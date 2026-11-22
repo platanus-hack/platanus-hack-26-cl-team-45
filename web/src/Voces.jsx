@@ -3,7 +3,8 @@ import { useQueries } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { arrancar, SLUG } from './convex.jsx';
 import { NOMBRE_TONO, tono, plural } from './comun.js';
-import { elegir, lecturas, clave } from './voces-datos.js';
+import { desdeTopicos, elegir, lecturas, clave } from './voces-datos.js';
+import demoCamaras from './demo-camaras.json';
 import { Chat } from './Chat.jsx';
 import { montar } from './voces-dibujo.js';
 import './voces.css';
@@ -14,13 +15,16 @@ const FUENTE = {
   mapa: 'ejes = grupos de postura del mapa (los tópicos todavía no están disponibles)',
 };
 
+// Synthetic polls processed offline with the app's pipeline (evals/camaras/procesar.ts); their slug skips Convex.
+const DEMO = { camaras: demoCamaras }[SLUG];
+
 function Voces() {
   // useQueries returns an Error instead of throwing, so a deployment without encuestas.topicos falls back to the map.
   // The request object must be stable or useQueries re-subscribes on every render.
-  const pedido = useMemo(() => ({ t: { query: api.encuestas.topicos, args: { slug: SLUG } }, m: { query: api.encuestas.mapa, args: { slug: SLUG } } }), []);
+  const pedido = useMemo(() => DEMO ? {} : ({ t: { query: api.encuestas.topicos, args: { slug: SLUG } }, m: { query: api.encuestas.mapa, args: { slug: SLUG } } }), []);
   const r = useQueries(pedido);
-  const cargando = r.t === undefined || r.m === undefined;
-  const v = useMemo(() => cargando ? undefined : elegir(r.t, r.m), [r.t, r.m, cargando]);
+  const cargando = !DEMO && (r.t === undefined || r.m === undefined);
+  const v = useMemo(() => DEMO ? desdeTopicos(DEMO) : cargando ? undefined : elegir(r.t, r.m), [r.t, r.m, cargando]);
   const ls = useMemo(() => v ? lecturas(v) : [], [v]);
   const [sel, setSel] = useState(null);
   const [modo, setModo] = useState('vivo');
@@ -60,10 +64,11 @@ function Voces() {
             <button aria-pressed={modo === 'lecturas'} onClick={() => cambiar('lecturas')}>Lecturas</button>
             <button aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Preguntar</button>
           </div>}
-          <a className="boton" href={`/${SLUG}/panel`}>Mapa</a>
-          <a className="boton" href={`/${SLUG}/flujo`}>Flujo</a>
+          {!DEMO && <a className="boton" href={`/${SLUG}/panel`}>Mapa</a>}
+          {!DEMO && <a className="boton" href={`/${SLUG}/flujo`}>Flujo</a>}
         </nav>
         {hay && <p className="clave-fila">
+          {DEMO && <span className="clave"><strong>Datos sintéticos</strong></span>}
           {['pos', 'neu', 'neg'].map(t => <span key={t} className="clave"><i className="tono" style={{ background: `var(--${t})` }}></i>{t === 'neu' ? 'neutro o mixto' : NOMBRE_TONO[t]}</span>)}
           <span className="clave">punto = una persona · tamaño = intensidad · el blob crece hacia lo más mencionado</span>
         </p>}
