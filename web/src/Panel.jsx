@@ -11,7 +11,7 @@ function Portada() {
   const encuestas = useQuery(api.encuestas.listar);
   return (
     <div className="portada">
-      <header><h1>Audem</h1></header>
+      <header><h1>audem</h1><p className="bajada">Cada voz que se suma afina el mapa.</p></header>
       <main>
         {encuestas?.slice(0, 12).map(e => (
           <section key={e._id}>

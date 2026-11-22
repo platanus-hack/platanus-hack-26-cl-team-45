@@ -4,9 +4,9 @@ body { overflow: hidden; height: 100vh; }
 #voces { pointer-events: none; user-select: none; }
 #voces .anillo { fill: none; stroke: var(--edge); stroke-width: 1.5; }
 #voces .eje { stroke: var(--edge); }
-#voces .nodo { fill: url(#g-perla); stroke: var(--edge); stroke-width: 1.5; }
+#voces .nodo { fill: url(#g-perla); stroke: var(--linea); stroke-width: 1; }
 #voces text { font-family: var(--sans); font-size: var(--t-1); fill: var(--ink-2); transition: fill .3s ease-out, opacity .3s ease-out; }
-#voces text.nombre { fill: var(--ink); font-weight: 500; }
+#voces text.nombre { fill: var(--ink); font-weight: 400; font-family: var(--display); font-size: 15px; }
 #voces text.nombre.on { fill: var(--accent-ink); }
 #voces text.nombre.dim { opacity: .35; }
 #voces text.cuenta { font-family: var(--mono); fill: var(--muted); }
@@ -18,25 +18,25 @@ body { overflow: hidden; height: 100vh; }
 #voces .hilo { fill: none; stroke: var(--accent-ink); stroke-width: 1.5; opacity: .6; stroke-dasharray: 1; stroke-dashoffset: 1; animation: trazo .3s ease-out forwards; }
 @keyframes trazo { to { stroke-dashoffset: 0; } }
 
-header { position: relative; z-index: 1; display: flex; align-items: center; gap: var(--s3) var(--s5); padding: var(--s5) var(--s6) 0; flex-wrap: wrap; justify-content: flex-start; text-align: left; max-width: calc(100% - 420px); margin: 0; }
-h1 { margin: 0; font-size: clamp(var(--t2), 2.4vw, var(--t4)); font-weight: 600; line-height: 1.15; letter-spacing: -0.015em; }
+header { position: relative; z-index: 1; display: flex; align-items: center; gap: var(--s3) var(--s4); padding: var(--s6) var(--s6) 0; flex-wrap: wrap; justify-content: flex-start; text-align: left; max-width: calc(100% - 420px); margin: 0; }
+h1 { margin: 0; font-size: clamp(var(--t3), 3vw, 44px); line-height: 1.1; }
 .total { display: flex; align-items: baseline; gap: var(--s2); color: var(--ink-2); font-size: var(--t-1); }
-.total .num { font-size: var(--t2); color: var(--ink); font-weight: 500; }
+.total .num { font-size: var(--t2); color: var(--ink); font-weight: 300; }
 nav { display: flex; gap: var(--s2); flex-wrap: wrap; }
 .modos { display: inline-flex; gap: var(--s1); }
 .clave-fila { flex-basis: 100%; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); font-size: var(--t-1); color: var(--ink-2); }
 .clave { display: inline-flex; align-items: center; gap: var(--s2); }
 
 #tarjeta { position: fixed; z-index: 1; right: var(--s5); top: var(--s5); bottom: var(--s5); width: 380px; overflow: auto; display: flex; flex-direction: column; gap: var(--s4);
-  background: var(--surface); border-radius: 12px; padding: var(--s4) var(--s5); box-shadow: var(--card); }
-.bloque h2 { margin: 0 0 var(--s2); font-size: var(--t-1); font-weight: 500; color: var(--accent-ink); display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+  background: var(--rubor); border-radius: var(--radio); padding: var(--s5); }
+.bloque h2 { margin: 0 0 var(--s2); font: 500 var(--t-1)/1.4 var(--sans); letter-spacing: 0; color: var(--tinta-suave); display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
 .bloque h2 .num { color: var(--muted); font-weight: 400; }
-.persona q { display: block; font-size: var(--t0); line-height: 1.45; margin-bottom: var(--s2); }
+.persona q { display: block; font: 300 var(--t1)/1.4 var(--display); margin-bottom: var(--s2); }
 .persona .cuenta { margin: 0 0 var(--s2); font-size: var(--t-1); color: var(--muted); }
-.lectura .titulo { margin: 0; font-size: var(--t1); font-weight: 600; line-height: 1.25; }
+.lectura .titulo { margin: 0; font: 400 var(--t2)/1.2 var(--display); letter-spacing: -0.01em; }
 .lectura p { margin: var(--s1) 0 var(--s3); line-height: 1.45; }
 .pasos { display: flex; align-items: center; gap: var(--s3); }
-.barra { flex: 1; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.barra { flex: 1; height: 3px; background: var(--rubor-hondo); border-radius: 2px; overflow: hidden; }
 .barra i { display: block; height: 100%; background: var(--accent-ink); transition: width .3s ease-out; }
 .propuestas, .emociones { list-style: none; margin: 0; padding: 0; }
 .propuestas li { padding: var(--s2) 0; border-top: 1px solid var(--line); font-size: var(--t-1); line-height: 1.45; }

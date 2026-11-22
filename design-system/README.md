@@ -11,7 +11,7 @@ Versión navegable, con vistas en vivo: https://claude.ai/artifact/2T9s87Ro77sCA
 | `tokens.json` | Todos los tokens: color (temas Claro y Noche), tipografía, espaciado, radios, sombras |
 | `tokens.css` | Los mismos tokens como variables CSS, generados desde `tokens.json` |
 | `audem-ds.css` | Estilos de los componentes (carga Outfit y Poppins desde Google Fonts) |
-| `audem-ds.js` | Los 9 componentes como script clásico de React 18: expone `window.Audem` |
+| `audem-ds.js` | Los 13 componentes (más `Entrada`) como script clásico de React 18: expone `window.Audem` |
 | `audem-ds.d.ts` | Las props de cada componente |
 | `audem-simbolo.svg` | El símbolo de la marca |
 | `demo.html` | Todos los componentes en una página, con botón Claro/Noche |
@@ -52,7 +52,7 @@ Audem es escucha ciudadana por WhatsApp: cada persona habla dos minutos y su voz
 - La página es `lienzo`; la marca vive en `rubor`. Pon el mapa, los paneles y todo lo que se toca sobre `rubor`, y usa `rubor-hondo` para el panel lateral y las pistas.
 - El texto va en `tinta`; rótulos y metadatos en `tinta-suave`. Los dos pasan 4,5:1 sobre las tres superficies, en ambos temas.
 - `coral` es el color del valor y de la acción: el arco de una Perilla, la barra de una Rama, el borde de los tiradores, el botón de grabar. Cuando coral es texto, usa `coral-texto`.
-- `turquesa`, `oro` y `lila` existen **solo dentro del Orbe**. Fuera de él, el estado «validada» usa `turquesa-texto` y «minoritaria» usa `lila-texto`, siempre con la palabra escrita en una Pastilla.
+- `turquesa`, `oro` y `lila` existen **solo dentro del Orbe** (y del BotonVoz, que es un Orbe). Fuera de él, el estado «validada» usa `turquesa-texto` y «minoritaria» usa `lila-texto`, siempre con la palabra escrita en una Pastilla.
 - `halo` es el resplandor difuso: alrededor del Orbe y como banda de margen de error en Rama.
 - `linea` es decorativa (órbitas, radios, separadores). El borde de un control que hay que ver usa `linea-fuerte`.
 - Hay dos temas: Claro (`light`) y Noche (`dark`). En Noche, `coral` se aclara y el ícono sobre coral pasa a `on-coral` oscuro.
@@ -70,14 +70,15 @@ Audem es escucha ciudadana por WhatsApp: cada persona habla dos minutos y su voz
 - Espaciado en pasos de `esp-1` a `esp-16`. Mucho aire: entre secciones `esp-12`; alrededor del Orbe `esp-16`.
 - Tres formas, nada más: **rectángulos rectos** (`radio-0`) para los botones, **esquinas apenas suaves** (`radio-sm`) para paneles y la ventana del mapa, y **píldoras y círculos** (`radio-pildora`) para todo lo que es un valor o un estado.
 - Sin bordes de tarjeta: lo que separa es el cambio de `lienzo` a `rubor`. Un panel no lleva sombra.
-- Una sola sombra fuerte por pantalla, `sombra-flota`, cuando la ventana del mapa flota sobre el halo. Los tiradores y el botón de grabar usan `sombra-tirador`.
+- Una sola sombra fuerte por pantalla, `sombra-flota`, cuando la ventana del mapa flota sobre el halo. Los tiradores y el botón de grabar usan `sombra-tirador`. La barra para preguntar usa `sombra-suave`.
 - La Onda separa la presentación del detalle, una vez por página.
 
 ### Movimiento
 
-- Lo único que se mueve solo es el Orbe: un giro lento del color (26 s) y una respiración (7 s, ida y vuelta). Todo lo demás se mueve solo cuando alguien lo toca: 200 ms, `ease-out`.
+- Lo único que se mueve solo es el Orbe: un giro lento del color (26 s) y una respiración (7 s, ida y vuelta). Todo lo demás se mueve solo cuando alguien lo toca: 200 ms, `ease-out`. La excepción es la Escena: al preguntar, el Orbe se corre en 500 ms y la conversación sube en 450 ms. Mientras el agente responde, el Orbe gira más rápido.
 - Cuando entra una voz nueva, el Orbe cambia de forma hacia la rama que creció. No hay confeti ni contadores que saltan.
-- Con `prefers-reduced-motion`, el Orbe queda quieto.
+- El BotonVoz es el otro objeto vivo: sus rayos giran en 60 s y, al grabar, laten con el volumen real de la voz; el arco coral marca cuánto de los dos minutos se usó; al terminar, un eco turquesa confirma que la voz llegó al mapa.
+- Con `prefers-reduced-motion`, el Orbe y el BotonVoz quedan quietos y solo cambian íconos y textos.
 
 ### Estados e interacción
 
@@ -90,7 +91,20 @@ Audem es escucha ciudadana por WhatsApp: cada persona habla dos minutos y su voz
 
 - Una idea por pantalla, centrada en el Orbe o en una cifra. El texto acompaña a un costado, alineado a la izquierda.
 - En el mapa: el Orbe a la izquierda sobre `rubor`, y a la derecha un Panel `hondo` con las Perillas de margen y la lista de Ramas.
+- Para preguntarle al mapa: la Escena, minimalista. En reposo, el Orbe al centro, un saludo en dos tonos y una sola barra para preguntar. Al preguntar, el Orbe se corre a la izquierda y la conversación aparece a la derecha, sin panel ni caja. Nada más en pantalla: ni etiquetas alrededor del Orbe ni menús.
+- Para responder una consulta: Microfono. La pregunta arriba, el BotonVoz al centro con su anillo de vidrio y sus rayos, el estado escrito debajo («Te escucho · 0:12») y «Prefiero escribir» como enlace. Debajo, solo «Tus voces». Nada más.
 - En láminas: fondo `lienzo`, el bloque de marca o una cifra grande, y el Orbe o el halo como imagen. Menos de veinte palabras por lámina.
+
+## El agente
+
+El agente sirve para consultar y diagnosticar lo que dijo la gente. No es un clon de nadie ni opina: lee las voces y las devuelve ordenadas.
+
+- **Responde solo con voces reales.** Cada respuesta dice con cuántas voces cuenta y de qué rama salen (`Basado en 183 voces de la rama «Más árboles y sombra»`).
+- **Cita textual.** Las palabras de la gente van entre comillas angulares («…»), sin corregirlas, con su fuente: `Voz 214 · audio · Villa Los Aromos`. Nunca el nombre ni el teléfono.
+- **Si no sabe, lo dice y ofrece preguntar:** «Nadie habló de estacionamientos todavía, así que no lo voy a adivinar», con el botón «Preguntarlo por WhatsApp».
+- **Dos modos.** *Consultar* habla de lo que opina la gente. *Diagnosticar* habla de la muestra: quién falta frente al Censo, qué audios se transcribieron con baja confianza, qué rama tiene un margen demasiado grande. Los hallazgos llevan Pastilla «Bien», «Revisar» o «Dato».
+- **Tono:** el mismo tuteo corto del resto. Frases de una idea. Sin «¡Excelente pregunta!» ni emoji.
+- **Forma:** minimalista. La pregunta de quien consulta va en una burbuja `rubor-hondo` a la derecha; la respuesta va sin burbuja, en `display` liviano a 22px, y las citas son texto plano con su fuente debajo. Sin paneles ni tarjetas. La barra para preguntar es una píldora con un Orbe en miniatura, el único otro lugar donde aparece el degradado.
 
 ## Iconografía
 
@@ -182,6 +196,8 @@ La voz colectiva como un objeto vivo: una forma iridiscente que cada rama empuja
 - `ramas`: `{ etiqueta, detalle, peso, estado }`. `peso` va de 0 a 1 (normalmente el respaldo de esa rama dividido por el de la mayor); `detalle` es la cifra corta bajo la etiqueta; `estado` cambia el tirador (relleno coral = validada, trazo lila = minoritaria).
 - `tamano`: ancho de la forma en px (360); el SVG se adapta al ancho de su contenedor.
 - `animado={false}`: lo deja quieto (para capturas). También se detiene solo con `prefers-reduced-motion`.
+- `minimal`: solo la forma y su órbita, sin radios, tiradores ni etiquetas. Es el Orbe de la Escena.
+- `pensando`: el color gira más rápido (5 s) mientras el agente responde.
 - `descripcion`: lo que debe oír un lector de pantalla; escribe la conclusión, no la forma.
 
 Funciona mejor con seis ramas, en `rubor`, con `esp-16` de aire. Uno por pantalla. Es el único lugar donde viven `turquesa`, `oro`, `lila` y el degradado: no los saques de aquí.
@@ -196,6 +212,70 @@ Una superficie `rubor` con cabecera, flecha y separador fino, para agrupar contr
 - `children`: se ordenan en fila y bajan de línea cuando no caben.
 
 Sin sombra y sin borde: el color de fondo ya lo separa. No metas un Panel dentro de otro.
+
+### Agente
+
+La conversación con el agente, sin caja: texto sobre el fondo, para consultar y diagnosticar lo que dijo la gente. Responde solo con voces reales, las cita y dice con cuántas cuenta.
+
+- `mensajes`: la conversación. Cada uno es `{ de: 'persona', texto }` o `{ de: 'agente', texto, citas, ramas, diagnostico, accion, base }`.
+  - `texto`: la respuesta, en `display` liviano a 22px. Una o dos frases.
+  - `citas`: `{ texto, fuente }`, palabras textuales de una voz (`Voz 214 · audio · Villa Los Aromos`).
+  - `ramas`: props de Rama, para mostrar respaldo y margen.
+  - `diagnostico`: `{ etiqueta, valor, estado }` con estado `ok` («Bien»), `alerta` («Revisar») o `info` («Dato»).
+  - `accion`: `{ etiqueta, onClick }`, un enlace coral (por ejemplo «Preguntarlo por WhatsApp»).
+  - `base`: de dónde sale la respuesta, en una línea al pie.
+- `onEnviar(texto, modo)`: se llama al enviar; el modo es `consultar` o `diagnosticar`.
+- `pensando`: `true` o un texto («Leyendo 482 voces…») mientras llega la respuesta. Bloquea el envío.
+- `sugerencias`: una lista, o `{ consultar: [...], diagnosticar: [...] }`. Van en una fila sobre la barra.
+- `onCerrar`: muestra la píldora «× Cerrar». `modos={false}` quita los modos. `avatar={false}` quita el mini Orbe de la barra.
+
+Ocupa el alto de su contenedor: dale un alto fijo. Va directo sobre `lienzo`, sin panel ni borde. La persona pregunta en una burbuja `rubor-hondo` a la derecha; el agente responde a la izquierda sin burbuja.
+
+Reglas del agente: no inventa. Si nadie habló de algo, lo dice y ofrece preguntarlo por WhatsApp. Cada afirmación lleva su número de voces, y una cifra lleva su margen. Cita textual, sin corregir a la gente. En modo diagnóstico habla de la muestra (quién falta, qué audios se entendieron mal, qué rama tiene poco respaldo), no de las opiniones.
+
+`Entrada` (la barra para preguntar) también se exporta sola: `onEnviar(texto)`, `placeholder`, `deshabilitado`, `pensando`, `avatar`.
+
+### Escena
+
+La pantalla del agente en web, minimalista: en reposo, el Orbe al centro con un saludo, una sola barra para preguntar y unas pocas sugerencias. Al preguntar, el Orbe se corre a la izquierda y la conversación aparece a la derecha.
+
+- `ramas`, `descripcion`, `animado`: van al Orbe, que aquí se dibuja en modo `minimal` (solo la forma y su órbita, sin etiquetas).
+- `saludo` y `pregunta`: el título en dos tonos. `saludo` va liviano en `tinta-suave` («Hola, equipo de Ñuñoa»); `pregunta`, en `tinta` («¿Qué quieres saber de lo que dijo la gente?»).
+- `pie`: una línea con la base de datos («482 voces sobre la plaza»). Bajo el título en reposo, bajo el Orbe al conversar.
+- `responder(texto, modo)`: devuelve (o promete) el mensaje del agente, con la forma de un mensaje de Agente sin `de`. Mientras responde, el Orbe gira más rápido. Si falla, la Escena muestra «No pude leer las voces ahora».
+- `agente`: props extra para el Agente (`sugerencias`, `modoInicial`). Las sugerencias de `consultar` también se muestran en reposo.
+- `mensajes`, `abierto`, `alto` (680), `etiquetaActivar` (el texto de la barra).
+
+Sin paneles, sin bordes de caja, sin etiquetas alrededor del Orbe: el fondo es `lienzo` con el halo del Orbe, y lo único que se toca es la barra. Bajo 760px, la conversación baja y el Orbe queda chico arriba. Las transiciones duran 450–500 ms y no ocurren con `prefers-reduced-motion`.
+
+### Botón de voz
+
+El botón para hablar: un Orbe iridiscente dentro de un anillo de vidrio, rodeado de rayos finos que giran despacio y crecen con la voz.
+
+- `estado`: `reposo`, `grabando`, `procesando`, `listo` o `error`. Cambia el ícono (micrófono, cuadrado para terminar, check), el nombre accesible y el movimiento.
+- `nivel`: el volumen de la voz de 0 a 1, actualizado unas 10 veces por segundo mientras graba. Agranda los rayos, el halo y el Orbe.
+- `progreso`: de 0 a 1, cuánto del tiempo máximo ya se usó. Se dibuja como un arco coral sobre el anillo.
+- `onClick`, `tamano` (diámetro del Orbe en px, 200), `etiqueta` (nombre accesible propio).
+
+Movimiento: en reposo los rayos giran en 60 s y el color del Orbe en 14 s; grabando, los rayos laten con `nivel`; procesando, el color gira en 3 s y los rayos se apagan; listo, sale un eco turquesa una vez. Con `prefers-reduced-motion` todo queda quieto y solo cambian ícono y textos.
+
+El ícono va en `on-coral`. No pongas texto encima del Orbe: el estado se escribe debajo, como hace Microfono.
+
+### Micrófono
+
+La pantalla donde una persona responde la consulta: la pregunta arriba, el BotonVoz al centro, el estado escrito debajo, la opción de escribir y la lista de sus voces que ya están en el mapa.
+
+- `pregunta`: la pregunta de la consulta, en `display` a 36px. `tema`: la línea de arriba en coral («Consulta · Plaza y espacio público»).
+- `limite`: segundos máximos de audio (120). Al llegar, termina solo.
+- `onGrabar()`: empieza a grabar (ahí se pide el micrófono). `onTerminar(segundos)`: devuelve una promesa; al resolverse con `{ texto }`, esa frase aparece en «Tus voces». Si se rechaza, la pantalla pasa a `error`.
+- `onEnviarTexto(texto)`: lo mismo para quien prefiere escribir.
+- `nivel`: el volumen real del micrófono (0–1). Si no llega, la pantalla simula uno para la demo.
+- `voces`: las voces previas de esta persona, como textos o `{ texto }`.
+- `estado` + `onEstado`: para controlar el flujo desde afuera; `estadoInicial` para dejarlo suelto.
+
+Textos por estado: «Toca para hablar» · «Te escucho · 0:12» · «Leyendo tu voz…» · «Tu voz está en el mapa» · «No pudimos usar tu micrófono». Siempre en tuteo y sin emoji.
+
+Una por pantalla, sobre `lienzo` con el halo `rubor` detrás del Orbe. Sin tarjetas ni menús: lo único que se toca es el Orbe, «Prefiero escribir» y la barra de texto.
 
 ## Logo
 

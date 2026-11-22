@@ -3,21 +3,22 @@
 Toda pantalla o gráfico de Audem sigue esto. Si algo nuevo no calza, se cambia este archivo primero.
 
 ## Dirección
-**Instrumento de medición.** La pantalla se lee como una figura de paper: superficies neutras, un solo canal de color con significado, cada codificación tiene su clave y cada número tiene su n. Nada decorativo.
+**Instrumento de medición, minimalista.** La pantalla se lee como una figura de paper: fondo blanco con un solo halo suave, mucho aire, un solo canal de color con significado, cada codificación tiene su clave y cada número tiene su n. Nada decorativo. La identidad viene del sistema visual en `design-system/` (tokens en `design-system/tokens.json`, tema Claro); `web/src/comun.css` los copia como variables.
 
 ## Tipografía
-- Poppins para texto y títulos, IBM Plex Mono para números, n y notas de método (Google Fonts). No hay más familias.
+- Outfit para títulos y números; Poppins (300) para el texto y las notas de método (Google Fonts). No hay más familias.
+- Títulos grandes en peso 400, nunca en negrita; las cifras en Outfit liviano.
 - Escala modular 1.2 con base 16 px: 13 · 16 · 19 · 23 · 28 · 33 · 40 (`--t-1` … `--t5`). Nada bajo 13 px.
 - Títulos de sección en minúscula normal (sentence case), nunca en mayúsculas.
-- Números en mono con `tabular-nums`.
+- Números con `tabular-nums` (clase `.num`).
 
 ## Color
 - **Tono** (positivo/neutro/negativo) es el único canal de color con datos. La emoción concreta va en texto, nunca en color.
-  - Paleta de Motion: Harmonic (Excite Audio), solo modo claro y fondo blanco: pos cian `#16a8c0`, neu crema `#eab54e`, neg coral `#ec5449`. Acento de interfaz cian `#14b4c9`; banda iridiscente `--iris` arriba de cada página.
-  - Los puntos se dibujan como esferas iluminadas (`url(#g-pos|neu|neg)` en `web/index.html`); botones y tarjetas con relieve suave (`--raised`, `--sunk`, `--card`).
-  - Validados para daltonismo con el validador de dataviz (todos los pares, en ambos modos). El neutro gris es a propósito.
+  - Los tres colores del Orbe del sistema, solo modo claro y fondo blanco: pos turquesa `#3db5c4`, neu oro `#f2c46d`, neg coral `#d94a3d`. Coral significa «negativo», así que la selección y el acento de interfaz son monocromos: tinta `#1e1719`.
+  - Los puntos se dibujan como esferas iluminadas (`url(#g-pos|neu|neg)` en `web/index.html`). Botones y tarjetas son planos: sin relieve ni sombras.
+  - Pendiente: volver a pasar el validador de daltonismo con estos tres colores.
 - El tono se deriva de la emoción con una lista cerrada (ver `POS`/`NEG` en `web/src/comun.js`). Lo que no está en la lista cuenta como neutro.
-- Neutros: tinta casi negra y fondo blanco roto, nunca #000 ni #fff puros. Modo oscuro diseñado aparte, con elevación por pasos de luminosidad y sin sombras.
+- Neutros: tinta `#1e1719` y tinta suave `#6b585b` sobre `lienzo` blanco; las superficies que agrupan van en `rubor` `#fcedea`.
 - El color nunca va solo: siempre lo acompaña una etiqueta, una leyenda o un conteo.
 
 ## Codificaciones (siempre con clave visible)
@@ -48,9 +49,11 @@ Toda pantalla o gráfico de Audem sigue esto. Si algo nuevo no calza, se cambia 
 
 ## Layout y espaciado
 - Base de 4 px: 4 · 8 · 12 · 16 · 24 · 32 · 48. Estrecho dentro de un grupo, amplio entre grupos.
-- Contenedores con borde fino **o** con elevación, nunca las dos cosas a la vez. Radio de 12 px o menos. Sin bordes laterales de acento.
+- Contenedores sin borde ni sombra: se separan por el cambio de `lienzo` a `rubor`, con radio de 4 px. Sin bordes laterales de acento.
+- Botones: píldoras `rubor` para navegar y alternar; la opción activa se rellena en tinta. La acción principal (`.primario`) es un rectángulo tinta, una por pantalla.
+- Cada página tiene un solo halo `rubor` arriba, detrás del contenido.
 - En pantallas angostas el layout se apila; nunca se aplasta.
 
 ## Movimiento
-- Solo `transform` y `opacity`, de 300 ms o menos, con ease-out. Nada pulsa ni se repite. Se respeta `prefers-reduced-motion`.
+- Solo `transform` y `opacity`, de 300 ms o menos, con ease-out. Nada pulsa ni se repite, salvo el botón de voz al responder: sus rayos giran despacio y laten con el volumen real del micrófono mientras graba. Se respeta `prefers-reduced-motion`.
 - Lo nuevo se marca con un estado estático (el anillo), no con una animación.

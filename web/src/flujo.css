@@ -1,8 +1,8 @@
-header { display: flex; align-items: center; gap: var(--s5); padding: var(--s4) var(--s6) var(--s3); flex-wrap: wrap; }
-h1 { margin: 0; font-size: clamp(var(--t3), 2.6vw, var(--t5)); font-weight: 600; line-height: 1.15; letter-spacing: -0.015em; flex: 1 1 100%; }
+header { display: flex; align-items: center; gap: var(--s3) var(--s4); padding: var(--s6) var(--s6) var(--s5); flex-wrap: wrap; }
+h1 { margin: 0; font-size: clamp(32px, 3.4vw, 52px); line-height: 1.1; flex: 1 1 100%; }
 nav { display: flex; gap: var(--s2); }
 main { padding: 0 var(--s6) var(--s6); }
-section { background: var(--surface); border: 1px solid var(--edge); border-radius: 20px; padding: var(--s4) var(--s5); overflow-x: auto; }
+section { background: none; border: 0; border-radius: var(--radio); padding: var(--s4) 0; overflow-x: auto; }
 figure { margin: 0; }
 #flujo { width: 100%; min-width: 900px; height: auto; max-height: calc(100vh - 190px); display: block; margin: 0 auto; }
 figcaption { border-top: 1px solid var(--line); margin-top: var(--s2); padding-top: var(--s3); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2) var(--s5); align-items: center; font-size: var(--t-1); color: var(--ink-2); }
@@ -23,12 +23,12 @@ g.n { cursor: pointer; transition: opacity .2s ease-out; }
 .resp circle { fill: var(--ink-2); }
 .resp.sin text { fill: var(--muted) !important; font-style: italic; }
 .frase circle { stroke: var(--surface); stroke-width: 1.5; }
-.conc rect { fill: var(--surface-2); stroke: var(--edge); }
+.conc rect { fill: var(--rubor); stroke: none; }
 .conc text { text-anchor: middle; dominant-baseline: central; }
 .tema circle.anillo { fill: var(--ink); fill-opacity: .055; }
 .tema circle.borde { fill: none; stroke: var(--ink); stroke-opacity: .25; }
 .tema text.pct { font-family: var(--mono); font-weight: 500; text-anchor: middle; dominant-baseline: central; }
-.tema text.nombre { font-size: 19px; font-weight: 600; }
+.tema text.nombre { font-size: 19px; font-weight: 400; font-family: var(--display); }
 .tema text.sub { font-family: var(--mono); font-size: 16px; fill: var(--ink-2); }
 #flujo.foco g.n:not(.vecino), #flujo.foco path.l:not(.vecino) { opacity: .08; }
 #flujo.foco path.rf.vecino { stroke-opacity: .5; }

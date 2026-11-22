@@ -12,7 +12,7 @@
   header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
   h2 { margin: 0 0 16px; font: 500 13px/18px var(--font-texto); color: var(--tinta-suave); }
   .fila { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
-  .mapa { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; background: var(--rubor); border-radius: var(--radio-sm); padding: 24px; box-shadow: var(--sombra-flota); }
+  .mapa { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 24px; align-items: start; }
   .lado { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
   .nota { font-size: 11px; color: var(--tinta-suave); margin: 0; }
   @media (max-width: 760px) { .mapa { grid-template-columns: 1fr; } }
@@ -25,6 +25,31 @@
 <main id="root"></main>
 <script>
   var A = window.Audem, h = React.createElement;
+  var EJ = {
+    arboles: { texto: 'Por calor y por falta de lugares para sentarse. 183 de las 482 voces lo mencionan, sobre todo para la tarde.',
+      citas: [{ texto: 'En verano la plaza es un horno, no hay dónde sentarse con los niños.', fuente: 'Voz 214 · audio · Villa Los Aromos' },
+              { texto: 'Más sombra y bancas, eso es todo lo que pido.', fuente: 'Voz 88 · texto' }],
+      base: 'Basado en 183 voces de la rama «Más árboles y sombra». Datos de ejemplo.' },
+    sesgo: { texto: 'Faltan voces jóvenes. El resto de la muestra se parece al Censo de la comuna.',
+      diagnostico: [{ etiqueta: 'Personas de 18 a 29 años', valor: '11 % (Censo 24 %)', estado: 'alerta' },
+                    { etiqueta: 'Mujeres', valor: '52 % (Censo 51 %)', estado: 'ok' },
+                    { etiqueta: 'Audios con transcripción dudosa', valor: '7 de 302', estado: 'info' }],
+      accion: { etiqueta: 'Pedir 60 voces de 18 a 29 años' },
+      base: 'Comparado con el Censo 2024 de la comuna. Datos de ejemplo.' },
+    nada: { texto: 'Nadie habló de estacionamientos todavía, así que no lo voy a adivinar.',
+      accion: { etiqueta: 'Preguntarlo por WhatsApp' },
+      base: 'Llegaría a las 482 personas que aceptaron recibir preguntas.' },
+    crece: { texto: 'Hoy creció «Ciclovía segura»: pasó de 17 % a 21 %, con 40 voces nuevas.',
+      ramas: [{ texto: 'Ciclovía segura', porcentaje: 21, voces: 482, estado: 'validada' }],
+      base: 'Comparado con ayer a la misma hora. Datos de ejemplo.' }
+  };
+  var SUG = { consultar: ['¿Por qué piden más árboles?', '¿Qué rama creció hoy?', '¿Qué opinan de los estacionamientos?'],
+              diagnosticar: ['¿Hay sesgo por edad?', '¿Qué audios se entendieron mal?'] };
+  function responder(t) {
+    var q = t.toLowerCase();
+    var r = /sesgo|edad|falta|joven|audio|entend/.test(q) ? EJ.sesgo : /estacion|auto/.test(q) ? EJ.nada : /crec|hoy/.test(q) ? EJ.crece : EJ.arboles;
+    return new Promise(function (ok) { setTimeout(function () { ok(r); }, 900); });
+  }
   function App() {
     var tema = React.useState(null);
     React.useEffect(function () { if (tema[0]) document.documentElement.dataset.theme = tema[0]; }, [tema[0]]);
@@ -42,18 +67,23 @@
         h(A.Selector, { etiqueta: 'Tema', opciones: [{ valor: 'light', etiqueta: 'Claro' }, { valor: 'dark', etiqueta: 'Noche' }], valorInicial: 'light', onChange: tema[1] })),
       h('p', { className: 'cuerpo', style: { margin: 0, maxWidth: '60ch' } }, 'Escucha ciudadana por WhatsApp. Hablas dos minutos y tu voz se suma al mapa de tu comuna.'),
       h(A.Onda, null),
-      h('section', null, h('h2', null, 'El mapa · datos de ejemplo'),
+      h('section', null, h('h2', null, 'El mapa con el agente · datos de ejemplo'),
+        h(A.Escena, { ramas: ramas, alto: 680, responder: responder, agente: { sugerencias: SUG },
+          saludo: 'Hola, equipo de Ñuñoa', pie: '482 voces sobre «Plaza y espacio público» · datos de ejemplo',
+          descripcion: 'Seis posturas sobre la plaza; la más respaldada es más árboles y sombra, 38 %.' })),
+      h('section', null, h('h2', null, 'Responder por voz · simulación, no usa el micrófono'),
+        h(A.Microfono, { tema: 'Consulta · Plaza y espacio público', pregunta: '¿Qué le falta a la plaza de tu barrio?',
+          voces: [{ texto: 'Más sombra y bancas para sentarse con los niños.' }] })),
+      h('section', null, h('h2', null, 'Margen y ramas'),
         h('div', { className: 'mapa' },
-          h(A.Orbe, { ramas: ramas, descripcion: 'Seis posturas sobre la plaza; la más respaldada es más árboles y sombra, 38 %.' }),
-          h('div', { className: 'lado' },
-            h(A.Panel, { titulo: 'Margen por rama', accion: 'En vivo', hondo: true },
-              h(A.Perilla, { valor: 31, max: 31, texto: '±31', etiqueta: '10 voces', tamano: 56 }),
-              h(A.Perilla, { valor: 10, max: 31, texto: '±10', etiqueta: '100 voces', tamano: 56 }),
-              h(A.Perilla, { valor: 3.1, max: 31, texto: '±3', etiqueta: '1.000 voces', tamano: 56 })),
-            h('div', null,
-              h(A.Rama, { texto: 'Más árboles y sombra en la plaza', porcentaje: 38, voces: 482, estado: 'validada' }),
-              h(A.Rama, { texto: 'Iluminación para caminar de noche', porcentaje: 16, voces: 482 }),
-              h(A.Rama, { texto: 'Cerrar el centro a los autos los domingos', porcentaje: 9, voces: 482, estado: 'minoritaria' }))))),
+          h(A.Panel, { titulo: 'Margen por rama', accion: 'En vivo', hondo: true },
+            h(A.Perilla, { valor: 31, max: 31, texto: '±31', etiqueta: '10 voces', tamano: 56 }),
+            h(A.Perilla, { valor: 10, max: 31, texto: '±10', etiqueta: '100 voces', tamano: 56 }),
+            h(A.Perilla, { valor: 3.1, max: 31, texto: '±3', etiqueta: '1.000 voces', tamano: 56 })),
+          h('div', null,
+            h(A.Rama, { texto: 'Más árboles y sombra en la plaza', porcentaje: 38, voces: 482, estado: 'validada' }),
+            h(A.Rama, { texto: 'Iluminación para caminar de noche', porcentaje: 16, voces: 482 }),
+            h(A.Rama, { texto: 'Cerrar el centro a los autos los domingos', porcentaje: 9, voces: 482, estado: 'minoritaria' })))),
       h('section', null, h('h2', null, 'Acciones'),
         h('div', { className: 'fila' },
           h(A.Boton, null, 'Pruébalo'), h(A.Boton, { variante: 'contorno' }, 'Ver el mapa'),

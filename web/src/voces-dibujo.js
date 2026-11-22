@@ -68,7 +68,7 @@ void main(){
 const FRAG = `
 varying vec3 vN; varying float vD; varying vec3 vView;
 void main(){
-  vec3 neg = vec3(0.925, 0.329, 0.286), pos = vec3(0.086, 0.659, 0.753), luz = vec3(1.0, 0.97, 0.92);
+  vec3 neg = vec3(0.851, 0.290, 0.239), pos = vec3(0.239, 0.710, 0.769), luz = vec3(1.0, 0.96, 0.95);
   float fres = pow(1. - max(dot(vN, vView), 0.), 2.);
   float diff = max(dot(vN, normalize(vec3(-.4,.6,.7))), 0.);
   vec3 col = mix(pos, neg, smoothstep(0.0, 0.35, vD + fres * 0.6));

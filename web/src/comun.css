@@ -1,43 +1,52 @@
-/* Shared tokens and base styles for every Audem page. Rules: DESIGN.md. Palette after Excite Audio's Motion: Harmonic (blush, coral, teal, cream). Light only. */
+/* Shared tokens and base styles for every Audem page. Rules: DESIGN.md · tokens: design-system/tokens.json (tema Claro). Light only. */
 :root {
   color-scheme: light;
-  --page: #ffffff; --surface: #ffffff; --surface-2: #ffffff; --ink: #24292b; --ink-2: #5f6669; --muted: #979ea1;
-  --line: #e8eef0; --edge: rgba(30,110,130,0.14); --cluster: rgba(25,179,199,0.05); --hover: rgba(25,179,199,0.08);
-  --pos: #16a8c0; --neu: #eab54e; --neg: #ec5449;
-  --accent: #14b4c9; --accent-ink: #0b7f96;
-  --sans: "Poppins", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Audem design system */
+  --lienzo: #ffffff; --rubor: #fcedea; --rubor-hondo: #f7dfda; --linea: #efd3ce; --linea-fuerte: #93706b;
+  --tinta: #1e1719; --tinta-suave: #6b585b; --coral: #d94a3d; --coral-texto: #b3362b; --turquesa: #3db5c4; --turquesa-texto: #0f6b77;
+  --oro: #f2c46d; --lila: #b7a5e6; --halo: #e5594c47; --foco: #b3362b;
+  --display: "Outfit", "Avenir Next", "Century Gothic", sans-serif;
+  /* Names the pages already use, mapped to the system */
+  --page: var(--lienzo); --surface: var(--lienzo); --surface-2: var(--rubor); --ink: var(--tinta); --ink-2: var(--tinta-suave); --muted: #8a6a65;
+  --line: var(--linea); --edge: var(--linea); --cluster: #fcedea80; --hover: var(--rubor);
+  --pos: var(--turquesa); --neu: var(--oro); --neg: var(--coral);   /* tone: the Orbe's three colors */
+  --accent: var(--tinta); --accent-ink: var(--tinta);                /* selection is monochrome: coral already means "negative" */
+  --sans: "Poppins", "Avenir Next", system-ui, sans-serif; --mono: var(--display);
   --t-1: 13px; --t0: 16px; --t1: 19px; --t2: 23px; --t3: 28px; --t4: 33px; --t5: 40px;
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --radio: 4px;
   --ease: cubic-bezier(.2,.8,.2,1);
-  /* The reference's iridescent band: cream, coral, aqua, deep cyan, lilac. */
-  --iris: linear-gradient(100deg, #ffe6a0 0%, #f6866f 18%, #ec5449 32%, #5fe0cf 55%, #14b4c9 70%, #0f7fae 84%, #b4a2ec 100%);
-  /* Soft 3D: raised = lit from above with a cyan drop shadow; pressed = sunk in. */
-  --raised: inset 0 1px 0 #fff, inset 0 -3px 6px rgba(20,140,165,.10), 0 8px 18px -8px rgba(16,120,145,.45), 0 1px 2px rgba(16,90,110,.14);
-  --raised-hi: inset 0 1px 0 #fff, inset 0 -3px 6px rgba(20,140,165,.10), 0 14px 26px -10px rgba(16,120,145,.55), 0 2px 4px rgba(16,90,110,.14);
-  --sunk: inset 0 3px 8px rgba(10,110,135,.28), inset 0 -1px 0 rgba(255,255,255,.9);
-  --card: 0 30px 60px -36px rgba(16,120,145,.45), 0 2px 10px rgba(16,100,120,.07);
-  --glass: linear-gradient(180deg, #ffffff 0%, #eefafc 100%);
+  --raised: none; --raised-hi: none; --sunk: none; --card: none;
+  --suave: 0 18px 40px -18px rgba(217, 74, 61, .30);
 }
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; color: var(--ink); font: 400 var(--t0)/1.5 var(--sans); background: #fff; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: 5px; background: var(--iris); z-index: 10; }
-h1 { background: linear-gradient(100deg, var(--ink) 0%, #0f7fae 45%, #14b4c9 65%, #ec5449 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-button, a.boton { font: inherit; color: inherit; background: var(--glass); border: 1px solid #fff; border-radius: 999px; padding: var(--s1) var(--s4); min-height: 36px; cursor: pointer; display: inline-flex; align-items: center; gap: var(--s2); text-decoration: none; box-shadow: var(--raised); transition: transform .15s var(--ease), box-shadow .15s var(--ease), background .15s; }
-button:hover, a.boton:hover { transform: translateY(-1px); box-shadow: var(--raised-hi); }
-button:active, a.boton:active, button[aria-pressed="true"], [aria-current="true"] { transform: none; color: var(--accent-ink); background: linear-gradient(180deg, #c9eff4, #e9fafc); box-shadow: var(--sunk); }
-button:disabled { transform: none; box-shadow: none; }
-.primario, #enviar { background: linear-gradient(160deg, #7debdc 0%, #14b4c9 45%, #0c7fa6 100%); color: #fff; border-color: rgba(255,255,255,.4); font-weight: 500; text-shadow: 0 1px 1px rgba(0,60,80,.3); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -3px 6px rgba(0,60,90,.22), 0 12px 24px -10px rgba(12,127,166,.8); }
-.primario:hover, #enviar:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -3px 6px rgba(0,60,90,.22), 0 16px 30px -10px rgba(12,127,166,.9); }
-.primario:active, #enviar:active { color: #fff; background: linear-gradient(160deg, #0c7fa6, #14b4c9); box-shadow: inset 0 3px 8px rgba(0,50,70,.4); }
-section { box-shadow: var(--card); border-color: var(--line) !important; }
-input, textarea { box-shadow: inset 0 2px 5px rgba(16,110,130,.08); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-/* Tone swatches render as tiny lit spheres, same light as the SVG dots (gradients in index.html). */
-i.tono { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex: none; box-shadow: inset -1px -2px 3px rgba(0,0,0,.18), inset 1px 1px 2px rgba(255,255,255,.6); }
-#tip { position: fixed; pointer-events: none; max-width: 320px; padding: var(--s2) var(--s3); border-radius: 12px; background: var(--surface-2); color: var(--ink); border: 1px solid var(--edge); font-size: var(--t-1); opacity: 0; transition: opacity .12s ease-out; z-index: 9; }
-#tip q { font-style: italic; display: block; font-size: var(--t0); margin-bottom: var(--s1); }
-#tip span { color: var(--ink-2); }
+body { margin: 0; min-height: 100vh; color: var(--tinta); font: 300 var(--t0)/1.55 var(--sans); background: var(--lienzo); }
+/* One soft halo behind every page, like the Orbe's. */
+body::before { content: ""; position: fixed; z-index: -1; left: 50%; top: -30vh; width: 120vw; height: 90vh; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, var(--rubor), #fcedea00); pointer-events: none; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; color: var(--tinta); text-wrap: balance; }
+b, strong { font-weight: 500; }
+.num { font-family: var(--display); font-variant-numeric: tabular-nums; }
+/* Buttons: quiet pills for navigation and toggles; .primario is the one strong action. */
+button, a.boton { font: 400 14px/20px var(--sans); color: var(--tinta); background: var(--rubor); border: 0; border-radius: 999px; padding: 8px 16px; min-height: 36px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); text-decoration: none; transition: background-color .2s ease-out, color .2s ease-out; }
+button:hover, a.boton:hover { background: var(--rubor-hondo); }
+button[aria-pressed="true"], [aria-current="true"] { background: var(--tinta); color: var(--lienzo); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.primario, #enviar { background: var(--tinta); color: var(--lienzo); font-weight: 500; border-radius: 0; padding: 10px 24px; }
+.primario:hover, #enviar:hover:not(:disabled) { background: var(--coral-texto); }
+section { box-shadow: none; }
+input, textarea { font: 300 var(--t0)/1.5 var(--sans); color: var(--tinta); background: var(--lienzo); border: 1px solid var(--linea-fuerte); border-radius: 999px; padding: 8px 16px; min-height: 40px; }
+textarea { border-radius: 20px; }
+input::placeholder, textarea::placeholder { color: var(--tinta-suave); }
+:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
+/* Tone swatches: tiny lit spheres, same light as the SVG dots (gradients in index.html). */
+i.tono { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex: none; box-shadow: inset -1px -2px 3px rgba(30,23,25,.18), inset 1px 1px 2px rgba(255,255,255,.6); }
+#tip { position: fixed; pointer-events: none; max-width: 320px; padding: var(--s3) var(--s4); border-radius: var(--radio); background: var(--lienzo); color: var(--tinta); border: 1px solid var(--linea); box-shadow: var(--suave); font-size: var(--t-1); opacity: 0; transition: opacity .12s ease-out; z-index: 9; }
+#tip q { display: block; font-size: var(--t0); margin-bottom: var(--s1); }
+#tip span { color: var(--tinta-suave); }
+.metodo { font-family: var(--sans) !important; font-weight: 300; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 header, main { width: 100%; max-width: 1680px; margin-inline: auto; }
 header { justify-content: center; text-align: center; }
+/* Small wordmark: "audem" with the coral point of the symbol. */
+.marca { margin: 0; font: 800 22px/1 var(--display); letter-spacing: -0.035em; color: var(--tinta); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+.marca::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); transform: translateY(5px); }
