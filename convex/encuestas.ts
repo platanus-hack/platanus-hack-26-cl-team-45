@@ -132,13 +132,6 @@ export const responderAudio = mutation({
   },
 });
 
-export const mias = query({
-  args: { encuestaId: v.id("encuestas"), participante: v.string() },
-  handler: async (ctx, { encuestaId, participante }) =>
-    (await ctx.db.query("respuestas").withIndex("by_encuesta", q => q.eq("encuestaId", encuestaId)).collect())
-      .filter(r => r.participante === participante),
-});
-
 // ---------- live map: same shape the panels used to poll from /api/mapa ----------
 
 export const mapa = query({

@@ -92,7 +92,7 @@ Audem es escucha ciudadana por WhatsApp: cada persona habla dos minutos y su voz
 - Una idea por pantalla, centrada en el Orbe o en una cifra. El texto acompaña a un costado, alineado a la izquierda.
 - En el mapa: el Orbe a la izquierda sobre `rubor`, y a la derecha un Panel `hondo` con las Perillas de margen y la lista de Ramas.
 - Para preguntarle al mapa: la Escena, minimalista. En reposo, el Orbe al centro, un saludo en dos tonos y una sola barra para preguntar. Al preguntar, el Orbe se corre a la izquierda y la conversación aparece a la derecha, sin panel ni caja. Nada más en pantalla: ni etiquetas alrededor del Orbe ni menús.
-- Para responder una consulta: Microfono. La pregunta arriba, el BotonVoz al centro con su anillo de vidrio y sus rayos, el estado escrito debajo («Te escucho · 0:12») y «Prefiero escribir» como enlace. Debajo, solo «Tus voces». Nada más.
+- Para responder una consulta: Microfono. La pregunta arriba, el BotonVoz al centro con su anillo de vidrio y sus rayos, el estado escrito debajo («Te escucho · 0:12») y «Prefiero escribir» como enlace. Al terminar de grabar, el audio para escucharlo y dos botones: Descartar y Enviar. Una voz por visita, y nada queda guardado en el navegador.
 - En láminas: fondo `lienzo`, el bloque de marca o una cifra grande, y el Orbe o el halo como imagen. Menos de veinte palabras por lámina.
 
 ## El agente
@@ -265,19 +265,20 @@ El ícono va en `on-coral`. No pongas texto encima del Orbe: el estado se escrib
 
 ### Micrófono
 
-La pantalla donde una persona responde la consulta: la pregunta arriba, el BotonVoz al centro, el estado escrito debajo, la opción de escribir y la lista de sus voces que ya están en el mapa.
+La pantalla donde una persona responde la consulta: la pregunta arriba, el BotonVoz al centro, el estado escrito debajo y la opción de escribir. Una voz por visita: se graba, se escucha y se envía o se descarta.
 
 - `pregunta`: la pregunta de la consulta, en `display` a 36px. `tema`: la línea de arriba en coral («Consulta · Plaza y espacio público»).
 - `limite`: segundos máximos de audio (120). Al llegar, termina solo.
-- `onGrabar()`: empieza a grabar (ahí se pide el micrófono). `onTerminar(segundos)`: devuelve una promesa; al resolverse con `{ texto }`, esa frase aparece en «Tus voces». Si se rechaza, la pantalla pasa a `error`.
-- `onEnviarTexto(texto)`: lo mismo para quien prefiere escribir.
+- `onGrabar()`: empieza a grabar (ahí se pide el micrófono). `onDetener(segundos)`: la grabación terminó y la pantalla pasa a `revisar`; si la promesa se rechaza, pasa a `error`.
+- `previa`: URL del audio grabado, para escucharlo en `revisar`.
+- `onEnviar()`: envía la grabación; mientras la promesa corre, `procesando`, y al resolverse, `listo`, que es el final. `onDescartar()`: vuelve a `reposo`.
+- `onEnviarTexto(texto)`: lo mismo que `onEnviar` para quien prefiere escribir.
 - `nivel`: el volumen real del micrófono (0–1). Si no llega, la pantalla simula uno para la demo.
-- `voces`: las voces previas de esta persona, como textos o `{ texto }`.
 - `estado` + `onEstado`: para controlar el flujo desde afuera; `estadoInicial` para dejarlo suelto.
 
-Textos por estado: «Toca para hablar» · «Te escucho · 0:12» · «Leyendo tu voz…» · «Tu voz está en el mapa» · «No pudimos usar tu micrófono». Siempre en tuteo y sin emoji.
+Textos por estado: «Toca para hablar» · «Te escucho · 0:12» · «Tu audio · 0:12» · «Enviando tu voz…» · «Tu voz está en el mapa» · «No pudimos usar tu micrófono». Siempre en tuteo y sin emoji.
 
-Una por pantalla, sobre `lienzo` con el halo `rubor` detrás del Orbe. Sin tarjetas ni menús: lo único que se toca es el Orbe, «Prefiero escribir» y la barra de texto.
+Una por pantalla, sobre `lienzo` con el halo `rubor` detrás del Orbe. Sin tarjetas ni menús: lo único que se toca es el Orbe, «Prefiero escribir», la barra de texto y, al revisar, Descartar y Enviar.
 
 ## Logo
 

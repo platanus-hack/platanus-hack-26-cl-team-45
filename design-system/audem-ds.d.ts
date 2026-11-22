@@ -25,9 +25,9 @@ export type ModoAgente = 'consultar' | 'diagnosticar';
 export interface AgenteProps { mensajes?: Mensaje[]; onEnviar?: (texto: string, modo: ModoAgente) => void; pensando?: boolean | string; sugerencias?: string[] | Partial<Record<ModoAgente, string[]>>; onCerrar?: () => void; modos?: boolean; modoInicial?: ModoAgente; avatar?: boolean; titulo?: string; className?: string; }
 export interface EntradaProps { onEnviar?: (texto: string) => void; placeholder?: string; deshabilitado?: boolean; pensando?: boolean; avatar?: boolean; etiqueta?: string; className?: string; }
 export interface EscenaProps { ramas: RamaOrbe[]; descripcion?: string; animado?: boolean; responder?: (texto: string, modo: ModoAgente) => RespuestaAgente | Promise<RespuestaAgente | null> | null; agente?: Partial<AgenteProps>; mensajes?: Mensaje[]; abierto?: boolean; alto?: number; saludo?: string; pregunta?: string; pie?: string; etiquetaActivar?: string; className?: string; }
-export type EstadoVoz = 'reposo' | 'grabando' | 'procesando' | 'listo' | 'error';
+export type EstadoVoz = 'reposo' | 'grabando' | 'revisar' | 'procesando' | 'listo' | 'error';
 export interface BotonVozProps { estado?: EstadoVoz; /** volumen 0 a 1 */ nivel?: number; /** tiempo usado 0 a 1 */ progreso?: number; onClick?: () => void; tamano?: number; etiqueta?: string; className?: string; }
-export interface MicrofonoProps { pregunta?: string; tema?: string; limite?: number; onGrabar?: () => void; onTerminar?: (segundos: number) => Promise<{ texto?: string } | void> | void; onEnviarTexto?: (texto: string) => Promise<{ texto?: string } | void> | void; nivel?: number; voces?: Array<string | { texto: string }>; estado?: EstadoVoz; estadoInicial?: EstadoVoz; onEstado?: (estado: EstadoVoz) => void; tamano?: number; className?: string; }
+export interface MicrofonoProps { pregunta?: string; tema?: string; limite?: number; onGrabar?: () => void; onDetener?: (segundos: number) => Promise<void> | void; previa?: string; onEnviar?: () => Promise<void> | void; onDescartar?: () => void; onEnviarTexto?: (texto: string) => Promise<void> | void; nivel?: number; estado?: EstadoVoz; estadoInicial?: EstadoVoz; onEstado?: (estado: EstadoVoz) => void; tamano?: number; className?: string; }
 
 export declare function Marca(props: MarcaProps): JSX.Element;
 export declare function Onda(props: OndaProps): JSX.Element;

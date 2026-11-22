@@ -317,7 +317,7 @@
       rayos.push(h('line', { key: i, className: 'au-rayo au-rayo--' + (i % 3), x1: f2(c + r1 * Math.cos(a)), y1: f2(c + r1 * Math.sin(a)), x2: f2(c + r2 * Math.cos(a)), y2: f2(c + r2 * Math.sin(a)) }));
     }
     var rp = T * 0.64, circ = 2 * Math.PI * rp;
-    var etiqueta = p.etiqueta || ({ reposo: 'Hablar', grabando: 'Terminar', procesando: 'Procesando tu voz', listo: 'Listo', error: 'Intentar de nuevo' })[est];
+    var etiqueta = p.etiqueta || ({ reposo: 'Hablar', grabando: 'Terminar', revisar: 'Grabación lista', procesando: 'Enviando tu voz', listo: 'Listo', error: 'Intentar de nuevo' })[est];
     var icono = est === 'grabando' ? ICONOS.stop : (est === 'listo' ? ICONOS.ok : ICONOS.mic);
     var orig = c + 'px ' + c + 'px';
     return h('div', { className: cx('au-voz', 'is-' + est, p.className), style: { width: D + 'px', height: D + 'px', '--nivel': nivel.toFixed(3) } },
@@ -329,36 +329,38 @@
       est === 'grabando' ? h('svg', { className: 'au-voz-progreso', width: D, height: D, viewBox: '0 0 ' + D + ' ' + D, 'aria-hidden': 'true' },
         h('circle', { cx: c, cy: c, r: f2(rp), strokeDasharray: f2(circ), strokeDashoffset: f2(circ * (1 - prog)), transform: 'rotate(-90 ' + c + ' ' + c + ')' })) : null,
       est === 'listo' ? h('span', { className: 'au-voz-eco', 'aria-hidden': 'true', style: { width: T + 'px', height: T + 'px' } }) : null,
-      h('button', { type: 'button', className: 'au-voz-orbe', style: { width: T + 'px', height: T + 'px' }, onClick: p.onClick, disabled: est === 'procesando', 'aria-label': etiqueta, 'aria-pressed': est === 'grabando' },
+      h('button', { type: 'button', className: 'au-voz-orbe', style: { width: T + 'px', height: T + 'px' }, onClick: p.onClick, disabled: est === 'procesando' || est === 'revisar' || est === 'listo', 'aria-label': etiqueta, 'aria-pressed': est === 'grabando' },
         h('svg', { className: 'au-voz-icono', width: Math.round(T * 0.22), height: Math.round(T * 0.22), viewBox: '0 0 24 24', 'aria-hidden': 'true' }, icono)));
   }
 
   var TEXTOS_VOZ = {
     reposo: ['Toca para hablar', null],
     grabando: ['Te escucho', 'Toca de nuevo para terminar.'],
-    procesando: ['Leyendo tu voz…', 'Esto toma unos segundos.'],
-    listo: ['Tu voz está en el mapa', 'Gracias. Puedes sumar otra cuando quieras.'],
+    revisar: ['Tu audio', 'Escúchalo antes de enviarlo. Si no te convence, descártalo y graba otro.'],
+    procesando: ['Enviando tu voz…', 'Esto toma unos segundos.'],
+    listo: ['Tu voz está en el mapa', 'Gracias por participar.'],
     error: ['No pudimos usar tu micrófono', 'Revisa el permiso del navegador o escribe tu respuesta.']
   };
+  // One voice per visit: record, review (onDetener may hand back a `previa` URL to play), then send or discard. `listo` is final.
   function Microfono(p) {
     var limite = p.limite || 120;
     var st = R.useState(p.estadoInicial || 'reposo'), estado = p.estado || st[0];
-    var seg = R.useState(0), segRef = R.useRef(0), modo = R.useState('voz'), voces = R.useState(p.voces || []), niv = R.useState(0);
+    var seg = R.useState(0), segRef = R.useRef(0), modo = R.useState('voz'), niv = R.useState(0);
     var vivo = R.useRef(true);
     R.useEffect(function () { return function () { vivo.current = false; }; }, []);
     function fijar(e) { if (!vivo.current) return; if (!p.estado) st[1](e); if (p.onEstado) p.onEstado(e); }
-    function sumar(texto, tipo) { voces[1](function (v) { return [{ texto: texto, tipo: tipo }].concat(v); }); }
-    function cerrar(promesa, texto, tipo) {
+    function cerrar(promesa) {
       fijar('procesando');
-      Promise.resolve(promesa || new Promise(function (ok) { setTimeout(ok, 1600); })).then(function (r) {
-        sumar((r && r.texto) || texto, tipo); fijar('listo');
-        setTimeout(function () { fijar('reposo'); }, 2400);
-      }, function () { fijar('error'); });
+      Promise.resolve(promesa || new Promise(function (ok) { setTimeout(ok, 1600); })).then(function () { fijar('listo'); }, function () { fijar('error'); });
     }
-    function terminar() { var d = segRef.current; cerrar(p.onTerminar ? p.onTerminar(d) : null, 'Audio de ' + reloj(d), 'audio'); }
+    function detener() {
+      fijar('revisar');
+      if (p.onDetener) Promise.resolve(p.onDetener(segRef.current)).catch(function () { fijar('error'); });
+    }
+    function descartar() { if (p.onDescartar) p.onDescartar(); fijar('reposo'); }
     function tocar() {
-      if (estado === 'grabando') return terminar();
-      if (estado === 'procesando') return;
+      if (estado === 'grabando') return detener();
+      if (estado !== 'reposo' && estado !== 'error') return;
       segRef.current = 0; seg[1](0); fijar('grabando'); if (p.onGrabar) p.onGrabar();
     }
     R.useEffect(function () {
@@ -366,7 +368,7 @@
       var t0 = Date.now();
       var id = setInterval(function () {
         var s = Math.min(limite, (Date.now() - t0) / 1000); segRef.current = s; seg[1](s);
-        if (s >= limite) { clearInterval(id); terminar(); }
+        if (s >= limite) { clearInterval(id); detener(); }
       }, 200);
       return function () { clearInterval(id); };
     }, [estado]);
@@ -377,8 +379,9 @@
       return function () { clearInterval(id); };
     }, [estado, p.nivel != null]);
     var tx = TEXTOS_VOZ[estado] || TEXTOS_VOZ.reposo;
-    var titulo = estado === 'grabando' ? tx[0] + ' · ' + reloj(seg[0]) : tx[0];
+    var titulo = estado === 'grabando' || estado === 'revisar' ? tx[0] + ' · ' + reloj(seg[0]) : tx[0];
     var sub = estado === 'reposo' ? 'Hasta ' + reloj(limite) + ', como un audio de WhatsApp.' : tx[1];
+    var cambiar = estado === 'reposo' || estado === 'error';
     return h('section', { className: cx('au-micro', p.className), 'aria-label': 'Responder la consulta' },
       h('div', { className: 'au-micro-fondo', 'aria-hidden': 'true' }),
       h('header', { className: 'au-micro-cab' }, h(Marca, { tamano: 26 })),
@@ -391,18 +394,17 @@
             h('div', { className: 'au-micro-estado', role: 'status', 'aria-live': 'polite' },
               h('p', { className: 'au-micro-titulo' }, titulo),
               sub ? h('p', { className: 'au-micro-sub' }, sub) : null),
-            h('button', { type: 'button', className: 'au-micro-link', onClick: function () { modo[1]('texto'); } }, 'Prefiero escribir'))
+            estado === 'revisar' ? h('div', { className: 'au-micro-revisar' },
+              p.previa ? h('audio', { controls: true, src: p.previa }) : null,
+              h('div', { className: 'au-micro-acciones' },
+                h(Boton, { variante: 'contorno', onClick: descartar }, 'Descartar'),
+                h(Boton, { onClick: function () { cerrar(p.onEnviar ? p.onEnviar() : null); } }, 'Enviar'))) : null,
+            cambiar ? h('button', { type: 'button', className: 'au-micro-link', onClick: function () { modo[1]('texto'); } }, 'Prefiero escribir') : null)
         : h('div', { className: 'au-micro-texto' },
-            h(Entrada, { placeholder: 'Escribe lo que piensas…', etiqueta: 'Tu respuesta', deshabilitado: estado === 'procesando',
-              onEnviar: function (t) { cerrar(p.onEnviarTexto ? p.onEnviarTexto(t) : null, t, 'texto'); } }),
-            estado !== 'reposo' ? h('p', { className: 'au-micro-sub', role: 'status' }, tx[0]) : null,
-            h('button', { type: 'button', className: 'au-micro-link', onClick: function () { modo[1]('voz'); } }, 'Prefiero hablar')),
-      voces[0].length ? h('div', { className: 'au-micro-voces' },
-        h('p', { className: 'au-micro-voces-tit' }, 'Tus voces'),
-        h('ul', null, voces[0].map(function (v, i) {
-          var t = typeof v === 'string' ? { texto: v } : v;
-          return h('li', { key: i }, h(Pastilla, { tono: 'turquesa' }, 'En el mapa'), h('span', null, t.texto));
-        }))) : null);
+            estado === 'listo' ? null : h(Entrada, { placeholder: 'Escribe lo que piensas…', etiqueta: 'Tu respuesta', deshabilitado: estado === 'procesando',
+              onEnviar: function (t) { cerrar(p.onEnviarTexto ? p.onEnviarTexto(t) : null); } }),
+            estado !== 'reposo' ? h('p', { className: 'au-micro-sub', role: 'status' }, estado === 'listo' ? tx[0] + '. ' + tx[1] : tx[0]) : null,
+            cambiar ? h('button', { type: 'button', className: 'au-micro-link', onClick: function () { modo[1]('voz'); } }, 'Prefiero hablar') : null));
   }
 
   var C = window;
