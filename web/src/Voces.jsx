@@ -3,7 +3,9 @@ import { useQueries } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { arrancar, SLUG } from './convex.jsx';
 import { NOMBRE_TONO, tono, plural } from './comun.js';
-import { elegir, lecturas } from './voces-datos.js';
+import { desdeTopicos, elegir, lecturas, clave } from './voces-datos.js';
+import demoCamaras from './demo-camaras.json';
+import { Chat } from './Chat.jsx';
 import { montar } from './voces-dibujo.js';
 import './voces.css';
 
@@ -13,18 +15,22 @@ const FUENTE = {
   mapa: 'ejes = grupos de postura del mapa (los tópicos todavía no están disponibles)',
 };
 
+// Synthetic polls processed offline with the app's pipeline (evals/camaras/procesar.ts); their slug skips Convex.
+const DEMO = { camaras: demoCamaras }[SLUG];
+
 function Voces() {
   // useQueries returns an Error instead of throwing, so a deployment without encuestas.topicos falls back to the map.
   // The request object must be stable or useQueries re-subscribes on every render.
-  const pedido = useMemo(() => ({ t: { query: api.encuestas.topicos, args: { slug: SLUG } }, m: { query: api.encuestas.mapa, args: { slug: SLUG } } }), []);
+  const pedido = useMemo(() => DEMO ? {} : ({ t: { query: api.encuestas.topicos, args: { slug: SLUG } }, m: { query: api.encuestas.mapa, args: { slug: SLUG } } }), []);
   const r = useQueries(pedido);
-  const cargando = r.t === undefined || r.m === undefined;
-  const v = useMemo(() => cargando ? undefined : elegir(r.t, r.m), [r.t, r.m, cargando]);
+  const cargando = !DEMO && (r.t === undefined || r.m === undefined);
+  const v = useMemo(() => DEMO ? desdeTopicos(DEMO) : cargando ? undefined : elegir(r.t, r.m), [r.t, r.m, cargando]);
   const ls = useMemo(() => v ? lecturas(v) : [], [v]);
   const [sel, setSel] = useState(null);
   const [modo, setModo] = useState('vivo');
   const [paso, setPaso] = useState(0);
   const [auto, setAuto] = useState(true);
+  const [ejesChat, setEjesChat] = useState(null);         // axes of the chat's latest chart, lit on the blob
   const dibujo = useRef(null);
 
   useEffect(() => {
@@ -32,14 +38,17 @@ function Voces() {
   }, []);
   useEffect(() => { if (v !== undefined) dibujo.current.recibir(v); }, [v]);
   const lectura = modo === 'lecturas' && ls.length ? ls[paso % ls.length] : null;
-  useEffect(() => { dibujo.current.resaltar(lectura); }, [lectura]);
+  useEffect(() => {
+    const chat = modo === 'chat' && ejesChat && v ? { ejes: ejesChat, claves: v.ejes.filter(e => ejesChat.includes(e.id)).flatMap(e => e.celdas.map(c => clave(e.id, c.id))) } : null;
+    dibujo.current.resaltar(lectura ?? chat);
+  }, [lectura, modo, ejesChat, v]);
   useEffect(() => {                                       // readings advance on their own until someone steps manually
     if (modo !== 'lecturas' || !auto || !ls.length) return;
     const id = setInterval(() => setPaso(p => (p + 1) % ls.length), 8000);
     return () => clearInterval(id);
   }, [modo, auto, ls.length]);
 
-  const cambiar = m => { setModo(m); setPaso(0); setAuto(true); if (m === 'lecturas') dibujo.current.deseleccionar(); };
+  const cambiar = m => { setModo(m); setPaso(0); setAuto(true); if (m !== 'vivo') dibujo.current.deseleccionar(); };
   const mover = d => { setAuto(false); setPaso(p => (p + d + ls.length) % ls.length); };
   const hay = v && v.ejes.length > 0;
 
@@ -53,11 +62,13 @@ function Voces() {
           {hay && <div className="modos" role="group" aria-label="Vista">
             <button aria-pressed={modo === 'vivo'} onClick={() => cambiar('vivo')}>En vivo</button>
             <button aria-pressed={modo === 'lecturas'} onClick={() => cambiar('lecturas')}>Lecturas</button>
+            <button aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Preguntar</button>
           </div>}
-          <a className="boton" href={`/${SLUG}/panel`}>Mapa</a>
-          <a className="boton" href={`/${SLUG}/flujo`}>Flujo</a>
+          {!DEMO && <a className="boton" href={`/${SLUG}/panel`}>Mapa</a>}
+          {!DEMO && <a className="boton" href={`/${SLUG}/flujo`}>Flujo</a>}
         </nav>
         {hay && <p className="clave-fila">
+          {DEMO && <span className="clave"><strong>Datos sintéticos</strong></span>}
           {['pos', 'neu', 'neg'].map(t => <span key={t} className="clave"><i className="tono" style={{ background: `var(--${t})` }}></i>{t === 'neu' ? 'neutro o mixto' : NOMBRE_TONO[t]}</span>)}
           <span className="clave">punto = una persona · tamaño = intensidad · el blob crece hacia lo más mencionado</span>
         </p>}
@@ -86,15 +97,17 @@ function Voces() {
           ? <Persona {...sel} cerrar={() => dibujo.current.deseleccionar()} />
           : <p className="vacio">Toca un punto para leer lo que dijo esa persona.</p>)}
 
-        {hay && v.propuestas.length > 0 && <div className="bloque">
+        {hay && <Chat v={v} visible={modo === 'chat'} onFoco={setEjesChat} />}
+
+        {hay && modo !== 'chat' && v.propuestas.length > 0 && <div className="bloque">
           <h2>Propuestas <span className="num">{v.propuestas.length}</span></h2>
           <ul className="propuestas">{v.propuestas.slice().reverse().map((p, i) => <li key={i}>{p}</li>)}</ul>
         </div>}
-        {hay && v.emociones.length > 0 && <div className="bloque">
+        {hay && modo !== 'chat' && v.emociones.length > 0 && <div className="bloque">
           <h2>{v.fuente === 'topicos' ? 'Emoción que domina' : 'Emociones'} <span className="num">· n.º de personas</span></h2>
           <ul className="emociones">{v.emociones.map(e => <li key={e.emocion}><i className="tono" style={{ background: `var(--${tono(e.emocion)})` }}></i>{e.emocion} <span className="num">{e.n}</span></li>)}</ul>
         </div>}
-        {hay && <p className="metodo">Casos: {plural(v.casos, 'persona', 'personas')} · {plural(v.ejes.length, 'eje', 'ejes')}{v.ejes.length > 6 ? ', se muestran los 6 con más personas' : ''} · {FUENTE[v.fuente]}</p>}
+        {hay && modo !== 'chat' && <p className="metodo">Casos: {plural(v.casos, 'persona', 'personas')} · {plural(v.ejes.length, 'eje', 'ejes')}{v.ejes.length > 6 ? ', se muestran los 6 con más personas' : ''} · {FUENTE[v.fuente]}</p>}
       </aside>
     </>
   );
