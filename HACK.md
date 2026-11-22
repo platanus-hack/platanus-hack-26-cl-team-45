@@ -68,6 +68,7 @@ Proyección (solo pitch, por decidir): que el sistema también elija la mejor fo
 - 22-nov: pantalla de tópicos en `/<slug>/voces` para cualquier pregunta: lee `encuestas.topicos` y, mientras esa query no esté desplegada o venga vacía, usa los grupos de `encuestas.mapa`. Las lecturas se calculan de los datos (sin texto escrito a mano). Se quitó la página estática `/voces.html`.
 - 22-nov: chat «Preguntar» al lado del blob (`convex/chat.ts`, acción pública `chat.preguntar`, Haiku low). El modelo elige el gráfico y los ejes; los números los calcula la web. Necesita desplegar Convex para funcionar.
 - 22-nov: los grupos convergen hacia la respuesta 8 (`evals/hackaton/CONVERGENCIA.md`). Hasta la 9 se reagrupa todo; desde la 10 cada respuesta solo se asigna a los grupos existentes, sin espera y en paralelo. El proxy de la hackatón da 429 con muchas llamadas concurrentes: el cliente reintenta hasta 6 veces.
+- 22-nov: datos sintéticos de la demo sobre cámaras de televigilancia en el barrio (`data/camaras.json`, 25 respuestas). Con Sí / No, 20 de 25 dirían que sí; en el texto aparecen luz, respuesta policial, plaza tomada, privacidad, mantención, organización vecinal y desconfianza de las encuestas. `ADMIN_KEY=... node data/sembrar.ts` crea la encuesta y la responde de a una (4 s por defecto) para ver el mapa llenarse en `/<slug>/voces`.
 
 ## Pendientes
 

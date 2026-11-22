@@ -1,0 +1,156 @@
+{
+  "pregunta": "La municipalidad quiere instalar cámaras de televigilancia en tu barrio. ¿Qué te parece?",
+  "nota": "Datos sintéticos. `cerrada` es lo que la persona habría marcado si la encuesta solo ofreciera Sí / No: 20 de 25 (80 %) dirían que sí.",
+  "respuestas": [
+    {
+      "id": 1,
+      "participante": "Rosa, 71, jubilada, pasaje Los Copihues",
+      "cerrada": "sí",
+      "texto": "Aló, ¿ya está grabando? Ya. Sí, mijito, que las pongan, cómo no voy a querer. Pero le voy a decir una cosa. En mi pasaje, el Los Copihues, el foco del poste de la esquina está quemado hace como ocho meses. Ocho meses. Yo llamé a la municipalidad tres veces, la última vez me dijeron que estaba ingresado. Ingresado. Y ahí sigue. Entonces yo me pregunto, ¿una cámara en la pura oscuridad qué va a grabar? Si no se ve ni la mano. Yo ya no salgo después de las siete, ni a comprar el pan. Mi hija me dice mamá, vente a vivir conmigo, pero esta es mi casa po, cuarenta años aquí. Así que sí a las cámaras, pero primero que me arreglen la luz, por favor, que es lo que una necesita."
+    },
+    {
+      "id": 2,
+      "participante": "Javier, 34, repartidor en moto",
+      "cerrada": "sí",
+      "texto": "Ya, mira, te cuento lo que me pasó a mí. El año pasado me robaron la moto afuera de la casa, a las once de la noche. Y el vecino del frente tenía cámara, una de esas chinas que venden en internet, y se veía todo, se veía clarito el loco, se veía la patente de la camioneta en que se la llevaron. Fui a carabineros con el video en un pendrive, puse la denuncia, todo bien. Nunca nadie me llamó. Nunca. Fui dos veces más a preguntar y me dijeron que estaba en fiscalía. La moto era mi pega, estuve dos meses sin trabajar. Entonces, cámaras, sí, bacán, pero si el video después no le sirve a nadie, ¿para qué? El problema no es que no se vea quién fue, el problema es que no pasa nada después."
+    },
+    {
+      "id": 3,
+      "participante": "Daniela, 29, profesora de básica",
+      "cerrada": "no",
+      "texto": "Hola. Mira, yo trabajo en la escuela de acá del sector, hace cinco años, y te diría que no. No porque esté en contra de la seguridad, obvio que no, sino porque cada vez que hay plata para algo se va en esto. Los niños que yo tengo en cuarto básico no tienen dónde ir después de clases. Salen a la una y media, los papás trabajan hasta las siete, y quedan en la calle o encerrados con el celular. Antes había un taller de fútbol en la sede y un taller de música, los cerraron hace dos años porque no había fondos. Y ahora hay fondos para cámaras. A mí eso me duele. Porque los cabros que en diez años van a salir en esas cámaras son mis alumnos de ahora, y nadie está haciendo nada por ellos hoy."
+    },
+    {
+      "id": 4,
+      "participante": "Héctor, 58, dueño de almacén",
+      "cerrada": "sí",
+      "texto": "Que las pongan, que las pongan altiro. A mí me han asaltado dos veces, la segunda con pistola, a las ocho de la tarde, con mi señora atrás en la caja. Desde ahí cierro a las siete y pierdo la venta de la tarde, que era la mejor. Yo puse una cámara adentro pero afuera no tengo, y ojalá pongan una justo en la esquina mía. Eso sí, una cosa: que alguien las mire. Que haya una central, con gente, que si ven algo raro llamen a la patrulla. Porque si es para grabar y después ver la grabación cuando ya te asaltaron, eso ya lo tengo. Yo quiero que alguien vea antes, no después."
+    },
+    {
+      "id": 5,
+      "participante": "Fernanda, 22, estudiante de derecho",
+      "cerrada": "no",
+      "texto": "Ya, a ver, yo entiendo que la gente tenga miedo, de verdad, mi mamá tiene miedo y la entiendo. Pero nadie está preguntando lo básico. ¿Quién ve las grabaciones? ¿Cuánto tiempo las guardan? ¿Se las pasan a alguien, a carabineros, a una empresa privada? ¿Tienen reconocimiento facial o lo van a tener después? Porque eso nunca se dice al principio, se agrega después y nadie se entera. Yo vivo en este barrio, salgo de mi casa todos los días, y me van a estar grabando entrando y saliendo, con quién ando, a qué hora llego. Y no hay ninguna regla que yo conozca. Así que no, mientras no haya un reglamento claro, público, que diga qué se hace con esas imágenes, yo digo que no. Y que la muni lo publique antes de comprar, no después."
+    },
+    {
+      "id": 6,
+      "participante": "Marta, 45, presidenta junta de vecinos",
+      "cerrada": "sí",
+      "texto": "Hola, habla Marta, de la junta de vecinos de la villa. Mira, nosotros como junta estamos a favor, lo votamos en asamblea incluso. Pero hay algo que me tiene molesta y lo quiero decir. Nadie nos preguntó dónde ponerlas. Nos llegó el plano y van todas en la avenida principal, frente al consultorio y frente al supermercado. Que es donde ya hay luz, donde hay gente, donde pasan las micros. Los problemas no están ahí. Los problemas están en los pasajes de atrás, en la cancha, en el puente del canal. Eso lo sabe cualquier vecino. Nosotros tenemos un grupo de WhatsApp por pasaje, tenemos alarmas comunitarias que compramos con un bingo, nos organizamos. Lo que pedimos es que nos sienten en una mesa antes de decidir, no después. Nosotros sabemos dónde está el problema."
+    },
+    {
+      "id": 7,
+      "participante": "Luis, 39, guardia, ex operador de monitoreo",
+      "cerrada": "sí",
+      "texto": "Te hablo desde adentro, porque yo trabajé tres años en una central de monitoreo de otra comuna. Te cuento cómo es. Somos dos operadores por turno mirando sesenta, setenta pantallas. Sesenta pantallas. Tú no ves nada en vivo, es imposible, a menos que justo estés mirando esa. Lo que hacemos principalmente es buscar grabaciones cuando alguien llama y dice oye, me robaron a tal hora en tal esquina. Para eso sirven, para después. Igual digo que sí, porque algo ayuda, la gente se siente más tranquila y algunos lanzas se van a otro lado. Pero que nadie se crea que una cámara previene un asalto. Si quieren que sirva de verdad, necesitan más operadores por turno y que la central tenga radio directa con la patrulla. Si no, es un adorno caro."
+    },
+    {
+      "id": 8,
+      "participante": "Camila, 31, mamá de dos",
+      "cerrada": "sí",
+      "texto": "Hola, ya, eh, yo vivo frente a la plaza de la calle Las Acacias, la del tobogán rojo, que ya no tiene tobogán. Mira, la plaza está tomada. Hay unos cabros que venden ahí, todo el mundo sabe, y desde que llegaron yo no llevo a mis hijos. Tengo un niño de seis y una de cuatro, y juegan en el patio, que es chiquitito, porque no hay otro lugar. Entonces sí, que pongan una cámara ahí, ojalá. Pero lo que yo de verdad quiero es recuperar la plaza. Que la arreglen, que pongan luz, juegos nuevos, que haya actividades el fin de semana, que se llene de gente. Porque cuando la plaza está llena de familias esos cabros se van solos. Cuando está vacía y oscura, llegan. Una cámara mirando una plaza vacía no me devuelve la plaza."
+    },
+    {
+      "id": 9,
+      "participante": "Pedro, 19, juega a la pelota en la cancha",
+      "cerrada": "no",
+      "texto": "No po, hermano, no. Porque yo sé pa quién son esas cámaras. Son pa nosotros, pa los cabros que estamos en la esquina. Nosotros nos juntamos ahí porque no hay otro lado, la cancha no tiene luz y a las siete ya no se ve nada. Y ya, pasa la patrulla y nos piden el carnet a todos, a mí me han controlado como diez veces este año y yo no he hecho nada, trabajo con mi papá en la construcción. Entonces ahora nos van a grabar también. Pongan luz en la cancha, pongan un camarín, hagan un campeonato, y van a ver que la esquina se vacía. Pero eso no lo hacen, prefieren grabarnos."
+    },
+    {
+      "id": 10,
+      "participante": "Gladys, 64, feriante",
+      "cerrada": "sí",
+      "texto": "Sí, sí, de acuerdo. Yo tengo puesto en la feria del domingo y ahí es terrible, los lanzas andan en grupo y le sacan la billetera a las señoras mientras eligen la fruta. Una cámara en la entrada de la feria ayudaría. Pero también que pasen los inspectores, que antes pasaban y ahora no se ven nunca. Eso."
+    },
+    {
+      "id": 11,
+      "participante": "Andrés, 42, ingeniero informático",
+      "cerrada": "sí",
+      "texto": "Mira, voy a decir que sí, pero con una duda bien concreta. En la villa de al lado, la Los Aromos, pusieron cuatro cámaras el dos mil veintitrés, con harta ceremonia, vino el alcalde, todo. A los tres meses dos estaban apagadas. Una porque se le cortó el cable y la otra no sé, nunca supe. Y siguen apagadas. Nadie paga la mantención, ese es el tema. Comprar la cámara es lo fácil, sale en la foto. Mantenerla funcionando cinco años, con energía, con conectividad, con alguien que la limpie y la repare, eso no lo presupuesta nadie. Entonces mi pregunta es: ¿cuánto de la plata es para comprar y cuánto para mantener? Si la respuesta es todo para comprar, en un año vamos a tener postes con cámaras muertas."
+    },
+    {
+      "id": 12,
+      "participante": "Sergio, 50, taxista",
+      "cerrada": "sí",
+      "texto": "Sí, obvio que sí. Todo lo que sea seguridad, bienvenido. Ya, eso."
+    },
+    {
+      "id": 13,
+      "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
+      "cerrada": "sí",
+      "texto": "Hola, buenas. Ya, yo trabajo en un hospital, turno de madrugada, salgo de mi casa a las cinco de la mañana para tomar la micro en el paradero de la avenida. Son seis cuadras caminando a oscuras. Seis. Y el paradero no tiene luz, no tiene techo, no tiene nada. A esa hora pasa una micro cada veinte minutos con suerte, y una ahí sola esperando. Me han gritado cosas, una vez un auto me siguió una cuadra entera despacito. Yo digo que sí a las cámaras, pero la cámara no me va a acompañar esas seis cuadras. Lo que necesito es luz en el camino, luz en el paradero, que la micro pase más seguido temprano. Eso es seguridad para mí. Ya, me tengo que ir, gracias."
+    },
+    {
+      "id": 14,
+      "participante": "Ignacio, 27, trabajador social",
+      "cerrada": "no",
+      "texto": "Hola, yo trabajo en programas sociales acá en la comuna y conozco harto el territorio. Yo diría que no, o al menos no así. La evidencia de que las cámaras bajan los delitos es súper débil; a veces el delito se mueve a la cuadra siguiente y nada más. Lo que sí sabemos que funciona es la prevención: sedes vecinales abiertas en la tarde, programas para jóvenes, mediación entre vecinos, que la gente se conozca. La seguridad no se compra, se construye con comunidad. Y me preocupa que esto sea más para salir en la prensa que para resolver. Si la municipalidad tiene esa plata, que haga un diagnóstico con los vecinos primero, por sector, y que con eso decida."
+    },
+    {
+      "id": 15,
+      "participante": "Carmen, 52, vive frente a la plaza",
+      "cerrada": "sí",
+      "texto": "Ay, esto es delicado, no sé si decirlo. Bueno, ya. Yo estoy de acuerdo con las cámaras, en general. Pero me enteré que una de las cámaras va en el poste que está justo afuera de mi casa, frente a la plaza. Y yo tengo miedo. Porque los que venden ahí van a pensar que yo la pedí, que yo soy la sapa. Ya pasó con una vecina de la otra cuadra que llamó a carabineros, le rayaron la casa y le rompieron el vidrio del auto. Yo vivo sola con mi nieto. Entonces sí a las cámaras, pero que no la pongan en mi poste, o que expliquen públicamente que fue decisión de la muni y no de los vecinos. No quiero ser yo la que pague por eso."
+    },
+    {
+      "id": 16,
+      "participante": "Mauricio, 46, dueño de ferretería",
+      "cerrada": "sí",
+      "texto": "Sí, de acuerdo. Pero tengo una propuesta que nadie ha pensado. Yo ya tengo cuatro cámaras en mi local, dos apuntando a la calle, las pagué yo, como seiscientas lucas con la instalación. Y como yo hay varios comerciantes en la avenida. ¿Por qué la muni no conecta las cámaras privadas que ya existen a su central, con un convenio? Uno firma, comparte la señal de las cámaras que miran a la calle, y la muni pone las suyas donde no hay ninguna. Sale mucho más barato y cubren más. Yo lo firmaría altiro."
+    },
+    {
+      "id": 17,
+      "participante": "Valentina, 24, enfermera",
+      "cerrada": "sí",
+      "texto": "Ya, te cuento algo que me pasó hace un mes. Hubo una pelea en el pasaje, como a las dos de la mañana, dos tipos, uno con cuchillo. Yo llamé al ciento treinta y tres. Me tuvieron esperando, me pidieron la dirección como tres veces, y la patrulla llegó una hora y media después. Una hora y media. Por suerte no pasó nada grave, pero pudo pasar. Entonces cuando me preguntan por las cámaras, digo que sí, da lo mismo, pónganlas. Pero el problema real es que cuando uno llama no llega nadie. La cámara va a grabar la pelea perfecto, y la patrulla igual va a llegar una hora y media después."
+    },
+    {
+      "id": 18,
+      "participante": "Ramón, 78, vive solo",
+      "cerrada": "sí",
+      "texto": "Buenas tardes. Mire, yo llegué a esta población el año sesenta y ocho, cuando eran puros sitios. Nosotros mismos hicimos las veredas, la sede, todo. Y nos conocíamos todos, sabíamos quién era hijo de quién. Si pasaba un desconocido, uno lo notaba altiro. Ahora yo no sé quién vive al lado mío. Llegan, se van, arriendan, no saludan. Las cámaras, bueno, está bien, si los jóvenes dicen que sirven, que las pongan. Pero lo que a mí me hace falta es otra cosa. Es que la gente se conozca de nuevo. Que la sede se abra, que haya once comunitaria, que uno sepa a quién golpearle la puerta si le pasa algo de noche. Eso lo cuidaba a uno más que cualquier aparato."
+    },
+    {
+      "id": 19,
+      "participante": "Paola, 35, cuidadora, llegó de Venezuela",
+      "cerrada": "sí",
+      "texto": "Hola, buenas. Yo sí estoy de acuerdo, y te digo por qué, que a lo mejor es distinto a lo que dicen los demás. Cuando pasa algo malo en el barrio, un robo, lo que sea, muchas veces la gente dice altiro fueron los extranjeros. Le pasó a mi cuñado, lo acusaron de robar una bicicleta y él estaba trabajando, tuvo que pedirle a su jefe una carta. Entonces yo pienso que si hay cámaras, se va a ver quién fue de verdad. Para mí la cámara también me protege a mí, de que me echen la culpa. Eso sí, que se usen bien, que no sea para perseguir a nadie por cómo se ve."
+    },
+    {
+      "id": 20,
+      "participante": "Tomás, 41, conductor de aplicación",
+      "cerrada": "sí",
+      "texto": "Sí, de acuerdo, a mí me hicieron un portonazo hace un año, llegando a mi casa, con mi hija en el auto. Fue horrible. Pero te digo, a los que me lo hicieron los pillaron, salió en las noticias incluso, uno tenía quince años y el otro diecisiete. Y a la semana estaban afuera. Entonces sí, cámaras, pero el problema no se acaba con saber quién fue. Hay que hacer algo con esos cabros antes, porque a los quince años alguien ya los dejó tirados. Y después, cuando pasa, que haya consecuencias de verdad. Si no, la cámara es para ver la misma película una y otra vez."
+    },
+    {
+      "id": 21,
+      "participante": "Hugo, 55, maestro de construcción",
+      "cerrada": "no",
+      "texto": "No, para qué. Pusieron una en la esquina de la avenida con Los Pinos y al mes la rompieron a piedrazos. Ahí está todavía, colgando del poste. Van a botar la plata."
+    },
+    {
+      "id": 22,
+      "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
+      "cerrada": "sí",
+      "texto": "Uf, me cuesta responder esto. Mi primera reacción es que sí, porque igual me da miedo llegar de noche y a mi pareja le robaron el celular en la esquina. Pero también me incomoda un poco, no sé, que me graben todo el día cada vez que salgo a comprar. Creo que diría que sí, pero con condiciones. Que haya un registro público, aunque sea cada seis meses, de para qué se usaron las grabaciones: cuántas veces se pidieron, para qué casos, si sirvieron. Y que la junta de vecinos pueda revisarlo. Si sirven, perfecto, si no sirven, que las saquen y prueben otra cosa."
+    },
+    {
+      "id": 23,
+      "participante": "Luisa, 60, catequista de la parroquia",
+      "cerrada": "sí",
+      "texto": "Hola, buenas tardes, que Dios lo bendiga. Mire, yo digo que sí, todo lo que ayude es bueno. Pero yo veo otra cosa desde la parroquia. Antes teníamos actividades en la tarde, catequesis, el grupo de jóvenes, el coro, y la gente andaba en la calle hasta las nueve, había movimiento. Ahora nadie quiere salir de noche, entonces cerramos a las seis, y cuando cerramos la calle queda vacía, y la calle vacía es peor. Es como un círculo. Yo pediría que la municipalidad apoye a las organizaciones que ya existen para que vuelvan a abrir de noche, con un guardia, con luz en la entrada. La gente en la calle también cuida."
+    },
+    {
+      "id": 24,
+      "participante": "Claudia, 48, directora de jardín infantil",
+      "cerrada": "sí",
+      "texto": "Hola, soy directora del jardín de la calle El Roble. Yo digo que sí, pero quiero aprovechar de decir algo que para mí también es seguridad y nadie lo menciona. A la hora de salida de los niños, a las cinco, los autos pasan por fuera del jardín a ochenta por hora, porque usan la calle de atajo para evitar el taco de la avenida. El año pasado atropellaron a un apoderado, por suerte nada grave. Llevamos dos años pidiendo un lomo de toro y un paso de cebra. Si van a poner una cámara afuera del jardín, que sirva también para eso, para las multas. Seguridad no es solo que no te roben, también es que no te atropellen."
+    },
+    {
+      "id": 25,
+      "participante": "Roberto, 66, ex dirigente vecinal",
+      "cerrada": "sí",
+      "texto": "Ya, otra encuesta más. Te voy a decir lo que pienso, aunque no sé si sirva. El año pasado nos hicieron una encuesta parecida sobre qué queríamos para la plaza. Marque A, B o C. Yo marqué la multicancha porque era lo menos malo, pero lo que queríamos era otra cosa, queríamos luz y que se sacara a los que venden. Ganó la multicancha. La hicieron. Y nadie la usa porque está oscura y tomada. Y la muni dice que cumplió, que hizo lo que votamos. Entonces ahora me preguntan si quiero cámaras, y claro, digo que sí, quién va a decir que no a la seguridad. Pero no me pregunten sí o no. Pregúntenme qué necesito. Que esta vez lo que uno dice llegue de verdad a alguien que decida."
+    }
+  ]
+}
