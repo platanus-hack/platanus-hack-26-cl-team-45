@@ -4,13 +4,13 @@ import { useAction } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { SLUG, mensaje } from './convex.jsx';
 import { grafico } from './voces-datos.js';
+import { Entrada } from './ds.js';
 
 const SUGERENCIAS = ['¿Qué es lo que más molesta?', 'Compara el tono de los temas principales', '¿Qué emociones predominan?', '¿Qué propone la gente?'];
 
 export function Chat({ v, visible, onFoco }) {
   const preguntar = useAction(api.chat.preguntar);
   const [mensajes, setMensajes] = useState([]);           // { rol, texto, grafico?, citas?, error? }
-  const [texto, setTexto] = useState('');
   const [esperando, setEsperando] = useState(false);
   const fin = useRef(null);
   useEffect(() => { fin.current?.scrollIntoView({ block: 'end', behavior: 'smooth' }); }, [mensajes, esperando]);
@@ -24,7 +24,7 @@ export function Chat({ v, visible, onFoco }) {
     if (!q || esperando) return;
     const historial = mensajes.filter(m => !m.error).map(m => ({ rol: m.rol, texto: m.texto }));
     setMensajes(ms => [...ms, { rol: 'user', texto: q }]);
-    setTexto(''); setEsperando(true);
+    setEsperando(true);
     try {
       const r = await preguntar({ slug: SLUG, pregunta: q, historial });
       setMensajes(ms => [...ms, { rol: 'assistant', texto: r.respuesta, grafico: r.grafico, citas: r.citas }]);
@@ -35,28 +35,24 @@ export function Chat({ v, visible, onFoco }) {
     } finally { setEsperando(false); }
   }
 
+  // The design system's Agente pieces (au-ag-*, Entrada); the chart stays ours because Agente has no chart slot.
   return (
-    <div className="chat" hidden={!visible}>
-      <div className="chat-mensajes" aria-live="polite">
-        {!mensajes.length && <div className="bloque">
-          <h2>Pregúntale a los datos</h2>
-          <p className="vacio">Responde con lo que dijeron las {v.casos} personas y arma un gráfico con los conteos reales.</p>
-          <div className="sugerencias">{SUGERENCIAS.map(s => <button key={s} onClick={() => enviar(s)}>{s}</button>)}</div>
-        </div>}
+    <div className="chat au-ag" hidden={!visible}>
+      <div className="au-ag-lista" aria-live="polite">
+        {!mensajes.length && <p className="au-ag-vacio">Pregunta qué dijo la gente. Respondo con lo que dijeron las {v.casos} personas y armo un gráfico con los conteos reales.</p>}
         {mensajes.map((m, i) => m.rol === 'user'
-          ? <p key={i} className="msg yo">{m.texto}</p>
-          : <div key={i} className={`msg claude${m.error ? ' error' : ''}`}>
-              <p>{m.texto}</p>
+          ? <p key={i} className="au-ag-yo">{m.texto}</p>
+          : <div key={i} className="au-ag-msg">
+              <p className={`au-ag-texto${m.error ? ' es-error' : ''}`}>{m.texto}</p>
               <Grafico g={grafico(v, m.grafico)} casos={v.casos} />
-              {m.citas?.slice(0, 3).map((c, j) => <q key={j}>{c}</q>)}
+              {m.citas?.length > 0 && <div className="au-ag-citas">{m.citas.slice(0, 3).map((c, j) => <figure key={j} className="au-ag-cita"><blockquote>«{c}»</blockquote></figure>)}</div>}
+              {!m.error && <p className="au-ag-base">Basado en {v.casos} {v.casos === 1 ? 'persona' : 'personas'} de esta consulta</p>}
             </div>)}
-        {esperando && <p className="msg claude vacio">Leyendo las respuestas…</p>}
+        {esperando && <p className="au-ag-pensando">Leyendo las voces…</p>}
         <div ref={fin}></div>
       </div>
-      <form className="chat-form" onSubmit={e => { e.preventDefault(); enviar(texto); }}>
-        <input value={texto} onChange={e => setTexto(e.target.value)} maxLength={500} placeholder="Pregunta sobre las respuestas…" aria-label="Pregunta sobre las respuestas" />
-        <button className="primario" disabled={esperando || texto.trim().length < 2}>Enviar</button>
-      </form>
+      {!esperando && !mensajes.length && <div className="au-sug" role="group" aria-label="Preguntas sugeridas">{SUGERENCIAS.map(s => <button key={s} type="button" className="au-sug-chip" onClick={() => enviar(s)}>{s}</button>)}</div>}
+      <Entrada onEnviar={enviar} deshabilitado={esperando} pensando={esperando} placeholder="Pregunta sobre lo que dijo la gente…" />
     </div>
   );
 }
@@ -78,7 +74,7 @@ function Grafico({ g, casos }) {
               <text x={izq - 8} y={y + 13} textAnchor="end"><title>{f.nombre}</title>{corto(f.nombre)}</text>
               {g.tipo === 'tono'
                 ? ['pos', 'neu', 'neg'].map(t => { const w = f[t] * esc, r = <rect key={t} x={x} y={y} width={w} height={16} rx={3} fill={`var(--${t})`} />; x += w; return r; })
-                : <rect x={izq} y={y} width={f.n * esc} height={16} rx={3} fill={f.tono ? `var(--${f.tono})` : 'var(--ink-2)'} opacity={f.tono ? 1 : 0.55} />}
+                : <rect x={izq} y={y} width={f.n * esc} height={16} rx={3} fill={f.tono ? `var(--${f.tono})` : 'var(--tinta-suave)'} opacity={f.tono ? 1 : 0.55} />}
               <text className="num" x={izq + f.n * esc + 6} y={y + 13}>{g.tipo === 'tono' ? `${f.pos}·${f.neu}·${f.neg}` : f.n}</text>
             </g>
           );

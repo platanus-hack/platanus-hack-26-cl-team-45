@@ -1,84 +1,77 @@
-/* Voces: any poll as a blob. Canvas + SVG fill the screen behind; header and card float above. Rules: DESIGN.md. */
+/* Voces: any poll as a blob. Canvas + SVG fill the screen behind; header and card float above. Tokens and components: design-system/. Rules: DESIGN.md. */
 body { overflow: hidden; height: 100vh; }
 #escenario, #voces { position: fixed; inset: 0; width: 100%; height: 100%; }
 #escenario { cursor: grab; }
 #escenario:active { cursor: grabbing; }
 #voces { pointer-events: none; user-select: none; }
-#voces .eje { stroke: var(--edge); }
-#voces text { font-family: var(--sans); font-size: var(--t-1); fill: var(--ink-2); transition: fill .3s ease-out, opacity .3s ease-out; }
-#voces text.nombre { fill: var(--ink); font-weight: 400; font-family: var(--display); font-size: 15px; }
-#voces text.nombre.on { fill: var(--accent-ink); }
+#voces .eje { stroke: var(--linea); }
+#voces text { font-family: var(--font-texto); font-size: 13px; fill: var(--tinta-suave); transition: fill .2s ease-out, opacity .2s ease-out; }
+#voces text.nombre { fill: var(--tinta); font-weight: 500; }
+#voces text.nombre.on { font-weight: 600; }
 #voces text.nombre.dim { opacity: .35; }
-#voces text.cuenta { font-family: var(--mono); fill: var(--muted); }
-#voces .punto { pointer-events: all; cursor: pointer; outline: none; transition: opacity .3s ease-out; }
+#voces text.cuenta { font-family: var(--font-display); font-weight: 300; fill: var(--tinta-suave); }
+#voces .punto { pointer-events: all; cursor: pointer; outline: none; transition: opacity .2s ease-out; }
 #voces .punto .toque { fill: transparent; }
-#voces .punto .bola { stroke: var(--surface); stroke-width: 1.5; }
-#voces .punto.sel .bola, #voces .punto:focus-visible .bola { stroke: var(--ink); stroke-width: 2; }
+#voces .punto .bola { stroke: var(--lienzo); stroke-width: 1.5; }
+#voces .punto.sel .bola, #voces .punto:focus-visible .bola { stroke: var(--tinta); stroke-width: 2; }
 #voces .punto.dim { opacity: .15; }
 
-header { position: relative; z-index: 1; display: flex; align-items: center; gap: var(--s3) var(--s4); padding: var(--s6) var(--s6) 0; flex-wrap: wrap; justify-content: flex-start; text-align: left; max-width: calc(100% - 420px); margin: 0; }
-h1 { margin: 0; font-size: clamp(var(--t3), 3vw, 44px); line-height: 1.1; }
-.total { display: flex; align-items: baseline; gap: var(--s2); color: var(--ink-2); font-size: var(--t-1); }
-.total .num { font-size: var(--t2); color: var(--ink); font-weight: 300; }
-nav { display: flex; gap: var(--s2); flex-wrap: wrap; }
-.modos { display: inline-flex; gap: var(--s1); }
-.clave-fila { flex-basis: 100%; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); font-size: var(--t-1); color: var(--ink-2); }
-.clave { display: inline-flex; align-items: center; gap: var(--s2); }
+header { position: relative; z-index: 1; padding: var(--esp-6) var(--esp-8) 0; max-width: calc(100% - 420px); }
+header h1 { font-size: clamp(28px, 2.4vw, 40px); }
+.total .num { font-size: 28px; }
+.clave-fila { flex-basis: 100%; margin: 0; display: flex; flex-wrap: wrap; gap: var(--esp-1) var(--esp-4); font-size: 13px; color: var(--tinta-suave); }
 
-#tarjeta { position: fixed; z-index: 1; right: var(--s5); top: var(--s5); bottom: var(--s5); width: 380px; overflow: auto; display: flex; flex-direction: column; gap: var(--s4);
-  background: var(--rubor); border-radius: var(--radio); padding: var(--s5); }
-.bloque h2 { margin: 0 0 var(--s2); font: 500 var(--t-1)/1.4 var(--sans); letter-spacing: 0; color: var(--tinta-suave); display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
-.bloque h2 .num { color: var(--muted); font-weight: 400; }
-.persona q { display: block; font: 300 var(--t1)/1.4 var(--display); margin-bottom: var(--s2); }
-.persona .quien { margin: 0 0 var(--s3); font: 500 var(--t-1)/1.4 var(--sans); color: var(--tinta-suave); }
+/* The card floats over the blob: the screen's one sombra-flota. */
+#tarjeta { position: fixed; z-index: 1; right: var(--esp-6); top: var(--esp-6); bottom: var(--esp-6); width: 380px; overflow: auto; display: flex; flex-direction: column; gap: var(--esp-4);
+  background: var(--rubor-hondo); border-radius: var(--radio-sm); padding: var(--esp-4) var(--esp-6) var(--esp-6); box-shadow: var(--sombra-flota); }
+.bloque h2 { padding-bottom: var(--esp-2); border-bottom: 1px solid var(--linea); display: flex; align-items: center; gap: var(--esp-2); flex-wrap: wrap; }
+.bloque h2 .num { color: var(--tinta-suave); }
+.bloque .au-btn { padding: 8px 14px; font-size: 13px; }
+.persona q { display: block; font-weight: 300; line-height: 1.5; margin-bottom: var(--esp-2); }
+.persona .quien { margin: 0 0 var(--esp-3); font-size: 13px; font-weight: 500; color: var(--tinta-suave); }
 .persona .tema h2 { display: block; }
-.persona .tema h2 .tono { display: inline-block; margin-right: var(--s2); }
-.persona .tema + .tema { margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--line); }
-.persona > button { margin-top: var(--s3); }
-.replay { display: flex; align-items: center; gap: var(--s3); flex-basis: 100%; font-size: var(--t-1); color: var(--tinta-suave); }
-.replay button, .replay .num { white-space: nowrap; }
-.replay button { min-height: 32px; padding: 0 var(--s3); font-size: var(--t-1); }
-.replay input[type=range] { flex: 1; min-width: 0; max-width: 360px; min-height: 0; padding: 0; border: 0; background: none; accent-color: var(--tinta); }
-.lectura .titulo { margin: 0; font: 400 var(--t2)/1.2 var(--display); letter-spacing: -0.01em; }
-.lectura p { margin: var(--s1) 0 var(--s3); line-height: 1.45; }
-.pasos { display: flex; align-items: center; gap: var(--s3); }
-.barra { flex: 1; height: 3px; background: var(--rubor-hondo); border-radius: 2px; overflow: hidden; }
-.barra i { display: block; height: 100%; background: var(--accent-ink); transition: width .3s ease-out; }
+.persona .tema h2 .tono { display: inline-block; margin-right: var(--esp-2); }
+.persona .tema + .tema { margin-top: var(--esp-3); }
+.persona > .au-btn, .persona > button { margin-top: var(--esp-3); }
+/* Replay: play button + slider over the answers in arrival order. */
+.replay { display: flex; align-items: center; gap: var(--esp-3); flex-basis: 100%; font-size: 13px; color: var(--tinta-suave); }
+.replay .au-btn, .replay .num { white-space: nowrap; }
+.replay .au-btn { padding: 8px 14px; font-size: 13px; }
+.replay input[type="range"] { flex: 1; min-width: 0; max-width: 360px; }
+.lectura .titulo { margin: 0; font: 500 28px/34px var(--font-display); }
+.lectura p { margin: var(--esp-2) 0 var(--esp-3); line-height: 1.5; }
+.pasos { display: flex; align-items: center; gap: var(--esp-3); }
+.barra { flex: 1; height: 2px; background: var(--linea); border-radius: var(--radio-pildora); overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--tinta); transition: width .3s ease-out; }
 .propuestas, .emociones { list-style: none; margin: 0; padding: 0; }
-.propuestas li { padding: var(--s2) 0; border-top: 1px solid var(--line); font-size: var(--t-1); line-height: 1.45; }
+.propuestas li { padding: var(--esp-2) 0; border-top: 1px solid var(--linea); font-size: 13px; line-height: 1.5; }
 .propuestas li:first-child { border-top: 0; padding-top: 0; }
-.emociones { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font-size: var(--t-1); }
-.emociones li { display: inline-flex; align-items: center; gap: var(--s2); }
-.emociones .num { color: var(--muted); }
-.vacio { margin: 0 0 var(--s3); color: var(--ink-2); font-size: var(--t-1); }
-.metodo { margin: auto 0 0; padding-top: var(--s3); border-top: 1px solid var(--line); font-family: var(--mono); font-size: var(--t-1); color: var(--muted); line-height: 1.5; }
+.emociones { display: flex; flex-wrap: wrap; gap: var(--esp-2) var(--esp-4); font-size: 13px; }
+.emociones li { display: inline-flex; align-items: center; gap: var(--esp-2); }
+.emociones .num { color: var(--tinta-suave); }
+.vacio { margin: 0 0 var(--esp-3); }
+#tarjeta .metodo { margin: auto 0 0; padding-top: var(--esp-3); border-top: 1px solid var(--linea); }
 
 /* Narrow: blob on top, card as a bottom sheet. */
 @media (max-width: 999px) {
-  header { padding: var(--s4) var(--s4) 0; max-width: none; gap: var(--s2) var(--s3); }
-  nav button, nav a.boton { min-height: 32px; padding: 0 var(--s3); font-size: var(--t-1); }
+  header { padding: var(--esp-4) var(--esp-4) 0; max-width: none; gap: var(--esp-2) var(--esp-3); }
+  nav .au-btn, nav .au-sel-op { padding: 8px 12px; font-size: 13px; }
   .clave-fila .clave:last-child { display: none; }   /* the card's persona line and the method note carry it */
-  #tarjeta { left: var(--s4); right: var(--s4); top: auto; bottom: var(--s4); width: auto; max-height: 36vh; }
+  #tarjeta { left: var(--esp-4); right: var(--esp-4); top: auto; bottom: var(--esp-4); width: auto; max-height: 36vh; }
 }
 
-/* Chat: fills the card; messages scroll, the input stays at the bottom. */
-#tarjeta:has(.chat:not([hidden])) { padding-bottom: 0; }
-.chat { display: flex; flex-direction: column; gap: var(--s3); flex: 1; min-height: 0; }
+/* Preguntar: the design system's Agente fills the card; messages scroll, the Entrada stays at the bottom. */
+#tarjeta:has(.chat:not([hidden])) { padding-bottom: var(--esp-4); }
+.chat { flex: 1; }
 .chat[hidden] { display: none; }
-.chat-mensajes { flex: 1; overflow: auto; display: flex; flex-direction: column; gap: var(--s3); }
-.sugerencias { display: flex; flex-wrap: wrap; gap: var(--s2); }
-.sugerencias button { font-size: var(--t-1); min-height: 32px; padding: 0 var(--s3); text-align: left; }
-.msg { margin: 0; font-size: var(--t-1); line-height: 1.5; }
-.msg.yo { align-self: flex-end; max-width: 85%; background: linear-gradient(180deg, #c9eff4, #e9fafc); color: var(--accent-ink); padding: var(--s2) var(--s3); border-radius: 12px 12px 4px 12px; }
-.msg.claude p { margin: 0 0 var(--s2); font-size: var(--t0); line-height: 1.45; }
-.msg.claude q { display: block; font-size: var(--t-1); color: var(--ink-2); font-style: italic; border-left: 2px solid var(--line); padding-left: var(--s2); margin-top: var(--s1); }
-.msg.error p { color: var(--neg); }
-.grafico { margin: var(--s2) 0; }
-.grafico figcaption { font-size: var(--t-1); font-weight: 500; color: var(--ink); margin-bottom: var(--s1); }
+.chat .au-ag-lista { display: flex; flex-direction: column; gap: var(--esp-6); }
+.chat .au-ag-texto { font-size: 19px; line-height: 27px; }
+.chat .au-ag-texto.es-error { color: var(--coral-texto); }
+.chat .au-sug { justify-content: flex-start; }
+.grafico { margin: 0; }
+.grafico figcaption { font-size: 13px; font-weight: 500; margin-bottom: var(--esp-2); }
 .grafico svg { width: 100%; height: auto; display: block; }
-.grafico text { font-family: var(--sans); font-size: 11px; fill: var(--ink-2); }
-.grafico text.num { font-family: var(--mono); fill: var(--muted); }
-.metodo-mini { margin: var(--s1) 0 0; font-size: var(--t-1); color: var(--muted); }
-.chat-form { position: sticky; bottom: 0; display: flex; gap: var(--s2); padding: var(--s3) 0 var(--s4); background: var(--rubor); border-top: 1px solid var(--line); }
-.chat-form input { flex: 1; min-width: 0; font: inherit; font-size: var(--t-1); padding: var(--s2) var(--s3); border: 1px solid var(--edge); border-radius: 999px; background: var(--surface); color: var(--ink); }
+.grafico text { font-family: var(--font-texto); font-size: 11px; fill: var(--tinta-suave); }
+.grafico text.num { font-family: var(--font-display); fill: var(--tinta); }
+.metodo-mini { margin: var(--esp-1) 0 0; font-size: 11px; color: var(--tinta-suave); }
 @media (max-width: 999px) { #tarjeta:has(.chat:not([hidden])) { max-height: 52vh; } }

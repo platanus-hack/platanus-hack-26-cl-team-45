@@ -212,7 +212,7 @@ export function montar({ escenario, svg, onSelect }) {
       Object.assign(p, { pos: dir.map(x => x / n * r), celdas: cs.map(({ eje, celda }) => ({ eje, celda })), claves: new Set(cs.map(c => `${c.eje.id}|${id}`)) });
       const bola = p.g.lastChild;
       p.radio = 3 + Math.max(...cs.map(c => c.celda.fuerza)) * 2.5 + Math.min(cs.length - 1, 3);
-      bola.setAttribute('fill', `url(#g-${tono})`);
+      bola.setAttribute('fill', `var(--${tono})`);
       p.g.setAttribute('aria-label', `${cs.map(c => `${c.eje.nombre}, ${c.celda.postura}`).join('; ')}: ${cs[0].celda.citas[0] ?? ''}`);
     }
     for (const [k, p] of personas) if (!porPersona.has(k)) { p.g.remove(); personas.delete(k); }
@@ -298,7 +298,7 @@ export function montar({ escenario, svg, onSelect }) {
     const dirs = DIRS.map(([x, y, z]) => new THREE.Vector3(x, y, z));
     uniforms = { uTime: { value: 0 }, uDirs: { value: dirs }, uVals: { value: Array(EJES).fill(0) }, uPulse: { value: Array(EJES).fill(0) }, uAmp: { value: 0.03 }, uTono: { value: Array(EJES).fill(0) } };
     const css = getComputedStyle(document.documentElement), color = v => ({ value: new THREE.Color(css.getPropertyValue(v).trim()) });
-    Object.assign(uniforms, { neg: color('--neg'), pos: color('--pos'), neu: color('--neu'), base: color('--linea-fuerte'), luz: color('--lienzo') });
+    Object.assign(uniforms, { neg: color('--neg'), pos: color('--pos'), neu: color('--neu'), base: color('--linea-fuerte'), luz: color('--tinta') });
     blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 64), new THREE.ShaderMaterial({ uniforms, vertexShader: VERT, fragmentShader: FRAG }));
     scene.add(blob);
     const antes = performance.now() / 1000;            // switch dot clocks to the Three clock

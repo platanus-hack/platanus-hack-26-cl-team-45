@@ -3,10 +3,11 @@ import { useQueries } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { arrancar, SLUG } from './convex.jsx';
 import { NOMBRE_TONO, tono, plural } from './comun.js';
-import { desdeTopicos, elegir, lecturas, clave } from './voces-datos.js';
+import { elegir, lecturas, clave } from './voces-datos.js';
 import demoCamaras from './demo-camaras.json';
 import { Chat } from './Chat.jsx';
 import { montar } from './voces-dibujo.js';
+import { Boton, Marca, Pastilla } from './ds.js';
 import './voces.css';
 
 const TENDENCIA = { mejora: 'dice que mejoró', empeora: 'dice que empeoró', igual: 'dice que sigue igual' };
@@ -68,25 +69,26 @@ function Voces() {
   return (
     <>
       <Lienzo />
-      <header>
+      <header className="barra-sup">
+        <a href="/" aria-label="Inicio"><Marca tamano={28} /></a>
         <h1>{v === null ? 'No existe esta encuesta' : v?.pregunta ?? 'Audem'}</h1>
         {hay && <div className="total"><span className="num">{v.casos}</span><span>{v.casos === 1 ? 'persona' : 'personas'}</span></div>}
         <nav>
-          {hay && <div className="modos" role="group" aria-label="Vista">
-            <button aria-pressed={modo === 'vivo'} onClick={() => cambiar('vivo')}>En vivo</button>
-            <button aria-pressed={modo === 'lecturas'} onClick={() => cambiar('lecturas')}>Lecturas</button>
-            <button aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Preguntar</button>
+          {hay && <div className="modos au-sel au-sel--tinta" role="group" aria-label="Vista">
+            <button className="au-sel-op" aria-pressed={modo === 'vivo'} onClick={() => cambiar('vivo')}>En vivo</button>
+            <button className="au-sel-op" aria-pressed={modo === 'lecturas'} onClick={() => cambiar('lecturas')}>Lecturas</button>
+            <button className="au-sel-op" aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Preguntar</button>
           </div>}
-          {!DEMO && <a className="boton" href={`/${SLUG}/panel`}>Mapa</a>}
-          {!DEMO && <a className="boton" href={`/${SLUG}/flujo`}>Flujo</a>}
+          {!DEMO && <a className="au-btn au-btn--contorno" href={`/${SLUG}/panel`}>Mapa</a>}
+          {!DEMO && <a className="au-btn au-btn--contorno" href={`/${SLUG}/flujo`}>Flujo</a>}
         </nav>
         {hay && <p className="clave-fila">
-          {DEMO && <span className="clave"><strong>Datos sintéticos</strong></span>}
+          {DEMO && <Pastilla tono="neutro">Datos sintéticos</Pastilla>}
           {['pos', 'neu', 'neg'].map(t => <span key={t} className="clave"><i className="tono" style={{ background: `var(--${t})` }}></i>{t === 'neu' ? 'neutro o mixto' : NOMBRE_TONO[t]}</span>)}
           <span className="clave">punto = una persona, ubicada entre los temas de los que habla · más lejos = dijo más y con más fuerza · arrastra para girar</span>
         </p>}
         {total > 1 && <div className="replay">
-          <button onClick={() => setReproduciendo(x => !x)} aria-label={reproduciendo ? 'Pausar' : 'Ver cómo se formó, respuesta a respuesta'}>{reproduciendo ? 'Pausar' : '▶ Ver cómo se formó'}</button>
+          <Boton variante="contorno" onClick={() => setReproduciendo(x => !x)} aria-label={reproduciendo ? 'Pausar' : 'Ver cómo se formó, respuesta a respuesta'}>{reproduciendo ? 'Pausar' : '▶ Ver cómo se formó'}</Boton>
           <input type="range" min="1" max={total} value={n ?? total} aria-label="Respuestas que se muestran"
             onChange={e => { setReproduciendo(false); const x = +e.target.value; setN(x >= total ? null : x); }} />
           <span className="num">{n ?? total} de {total}</span>
@@ -98,7 +100,7 @@ function Voces() {
         {v && !hay && <div className="bloque">
           <h2>Todavía no hay respuestas analizadas</h2>
           <p className="vacio">Cada respuesta aparece aquí unos 15 segundos después de enviarse.</p>
-          <a className="boton primario" href={`/${SLUG}`}>Responder</a>
+          <a className="au-btn au-btn--primario" href={`/${SLUG}`}>Responder</a>
         </div>}
 
         {lectura && <div className="bloque lectura">
@@ -106,9 +108,9 @@ function Voces() {
           <p className="titulo">{lectura.titulo}</p>
           <p>{lectura.texto}</p>
           <div className="pasos">
-            <button onClick={() => mover(-1)} aria-label="Lectura anterior">‹</button>
+            <Boton variante="contorno" onClick={() => mover(-1)} aria-label="Lectura anterior">‹</Boton>
             <div className="barra"><i style={{ width: `${((paso % ls.length) + 1) / ls.length * 100}%` }}></i></div>
-            <button onClick={() => mover(1)} aria-label="Lectura siguiente">›</button>
+            <Boton variante="contorno" onClick={() => mover(1)} aria-label="Lectura siguiente">›</Boton>
           </div>
         </div>}
 
@@ -141,7 +143,7 @@ function Persona({ celdas, cerrar }) {
         <h2><i className="tono" style={{ background: `var(--${celda.tono})` }}></i>{eje.nombre} · {celda.postura}{TENDENCIA[celda.tendencia] ? ` · ${TENDENCIA[celda.tendencia]}` : ''}</h2>
         {celda.citas.map((c, i) => <q key={i}>{c}</q>)}
       </div>)}
-      <button onClick={cerrar}>Cerrar</button>
+      <Boton variante="contorno" onClick={cerrar}>Cerrar</Boton>
     </div>
   );
 }

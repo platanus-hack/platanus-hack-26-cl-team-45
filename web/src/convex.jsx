@@ -1,6 +1,7 @@
 // Shared Convex setup for every Audem page.
 import { createRoot } from 'react-dom/client';
 import { ConvexProvider, ConvexReactClient } from 'convex/react';
+import './ds.js';
 import './comun.css';
 
 // The dev deployment that `convex dev` keeps in sync is the one the demo uses (public URL, not a secret); VITE_CONVEX_URL overrides it.

@@ -9,7 +9,7 @@ export function montar() {
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
   // View state. `cursor` = how many respuestas are shown, in arrival order.
-  const st = { datos: null, orden: [], cursor: 0, jugando: false, envivo: true, tonos: new Set(['pos', 'neu', 'neg']), sel: null, vista: 'red' };
+  const st = { datos: null, orden: [], cursor: 0, jugando: false, envivo: true, tonos: new Set(['pos', 'neu', 'neg']), sel: null };
   const visto = new Set();
   // Convex data arrives from the React component; null = no poll with this slug.
   function recibir(d) {
@@ -133,7 +133,7 @@ export function montar() {
           if (visto.size) p.classList.add('nuevo');
           el('circle', { class: 'hit', r: r + 6 }, p);
           el('circle', { class: 'anillo', r: r + 4 }, p);
-          el('circle', { class: 'dato', r, fill: `url(#g-${t})` }, p);
+          el('circle', { class: 'dato', r, fill: `var(--${t})` }, p);
           p.addEventListener('mousemove', ev => mostrarTip(ev, `<q>${esc(f.cita || f.texto)}</q><span>${esc(f.emocion)} (${NOMBRE_TONO[t]}) · intensidad <span class="num">${(f.intensidad ?? 0).toFixed(2)}</span> · ${esc(g.nombre)}</span>`));
           p.addEventListener('mouseleave', ocultarTip);
           visto.add(f.id);
@@ -147,15 +147,12 @@ export function montar() {
     const ids = new Set(frases.map(f => f.id));
     svg.querySelectorAll('.punto').forEach(p => ids.has(p.dataset.k) || (visto.delete(p.dataset.k), p.remove()));
 
-    $('figura').dataset.vista = st.vista;
-    document.querySelectorAll('.vista button').forEach(b => b.setAttribute('aria-pressed', b.dataset.vista === st.vista));
-    renderRed(frases, grupos, recientes);
 
     // Ranking: themes by people, each with its tone split and raw counts. Rows are buttons that select the theme.
     $('temas').innerHTML = grupos.slice().sort((a, b) => b.personas - a.personas).map(g => {
       const tot = g.frases.length;
       const seg = ['pos', 'neu', 'neg'].filter(t => g.tonos[t]).map(t => `<div style="flex-grow:${g.tonos[t]};background:var(--${t})" data-t="${t}" data-n="${g.tonos[t]}" data-tot="${tot}"></div>`).join('');
-      return `<button class="tema" data-id="${esc(g.id)}" aria-pressed="${st.sel === g.id}"><span class="fila"><b>${esc(g.nombre)}</b><span class="num">${plural(g.personas, 'persona', 'personas')}</span></span><span class="barra">${seg}</span><span class="conteo num">${g.tonos.pos} pos · ${g.tonos.neu} neu · ${g.tonos.neg} neg</span></button>`;
+      return `<button class="tema opcion" data-id="${esc(g.id)}" aria-pressed="${st.sel === g.id}"><span class="fila"><b>${esc(g.nombre)}</b><span class="num">${plural(g.personas, 'persona', 'personas')}</span></span><span class="barra">${seg}</span><span class="conteo num">${g.tonos.pos} pos · ${g.tonos.neu} neu · ${g.tonos.neg} neg</span></button>`;
     }).join('') || '<p class="vacio">Todavía no hay respuestas.</p>';
 
     // Detail panel: the selected theme's frases, or the latest ones.
@@ -164,7 +161,7 @@ export function montar() {
     if (st.sel) {
       const g = porCluster.get(st.sel);
       const lista = g.frases.filter(f => st.tonos.has(tono(f.emocion))).reverse();
-      det.innerHTML = `<div class="cabeza"><h2>${esc(g.nombre)}</h2><button id="cerrar">Cerrar</button></div><p class="resumen">${esc(g.resumen)}</p>` +
+      det.innerHTML = `<div class="cabeza"><h2>${esc(g.nombre)}</h2><button id="cerrar" class="au-btn au-btn--contorno">Cerrar</button></div><p class="resumen">${esc(g.resumen)}</p>` +
         (lista.map(f => cita(f)).join('') || '<p class="vacio">Ninguna frase con los tonos elegidos.</p>');
       det.dataset.ultima = '';
     } else {
@@ -174,137 +171,7 @@ export function montar() {
     }
   }
 
-  // Network view. Nodes persist between renders so the simulation continues smoothly as data changes.
-  // Themes start at their grid cell from layout() and are pulled back there, which keeps clusters apart and stable.
-  const red = $('red');
-  red.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const capaAristas = el('g', {}, red), capaNodos = el('g', {}, red), capaTemas = el('g', {}, red); // themes on top so labels stay readable
-  const R = { nodos: new Map(), aristas: [], alfa: 0, raf: 0 };
-  const QUIETO = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const CARGA = { tema: 3, frase: 1, persona: 0.8 };
-
-  function renderRed(frases, grupos, recientes) {
-    const quiero = new Map(), temasPorPersona = new Map(), frasesPorPersona = new Map();
-    grupos.forEach(g => quiero.set('t' + g.id, { tipo: 'tema', g }));
-    frases.forEach(f => {
-      quiero.set('f' + f.id, { tipo: 'frase', f });
-      quiero.set('p' + f.respuesta_id, { tipo: 'persona', p: f.respuesta_id });
-      if (!temasPorPersona.has(f.respuesta_id)) { temasPorPersona.set(f.respuesta_id, new Set()); frasesPorPersona.set(f.respuesta_id, 0); }
-      temasPorPersona.get(f.respuesta_id).add(f.cluster_id);
-      frasesPorPersona.set(f.respuesta_id, frasesPorPersona.get(f.respuesta_id) + 1);
-    });
-    for (const [id, n] of R.nodos) if (!quiero.has(id)) { n.el.remove(); R.nodos.delete(id); }
-
-    const seleccion = new Set();
-    if (st.sel) {
-      seleccion.add('t' + st.sel);
-      frases.filter(f => f.cluster_id === st.sel).forEach(f => { seleccion.add('f' + f.id); seleccion.add('p' + f.respuesta_id); });
-    }
-
-    for (const [id, q] of quiero) {
-      let n = R.nodos.get(id);
-      if (!n) {
-        // New nodes appear next to the node they attach to, so they visibly fly out of their theme.
-        const ancla = q.tipo === 'tema' ? { x: q.g.cx, y: q.g.cy } : q.tipo === 'frase' ? R.nodos.get('t' + q.f.cluster_id) : R.nodos.get('f' + frases.find(f => f.respuesta_id === q.p).id);
-        n = { id, tipo: q.tipo, x: (ancla?.x ?? W / 2) + (Math.random() - 0.5) * 40, y: (ancla?.y ?? H / 2) + (Math.random() - 0.5) * 40, vx: 0, vy: 0 };
-        n.el = el('g', { class: `nodo ${q.tipo}` }, q.tipo === 'tema' ? capaTemas : capaNodos);
-        if (q.tipo === 'tema') {
-          el('circle', { r: 22 }, n.el); el('text', { class: 'cuenta' }, n.el); el('text', { class: 'nombre' }, n.el);
-          n.el.addEventListener('click', () => seleccionar(n.q.g.id));
-        } else if (q.tipo === 'frase') {
-          const r = 4.5 + 5 * Math.max(0, Math.min(1, q.f.intensidad ?? 0.5));
-          el('circle', { class: 'anillo', r: r + 4 }, n.el); el('circle', { class: 'dato', r, fill: `url(#g-${tono(q.f.emocion)})` }, n.el);
-          n.el.addEventListener('click', () => seleccionar(q.f.cluster_id));
-        } else {
-          el('circle', { r: 5 }, n.el);
-        }
-        n.el.addEventListener('mouseenter', () => enfocar(n));
-        n.el.addEventListener('mousemove', ev => mostrarTip(ev, textoNodo(n)));
-        n.el.addEventListener('mouseleave', () => { red.classList.remove('foco'); red.querySelectorAll('.vecino').forEach(x => x.classList.remove('vecino')); ocultarTip(); });
-        R.nodos.set(id, n); R.alfa = 1;
-      }
-      n.q = q;
-      if (q.tipo === 'tema') {
-        if (n.hx !== q.g.cx || n.hy !== q.g.cy) R.alfa = Math.max(R.alfa, 0.5); // grid changed: let the hub glide to its new cell
-        n.hx = q.g.cx; n.hy = q.g.cy;
-        n.r = 14 + 4 * Math.sqrt(q.g.personas);
-        n.el.querySelector('circle').setAttribute('r', n.r);
-        n.el.querySelector('.cuenta').textContent = q.g.personas;
-        const ls = lineas(q.g.nombre);
-        n.el.querySelector('.nombre').innerHTML = ls.map((l, i) => `<tspan x="0" dy="${i ? 19 : 0}">${esc(l)}</tspan>`).join('');
-        n.el.querySelector('.nombre').setAttribute('y', n.r + 20);
-        n.el.classList.toggle('elegido', st.sel === q.g.id);
-      }
-      if (q.tipo === 'frase') { n.el.classList.toggle('reciente', recientes.has(q.f.id)); n.el.classList.toggle('filtrado', !st.tonos.has(tono(q.f.emocion))); }
-      if (q.tipo === 'persona') { n.temas = temasPorPersona.get(q.p).size; n.frases = frasesPorPersona.get(q.p); n.el.classList.toggle('puente', n.temas > 1); }
-      n.el.classList.toggle('atenuado', !!st.sel && !seleccion.has(id));
-    }
-
-    capaAristas.innerHTML = '';
-    R.aristas = frases.flatMap(f => [['p' + f.respuesta_id, 'f' + f.id, 38, ''], ['f' + f.id, 't' + f.cluster_id, 78, tono(f.emocion)]]).map(([a, b, largo, t]) => {
-      const line = el('line', t ? { class: 'ft', stroke: `var(--${t})` } : {}, capaAristas);
-      if (st.sel && !(seleccion.has(a) && seleccion.has(b))) line.classList.add('atenuado');
-      return { a: R.nodos.get(a), b: R.nodos.get(b), largo, line };
-    });
-
-    if (QUIETO) { R.alfa = 1; while (R.alfa > 0.005) simular(); dibujar(); }
-    else if (st.vista === 'red' && !R.raf) R.raf = requestAnimationFrame(paso);
-    else dibujar();
-  }
-
-  function simular() {
-    const ns = [...R.nodos.values()], a = R.alfa;
-    for (let i = 0; i < ns.length; i++) for (let j = i + 1; j < ns.length; j++) {
-      const p = ns[i], q = ns[j], dx = q.x - p.x, dy = q.y - p.y, d2 = dx * dx + dy * dy + 1, d = Math.sqrt(d2);
-      if (d > 320) continue;
-      const f = 900 * CARGA[p.tipo] * CARGA[q.tipo] / d2 * a;
-      p.vx -= dx / d * f; p.vy -= dy / d * f; q.vx += dx / d * f; q.vy += dy / d * f;
-    }
-    for (const { a: p, b: q, largo } of R.aristas) {
-      const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || 1, k = (d - largo) / d * 0.1 * a;
-      p.vx += dx * k; p.vy += dy * k; q.vx -= dx * k; q.vy -= dy * k;
-    }
-    for (const n of ns) {
-      // Theme hubs are pinned to their grid cell (eased, not simulated); only frases and people float.
-      if (n.tipo === 'tema') { n.x += (n.hx - n.x) * 0.2; n.y += (n.hy - n.y) * 0.2; n.vx = n.vy = 0; continue; }
-      n.vx += (W / 2 - n.x) * 0.0008 * a; n.vy += (H / 2 - n.y) * 0.0008 * a;
-      n.vx *= 0.6; n.vy *= 0.6;
-      n.x = Math.max(16, Math.min(W - 16, n.x + n.vx)); n.y = Math.max(16, Math.min(H - 40, n.y + n.vy));
-    }
-    R.alfa *= 0.985;
-  }
-
-  function dibujar() {
-    for (const n of R.nodos.values()) n.el.setAttribute('transform', `translate(${n.x.toFixed(1)} ${n.y.toFixed(1)})`);
-    for (const { a, b, line } of R.aristas) { line.setAttribute('x1', a.x); line.setAttribute('y1', a.y); line.setAttribute('x2', b.x); line.setAttribute('y2', b.y); }
-  }
-
-  function paso() {
-    R.raf = 0;
-    if (st.vista !== 'red') return;
-    simular(); dibujar();
-    if (R.alfa > 0.005) R.raf = requestAnimationFrame(paso);
-  }
-
-  // Hover: light up the node's neighbourhood. People and themes reach two steps (their frases and what those connect to).
-  function enfocar(n) {
-    const junto = m => R.aristas.flatMap(e => e.a === m ? [e.b] : e.b === m ? [e.a] : []);
-    const cerca = junto(n), vecinos = new Set([n, ...cerca]);
-    if (n.tipo !== 'frase') cerca.forEach(m => junto(m).forEach(x => vecinos.add(x))); // a frase has one person and one theme
-    red.classList.add('foco');
-    vecinos.forEach(v => v.el.classList.add('vecino'));
-    R.aristas.forEach(e => vecinos.has(e.a) && vecinos.has(e.b) && e.line.classList.add('vecino'));
-  }
-
-  function textoNodo(n) {
-    const q = n.q;
-    if (q.tipo === 'tema') return `<b>${esc(q.g.nombre)}</b><br><span>${plural(q.g.personas, 'persona', 'personas')} · ${plural(q.g.frases.length, 'frase', 'frases')}</span>`;
-    if (q.tipo === 'frase') return `<q>${esc(q.f.cita || q.f.texto)}</q><span>${esc(q.f.emocion)} (${NOMBRE_TONO[tono(q.f.emocion)]}) · intensidad <span class="num">${(q.f.intensidad ?? 0).toFixed(2)}</span></span>`;
-    return `<b>Una persona</b><br><span>${plural(n.frases, 'frase', 'frases')} en ${plural(n.temas, 'tema', 'temas')}${n.temas > 1 ? ' · une temas' : ''}</span>`;
-  }
-
   // Controls
-  document.querySelector('.vista').addEventListener('click', e => { const b = e.target.closest('[data-vista]'); if (b) { st.vista = b.dataset.vista; render(); } });
   $('play').addEventListener('click', () => {
     if (!st.jugando && st.cursor >= st.orden.length) st.cursor = 0;
     st.jugando = !st.jugando; st.envivo = false; render();
@@ -332,5 +199,5 @@ export function montar() {
   document.addEventListener('keydown', teclas);
 
   const reloj = setInterval(avanzar, PLAY_MS);
-  return { recibir, desmontar() { clearInterval(reloj); cancelAnimationFrame(R.raf); document.removeEventListener('keydown', teclas); } };
+  return { recibir, desmontar() { clearInterval(reloj); document.removeEventListener('keydown', teclas); } };
 }

@@ -1,53 +1,50 @@
-/* Shared tokens and base styles for every Audem page. Rules: DESIGN.md · tokens: design-system/tokens.json (tema Claro). Light only. */
+/* Base for every Audem page. Tokens and components come from design-system/ (loaded by ds.js); this file only applies them. Rules: DESIGN.md. */
 :root {
-  color-scheme: light;
-  /* Audem design system */
-  --lienzo: #ffffff; --rubor: #fcedea; --rubor-hondo: #f7dfda; --linea: #efd3ce; --linea-fuerte: #93706b;
-  --tinta: #1e1719; --tinta-suave: #6b585b; --coral: #d94a3d; --coral-texto: #b3362b; --turquesa: #3db5c4; --turquesa-texto: #0f6b77;
-  --oro: #f2c46d; --lila: #b7a5e6; --halo: #e5594c47; --foco: #b3362b;
-  --display: "Outfit", "Avenir Next", "Century Gothic", sans-serif;
-  /* Names the pages already use, mapped to the system */
-  --page: var(--lienzo); --surface: var(--lienzo); --surface-2: var(--rubor); --ink: var(--tinta); --ink-2: var(--tinta-suave); --muted: #8a6a65;
-  --line: var(--linea); --edge: var(--linea); --cluster: #fcedea80; --hover: var(--rubor);
-  --pos: var(--turquesa); --neu: var(--oro); --neg: var(--coral);   /* tone: the Orbe's three colors */
-  --accent: var(--tinta); --accent-ink: var(--tinta);                /* selection is monochrome: coral already means "negative" */
-  --sans: "Poppins", "Avenir Next", system-ui, sans-serif; --mono: var(--display);
-  --t-1: 13px; --t0: 16px; --t1: 19px; --t2: 23px; --t3: 28px; --t4: 33px; --t5: 40px;
-  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
-  --radio: 4px;
-  --ease: cubic-bezier(.2,.8,.2,1);
-  --raised: none; --raised-hi: none; --sunk: none; --card: none;
-  --suave: 0 18px 40px -18px rgba(217, 74, 61, .30);
+  /* Tone is the only data channel in color (DESIGN.md). It borrows the Orbe's hues so the map and the Orbe read as one system. */
+  --pos: var(--turquesa); --neu: var(--oro); --neg: var(--coral);
 }
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; color: var(--tinta); font: 300 var(--t0)/1.55 var(--sans); background: var(--lienzo); }
-/* One soft halo behind every page, like the Orbe's. */
-body::before { content: ""; position: fixed; z-index: -1; left: 50%; top: -30vh; width: 120vw; height: 90vh; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, var(--rubor), #fcedea00); pointer-events: none; }
-h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; color: var(--tinta); text-wrap: balance; }
-b, strong { font-weight: 500; }
-.num { font-family: var(--display); font-variant-numeric: tabular-nums; }
-/* Buttons: quiet pills for navigation and toggles; .primario is the one strong action. */
-button, a.boton { font: 400 14px/20px var(--sans); color: var(--tinta); background: var(--rubor); border: 0; border-radius: 999px; padding: 8px 16px; min-height: 36px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); text-decoration: none; transition: background-color .2s ease-out, color .2s ease-out; }
-button:hover, a.boton:hover { background: var(--rubor-hondo); }
-button[aria-pressed="true"], [aria-current="true"] { background: var(--tinta); color: var(--lienzo); }
-button:disabled { opacity: .45; cursor: not-allowed; }
-.primario, #enviar { background: var(--tinta); color: var(--lienzo); font-weight: 500; border-radius: 0; padding: 10px 24px; }
-.primario:hover, #enviar:hover:not(:disabled) { background: var(--coral-texto); }
-section { box-shadow: none; }
-input, textarea { font: 300 var(--t0)/1.5 var(--sans); color: var(--tinta); background: var(--lienzo); border: 1px solid var(--linea-fuerte); border-radius: 999px; padding: 8px 16px; min-height: 40px; }
-textarea { border-radius: 20px; }
-input::placeholder, textarea::placeholder { color: var(--tinta-suave); }
+html { background: var(--lienzo); }
+body { margin: 0; min-height: 100vh; background: var(--lienzo); color: var(--tinta); font: 400 16px/1.5 var(--font-texto); -webkit-font-smoothing: antialiased; }
+h1 { margin: 0; font: 500 40px/46px var(--font-display); letter-spacing: -0.01em; }
+h2 { margin: 0 0 var(--esp-3); font: 600 13px/18px var(--font-texto); }
+a { color: inherit; text-underline-offset: 3px; }
+a.au-btn { display: inline-flex; align-items: center; text-decoration: none; }
+button { font: inherit; color: inherit; }
+.num { font-family: var(--font-display); font-weight: 300; font-variant-numeric: tabular-nums; }
+.meta, .vacio { font-size: 13px; line-height: 18px; color: var(--tinta-suave); }
+.metodo { font-size: 13px; line-height: 18px; color: var(--tinta-suave); }
 :focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
-/* Tone swatches: tiny lit spheres, same light as the SVG dots (gradients in index.html). */
-i.tono { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex: none; box-shadow: inset -1px -2px 3px rgba(30,23,25,.18), inset 1px 1px 2px rgba(255,255,255,.6); }
-#tip { position: fixed; pointer-events: none; max-width: 320px; padding: var(--s3) var(--s4); border-radius: var(--radio); background: var(--lienzo); color: var(--tinta); border: 1px solid var(--linea); box-shadow: var(--suave); font-size: var(--t-1); opacity: 0; transition: opacity .12s ease-out; z-index: 9; }
-#tip q { display: block; font-size: var(--t0); margin-bottom: var(--s1); }
+
+/* Surfaces: no border and no shadow, the step from lienzo to rubor separates them. */
+section { background: var(--rubor); border-radius: var(--radio-sm); padding: var(--esp-4) var(--esp-6); }
+aside section { background: var(--rubor-hondo); }
+
+/* Top bar shared by the data pages: brand, question, count and links. */
+.barra-sup { display: flex; align-items: center; gap: var(--esp-3) var(--esp-6); flex-wrap: wrap; }
+.barra-sup .au-marca { text-decoration: none; }
+.barra-sup h1 { flex: 1 1 100%; font-size: clamp(28px, 2.6vw, 40px); line-height: 1.15; }
+.barra-sup nav { display: flex; gap: var(--esp-2); flex-wrap: wrap; }
+.total { display: flex; align-items: baseline; gap: var(--esp-2); color: var(--tinta-suave); }
+.total .num { font-size: 40px; line-height: 1; color: var(--tinta); }
+
+/* Selectable rows (a theme, a poll): flat until hovered, outlined in tinta when chosen. */
+.opcion { display: block; width: 100%; text-align: left; background: none; border: 0; border-radius: var(--radio-sm); padding: var(--esp-2) var(--esp-3); cursor: pointer; transition: background-color .2s ease-out; }
+.opcion:hover { background: var(--rubor); }
+.opcion[aria-pressed="true"], .opcion[aria-current="true"] { box-shadow: inset 0 0 0 1.5px var(--tinta); }
+
+/* Fields: same straight shape and stroke as the outline button. */
+input:not([type="range"]), textarea { font: inherit; color: var(--tinta); background: var(--lienzo); border: 1px solid var(--linea-fuerte); border-radius: var(--radio-0); padding: var(--esp-2) var(--esp-3); min-height: 44px; }
+input::placeholder, textarea::placeholder { color: var(--tinta-suave); }
+input[type="range"] { accent-color: var(--tinta); }
+
+/* Tone swatch: flat dot, always next to its word. */
+i.tono { display: inline-block; width: 10px; height: 10px; border-radius: var(--radio-pildora); flex: none; }
+.clave { display: inline-flex; align-items: center; gap: var(--esp-2); }
+.clave svg { overflow: visible; }
+
+#tip { position: fixed; pointer-events: none; max-width: 320px; padding: var(--esp-2) var(--esp-3); border-radius: var(--radio-sm); background: var(--rubor-hondo); color: var(--tinta); box-shadow: var(--sombra-tirador); font-size: 13px; opacity: 0; transition: opacity .12s ease-out; z-index: 9; }
+#tip q { font-style: italic; display: block; font-size: 16px; margin-bottom: var(--esp-1); }
 #tip span { color: var(--tinta-suave); }
-.metodo { font-family: var(--sans) !important; font-weight: 300; }
+
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-header, main { width: 100%; max-width: 1680px; margin-inline: auto; }
-header { justify-content: center; text-align: center; }
-/* Small wordmark: the Orbe symbol and "audem". */
-.marca { margin: 0; font: 800 22px/1 var(--display); letter-spacing: -0.035em; color: var(--tinta); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
-/* The symbol is the Orbe (design-system/audem-simbolo.svg, also the favicon). */
-.marca::before { content: ""; width: 24px; height: 24px; flex: none; background: url(/logo.svg) center / contain no-repeat; }
