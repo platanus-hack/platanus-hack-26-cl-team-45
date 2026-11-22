@@ -156,18 +156,10 @@ const DIAPOS = [
     </>,
   },
   {
-    clase: 'demo',
-    crece: true,
+    clase: 'producto',
     notas: ['1:20–2:20 · Demo en vivo', 'A medida que llegan respuestas, la figura crece, se deforma y aborda mejor la complejidad', 'Mostrar tendencias, cómo se conectan los temas, sumar preguntas y cuestionar lo generado', 'Entre más actores, mejor representa la realidad'],
-    cuerpo: ({ voces }) => <>
-      <div className="texto">
-        <p className="seccion-tit">Producto</p>
-        <h2 className="titular">Crece con cada respuesta</h2>
-        <p className="contador-vivo"><span className="num">{voces}</span> voces</p>
-        <p className="leyenda">{[['pos', 'a favor'], ['neu', 'mixto'], ['neg', 'en contra']].map(([t, n]) => <span key={t}><i className="tono" style={{ background: `var(--${t})` }} />{n}</span>)}</p>
-      </div>
-      <div className="hueco" />
-    </>,
+    // A recording of the blob growing (cámaras demo, 6 → 60 voces, dark theme): the live replay could freeze the deck.
+    cuerpo: ({ activa }) => <Grabacion src="/producto.mp4" activa={activa} />,
   },
   {
     clase: 'cierre',
@@ -191,7 +183,16 @@ const DIAPOS = [
   },
 ];
 
-const TOTAL = demoCamaras.respuestas.length;
+// Plays from the start each time its slide comes in, and holds the last frame.
+function Grabacion({ src, activa }) {
+  const v = useRef(null);
+  useEffect(() => {
+    if (!activa) return v.current.pause();
+    v.current.currentTime = 0;
+    v.current.play().catch(() => {});
+  }, [activa]);
+  return <video ref={v} src={src} muted playsInline preload="auto" />;
+}
 
 // Slide "Cómo funciona": many voices enter wide on the left and narrow into one map. Quotes are real ones from the cámaras demo.
 const VOCES = ['coral', 'turquesa', 'lila', 'oro', 'coral'];
@@ -254,7 +255,6 @@ function Embudo() {
 function Pitch() {
   const [i, setI] = useState(() => Math.min(DIAPOS.length - 1, Math.max(0, +location.hash.slice(1) || 0)));
   const [notas, setNotas] = useState(false);
-  const [voces, setVoces] = useState(TOTAL);
   const [oscuro, setOscuro] = useState(() => !new URLSearchParams(location.search).has('claro'));
   const [k, setK] = useState(1);
   const dibujo = useRef(null);
@@ -298,29 +298,18 @@ function Pitch() {
     return () => removeEventListener('keydown', tecla);
   }, []);
 
-  // On the demo slide the poll replays from its first answers, one every ~0.18 s; elsewhere it shows whole.
   useEffect(() => {
     history.replaceState(null, '', '#' + i);
     requestAnimationFrame(() => dibujo.current?.medir());
-    if (!d.crece) { dibujo.current?.recibir(elegir(demoCamaras, null)); return; }
-    let n = 3;
-    dibujo.current?.recibir(elegir(demoCamaras, null, n)); setVoces(n);
-    const t = setInterval(() => {
-      n += 1;
-      dibujo.current?.recibir(elegir(demoCamaras, null, n)); setVoces(n);
-      if (n >= TOTAL) clearInterval(t);
-    }, 180);
-    return () => clearInterval(t);
   }, [i, k]);
 
-  const conBola = !!d.clase && ['portada', 'demo'].includes(d.clase);
   return (
-    <div className={`pitch ${conBola ? 'con-bola' : ''} en-${d.clase ?? 'normal'}`}>
+    <div className={`pitch ${d.clase === 'portada' ? 'con-bola' : ''} en-${d.clase ?? 'normal'}`}>
       <div id="escenario" />
       <svg id="voces" aria-hidden="true" />
       <div className="escena" style={{ transform: `translate(-50%, -50%) scale(${k})` }}>
         {DIAPOS.map((x, j) => (
-          <article key={j} className={`diapo ${x.clase ?? ''} ${j === i ? 'activa' : ''}`} aria-hidden={j !== i}>{typeof x.cuerpo === 'function' ? x.cuerpo({ voces }) : x.cuerpo}</article>
+          <article key={j} className={`diapo ${x.clase ?? ''} ${j === i ? 'activa' : ''}`} aria-hidden={j !== i}>{typeof x.cuerpo === 'function' ? x.cuerpo({ activa: j === i }) : x.cuerpo}</article>
         ))}
         {i > 0 && <p className="contador num">{i} / {DIAPOS.length - 1}</p>}
       </div>

@@ -131,8 +131,9 @@ export function montar({ escenario, svg, onSelect = () => {}, zona = null }) {
     U = Math.max(30, Math.min((alto / 2 - 44) / 2.45, ((derecha - izquierda) / 2 - (ancho ? 150 : 60)) / (0.87 * 2.45)));
     U *= z.zoom ?? 1;                                    // a zona without labels (the pitch cover) can ask for a bigger blob
     if (!renderer) return;
-    renderer.setSize(W, H);
-    camera.aspect = W / H; camera.updateProjectionMatrix();
+    // setSize reallocates the WebGL buffer even at the same size, and recibir calls medir on every new answer.
+    const t = renderer.getSize(new THREE.Vector2());
+    if (t.x !== W || t.y !== H) { renderer.setSize(W, H); camera.aspect = W / H; camera.updateProjectionMatrix(); }
     camera.setViewOffset(W, H, W / 2 - cx, H / 2 - cy, W, H);
     blob.scale.setScalar(BOLA * 3.784 * U / H);          // 1 unit = H / 3.784 px at depth 0 (fov 35, camera z 6)
   }
