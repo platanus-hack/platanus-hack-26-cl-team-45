@@ -46,6 +46,7 @@ const celda = (dirs: string[]) => {
 const salida = {
   pregunta,
   analizadas: analisis.length,
+  cerrada: { si: respuestas.filter(r => r.cerrada === "sí").length, total: respuestas.length }, // what a Sí / No poll would show
   topicos: topicos.map(k => {
     const celdas = analisis.flatMap((a, i) => {
       const ts = a.temas.filter((_, j) => topicoDe.get(temaId(i, j)) === k.id);

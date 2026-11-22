@@ -1,6 +1,10 @@
 {
   "pregunta": "La municipalidad quiere instalar cámaras de televigilancia en tu barrio. ¿Qué te parece?",
   "analizadas": 60,
+  "cerrada": {
+    "si": 50,
+    "total": 60
+  },
   "topicos": [
     {
       "id": "k1",

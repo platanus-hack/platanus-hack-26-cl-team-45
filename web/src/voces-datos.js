@@ -17,6 +17,7 @@ export function desdeTopicos(d) {
     })))),
     propuestas: d.propuestas.map(p => p.texto),
     emociones: d.emociones,
+    cerrada: d.cerrada ?? null,                           // synthetic demos only: what a Sí / No poll would have said
   };
 }
 
@@ -63,6 +64,13 @@ export function lecturas(v, max = 6) {
   const out = [];
   const de = (e, filtro = () => true) => e.celdas.filter(filtro).map(c => clave(e.id, c.id));
   const pct = n => v.casos ? ` (${Math.round(n / v.casos * 100)}%)` : '';
+
+  // Synthetic demos carry the Sí / No a closed poll would have shown; contrast it with the most negative axes.
+  if (v.cerrada) {
+    const malos = ejes.filter(e => e.neg).sort((a, b) => b.neg - a.neg).slice(0, 3);
+    out.push({ titulo: 'Si la pregunta fuera Sí / No', ejes: malos.map(e => e.id), claves: malos.flatMap(e => de(e, c => c.tono === 'neg')),
+      texto: `${v.cerrada.si} de ${v.cerrada.total} (${Math.round(v.cerrada.si / v.cerrada.total * 100)}%) habrían marcado Sí. Al escucharlos, lo que más se repite en negativo es ${malos.map(e => `${e.nombre} (${e.neg})`).join(', ')}.` });
+  }
 
   const top = ejes[0];
   out.push({ titulo: 'Lo más mencionado', ejes: [top.id], claves: de(top),
