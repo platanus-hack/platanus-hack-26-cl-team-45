@@ -47,6 +47,7 @@ i.tono { display: inline-block; width: 10px; height: 10px; border-radius: 50%; f
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 header, main { width: 100%; max-width: 1680px; margin-inline: auto; }
 header { justify-content: center; text-align: center; }
-/* Small wordmark: "audem" with the coral point of the symbol. */
-.marca { margin: 0; font: 800 22px/1 var(--display); letter-spacing: -0.035em; color: var(--tinta); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
-.marca::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); transform: translateY(5px); }
+/* Small wordmark: the Orbe symbol and "audem". */
+.marca { margin: 0; font: 800 22px/1 var(--display); letter-spacing: -0.035em; color: var(--tinta); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+/* The symbol is the Orbe (design-system/audem-simbolo.svg, also the favicon). */
+.marca::before { content: ""; width: 24px; height: 24px; flex: none; background: url(/logo.svg) center / contain no-repeat; }
