@@ -124,13 +124,13 @@ Todos viven en `window.Audem` después de cargar React 18, `tokens.css`, `audem-
 
 ### Marca
 
-El nombre de Audem en minúscula, con su símbolo de cinco ondas que se juntan en un punto coral.
+El nombre de Audem en minúscula, con su símbolo: el Orbe, una forma iridiscente coral con centro turquesa y borde dorado.
 
 - `tamano`: tamaño del nombre en px (48 por defecto).
 - `segunda`: una palabra en peso liviano apilada bajo el nombre, al mismo tamaño (`escucha`, `mapa`, `voces`). Úsala en portadas y en el inicio del mapa; en barras y pies, sin ella.
 - `simbolo={false}`: solo el nombre, cuando el símbolo ya está cerca.
 
-Hereda el color del texto que la rodea (`tinta` por defecto); el punto siempre es `coral`. No le cambies el peso, no le pongas mayúscula inicial y no la pongas sobre el Orbe.
+El nombre hereda el color del texto que la rodea (`tinta` por defecto); el Orbe siempre conserva sus colores (`coral`, `turquesa`, `oro`, `lila`), también en Noche. No le cambies el peso, no le pongas mayúscula inicial y no pongas la Marca encima de otro Orbe.
 
 ### Onda
 
@@ -279,4 +279,4 @@ Una por pantalla, sobre `lienzo` con el halo `rubor` detrás del Orbe. Sin tarje
 
 ## Logo
 
-`audem-simbolo.svg`: el símbolo, cinco ondas en `tinta` (#1e1719) que se juntan en un punto `coral` (#d94a3d). Es de dos tintas y no hereda color: sobre fondos oscuros usa el componente Marca, que toma el color del texto. Aire mínimo alrededor: un cuarto de su alto. Tamaño mínimo: 16px.
+`audem-simbolo.svg`: el símbolo de Audem es el Orbe, una forma orgánica con degradado: centro `turquesa` (#3db5c4), cuerpo `coral` (#d94a3d), borde `oro` (#f2c46d) y un reflejo `lila`. Lleva sus colores fijos y funciona igual sobre fondos claros y oscuros. Sirve como favicon e ícono de app. Aire mínimo alrededor: un cuarto de su alto. Tamaño mínimo: 16px.

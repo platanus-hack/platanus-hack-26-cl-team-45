@@ -17,13 +17,25 @@
   function margen(voces) { return voces > 0 ? 98 / Math.sqrt(voces) : null; }
 
   /* ---------- Marca ---------- */
-  var ONDAS = ['M6 12C18 6 30 30 48 32', 'M6 22C18 18 30 34 48 32', 'M6 32C18 26 30 38 48 32', 'M6 42C18 46 30 30 48 32', 'M6 52C18 58 30 34 48 32'];
+  /* El símbolo es el Orbe: una forma iridiscente coral con centro turquesa. */
   function Simbolo(p) {
-    var a = p.alto || 40;
+    var a = p.alto || 40, id = useUid();
     return h('svg', { className: 'au-simbolo', width: a, height: a, viewBox: '0 0 64 64', 'aria-hidden': 'true' },
-      h('g', { fill: 'none', stroke: 'currentColor', strokeWidth: 3.5, strokeLinecap: 'round' },
-        ONDAS.map(function (d, i) { return h('path', { key: i, d: d }); })),
-      h('circle', { cx: 55, cy: 32, r: 5, className: 'au-simbolo-punto' }));
+      h('defs', null,
+        h('radialGradient', { id: id + 'g', gradientUnits: 'userSpaceOnUse', cx: 27, cy: 31, r: 29 },
+          h('stop', { offset: '0', style: { stopColor: 'var(--turquesa)' } }), h('stop', { offset: '.3', style: { stopColor: 'var(--turquesa)' } }),
+          h('stop', { offset: '.64', style: { stopColor: 'var(--coral)' } }), h('stop', { offset: '.88', style: { stopColor: 'var(--coral)' } }),
+          h('stop', { offset: '1', style: { stopColor: 'var(--oro)' } })),
+        h('filter', { id: id + 'b', x: '-50%', y: '-50%', width: '200%', height: '200%' }, h('feGaussianBlur', { stdDeviation: 3.6 })),
+        h('clipPath', { id: id + 'c' }, h('path', { d: 'M33 5c11 0 21 8 23 20s-2 26-15 31S13 59 8 46 4 21 13 12s13-7 20-7Z' }))),
+      h('g', { clipPath: 'url(#' + id + 'c)' },
+        h('rect', { width: 64, height: 64, fill: 'url(#' + id + 'g)' }),
+        h('g', { filter: 'url(#' + id + 'b)' },
+          h('ellipse', { cx: 18, cy: 18, rx: 12, ry: 8, className: 'au-orbe-coral' }),
+          h('ellipse', { cx: 46, cy: 44, rx: 9, ry: 7, className: 'au-orbe-coral' }),
+          h('ellipse', { cx: 45, cy: 19, rx: 7, ry: 5, className: 'au-orbe-lila' }),
+          h('ellipse', { cx: 17, cy: 47, rx: 6, ry: 4, className: 'au-orbe-oro' }),
+          h('ellipse', { cx: 26, cy: 13, rx: 8, ry: 3, className: 'au-simbolo-brillo' }))));
   }
   function Marca(p) {
     var t = p.tamano || 48;
