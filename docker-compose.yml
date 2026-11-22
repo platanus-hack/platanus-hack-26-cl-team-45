@@ -48,6 +48,7 @@ services:
         required: false
     environment:
       - CONVEX_SELF_HOSTED_URL=http://backend:3210
+      - CONVEX_DEPLOYMENT= # empty wins over the cloud one in the mounted .env.local (dotenv never overrides)
       - VITE_CONVEX_URL=http://127.0.0.1:3210 # seen from the browser, not from the container
       - CHOKIDAR_USEPOLLING=true # file changes through the macOS bind mount
       - COREPACK_ENABLE_DOWNLOAD_PROMPT=0
