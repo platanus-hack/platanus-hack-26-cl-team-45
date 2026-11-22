@@ -32,10 +32,10 @@ function Voces() {
   const v = useMemo(() => DEMO ? elegir(DEMO, null, n) : cargando ? undefined : elegir(r.t, r.m, n), [r.t, r.m, cargando, n]);
   const ls = useMemo(() => v ? lecturas(v) : [], [v]);
   const [sel, setSel] = useState(null);
-  const [modo, setModo] = useState('vivo');
+  const [modo, setModo] = useState('chat');                // chat: talk about what people think · lecturas: the statistics
   const [paso, setPaso] = useState(0);
   const [auto, setAuto] = useState(true);
-  const [ejesChat, setEjesChat] = useState(null);         // axes of the chat's latest chart, lit on the blob
+  const [focoChat, setFocoChat] = useState(null);         // { ejes, personas } of the chat's latest answer, lit on the blob
   const dibujo = useRef(null);
 
   useEffect(() => {
@@ -44,9 +44,10 @@ function Voces() {
   useEffect(() => { if (v !== undefined) dibujo.current.recibir(v); }, [v]);
   const lectura = modo === 'lecturas' && ls.length ? ls[paso % ls.length] : null;
   useEffect(() => {
-    const chat = modo === 'chat' && ejesChat && v ? { ejes: ejesChat, claves: v.ejes.filter(e => ejesChat.includes(e.id)).flatMap(e => e.celdas.map(c => clave(e.id, c.id))) } : null;
+    const ps = new Set(focoChat?.personas ?? []);
+    const chat = modo === 'chat' && focoChat && v ? { ejes: focoChat.ejes, claves: v.ejes.flatMap(e => e.celdas.filter(c => ps.has(c.id)).map(c => clave(e.id, c.id))) } : null;
     dibujo.current.resaltar(lectura ?? chat);
-  }, [lectura, modo, ejesChat, v]);
+  }, [lectura, modo, focoChat, v]);
   useEffect(() => {                                       // play: one more answer every 0.6 s until all are in
     if (!reproduciendo) return;
     const id = setInterval(() => setN(x => {
@@ -62,7 +63,7 @@ function Voces() {
     return () => clearInterval(id);
   }, [modo, auto, ls.length]);
 
-  const cambiar = m => { setModo(m); setPaso(0); setAuto(true); if (m !== 'vivo') dibujo.current.deseleccionar(); };
+  const cambiar = m => { setModo(m); setPaso(0); setAuto(true); };
   const mover = d => { setAuto(false); setPaso(p => (p + d + ls.length) % ls.length); };
   const hay = v && v.ejes.length > 0;
 
@@ -75,9 +76,8 @@ function Voces() {
         {hay && <div className="total"><span className="num">{v.casos}</span><span>{v.casos === 1 ? 'persona' : 'personas'}</span></div>}
         <nav>
           {hay && <div className="modos au-sel au-sel--tinta" role="group" aria-label="Vista">
-            <button className="au-sel-op" aria-pressed={modo === 'vivo'} onClick={() => cambiar('vivo')}>En vivo</button>
+            <button className="au-sel-op" aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Conversar</button>
             <button className="au-sel-op" aria-pressed={modo === 'lecturas'} onClick={() => cambiar('lecturas')}>Lecturas</button>
-            <button className="au-sel-op" aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Preguntar</button>
           </div>}
           {!DEMO && <a className="au-btn au-btn--contorno" href={`/${SLUG}/panel`}>Mapa</a>}
           {!DEMO && <a className="au-btn au-btn--contorno" href={`/${SLUG}/flujo`}>Flujo</a>}
@@ -114,21 +114,20 @@ function Voces() {
           </div>
         </div>}
 
-        {hay && modo === 'vivo' && (sel
-          ? <Persona {...sel} cerrar={() => dibujo.current.deseleccionar()} />
-          : <p className="vacio">Toca un punto para leer lo que dijo esa persona.</p>)}
+        {hay && sel && <Persona {...sel} cerrar={() => dibujo.current.deseleccionar()} />}
 
-        {hay && <Chat v={v} visible={modo === 'chat'} onFoco={setEjesChat} />}
+        {/* Always mounted so the conversation survives a trip to Lecturas. */}
+        {hay && <div className="chat-caja" hidden={modo !== 'chat'}><Chat v={v} onFoco={setFocoChat} onVer={id => dibujo.current.seleccionar(id)} /></div>}
 
-        {hay && modo !== 'chat' && v.propuestas.length > 0 && <div className="bloque">
+        {hay && modo === 'lecturas' && v.propuestas.length > 0 && <div className="bloque">
           <h2>Propuestas <span className="num">{v.propuestas.length}</span></h2>
           <ul className="propuestas">{v.propuestas.slice().reverse().map((p, i) => <li key={i}>{p}</li>)}</ul>
         </div>}
-        {hay && modo !== 'chat' && v.emociones.length > 0 && <div className="bloque">
+        {hay && modo === 'lecturas' && v.emociones.length > 0 && <div className="bloque">
           <h2>{v.fuente === 'topicos' ? 'Emoción que domina' : 'Emociones'} <span className="num">· n.º de personas</span></h2>
           <ul className="emociones">{v.emociones.map(e => <li key={e.emocion}><i className="tono" style={{ background: `var(--${tono(e.emocion)})` }}></i>{e.emocion} <span className="num">{e.n}</span></li>)}</ul>
         </div>}
-        {hay && modo !== 'chat' && <p className="metodo">Casos: {plural(v.casos, 'persona', 'personas')} · {plural(v.ejes.length, 'eje', 'ejes')}{v.ejes.length > 6 ? ', se muestran los 6 con más personas' : ''} · {FUENTE[v.fuente]}</p>}
+        {hay && modo === 'lecturas' && <p className="metodo">Casos: {plural(v.casos, 'persona', 'personas')} · {plural(v.ejes.length, 'eje', 'ejes')}{v.ejes.length > 6 ? ', se muestran los 6 con más personas' : ''} · {FUENTE[v.fuente]}</p>}
       </aside>
     </>
   );

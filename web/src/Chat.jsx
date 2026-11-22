@@ -1,16 +1,16 @@
-// Chat beside the blob: ask about the poll, get an answer, a chart computed from the real data and the quotes behind it.
-import { useEffect, useRef, useState } from 'react';
+// Chat beside the blob: ask what people think and why. Answers come from the same analysis the blob draws: each one
+// names the people behind it, who light up on the blob, and their quotes open their dot.
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAction } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { SLUG, mensaje } from './convex.jsx';
-import { grafico } from './voces-datos.js';
 import { Entrada, Simbolo } from './ds.js';
 
-const SUGERENCIAS = ['¿Qué es lo que más molesta?', 'Compara el tono de los temas principales', '¿Qué emociones predominan?', '¿Qué propone la gente?'];
+const SUGERENCIAS = ['¿Qué es lo que más le preocupa a la gente?', '¿En qué no se ponen de acuerdo?', '¿Qué piensan quienes están en contra?', '¿Qué propone la gente?'];
 
-export function Chat({ v, visible, onFoco }) {
+export function Chat({ v, onFoco, onVer }) {
   const preguntar = useAction(api.chat.preguntar);
-  const [mensajes, setMensajes] = useState([]);           // { rol, texto, grafico?, citas?, error? }
+  const [mensajes, setMensajes] = useState([]);           // { rol, texto, voces?: [{ persona, cita }], ejes?, error? }
   const [esperando, setEsperando] = useState(false);
   const hilo = useRef(null), turno = useRef(null);
   // Keep the latest question at the top of the thread, so a long answer reads from its start.
@@ -20,9 +20,11 @@ export function Chat({ v, visible, onFoco }) {
   }, [mensajes.length, esperando]);
   const ultimaPregunta = mensajes.map(m => m.rol).lastIndexOf('user');
 
-  // The newest answer's axes light up on the blob while the chat is open.
-  const ultimo = [...mensajes].reverse().find(m => m.rol === 'assistant' && m.grafico);
-  useEffect(() => { onFoco(visible && ultimo ? grafico(v, ultimo.grafico)?.ejes ?? null : null); }, [visible, ultimo, v]);
+  // Who is who: the person ids the answers name, against the people on screen.
+  const quien = useMemo(() => new Map(v.ejes.flatMap(e => e.celdas.map(c => [c.id, c.participante]))), [v]);
+  // The newest answer lights its people and axes on the blob.
+  const ultimo = [...mensajes].reverse().find(m => m.rol === 'assistant' && !m.error);
+  useEffect(() => { onFoco(ultimo ? { ejes: ultimo.ejes ?? [], personas: (ultimo.voces ?? []).map(x => x.persona) } : null); }, [ultimo]);
 
   async function enviar(p) {
     const q = p.trim();
@@ -32,7 +34,7 @@ export function Chat({ v, visible, onFoco }) {
     setEsperando(true);
     try {
       const r = await preguntar({ slug: SLUG, pregunta: q, historial });
-      setMensajes(ms => [...ms, { rol: 'assistant', texto: r.respuesta, grafico: r.grafico, citas: r.citas }]);
+      setMensajes(ms => [...ms, { rol: 'assistant', texto: r.respuesta, voces: r.voces.filter(x => quien.has(x.persona)), ejes: r.ejes }]);
     } catch (e) {
       // Say what happened in plain words; the raw message stays in the console.
       console.error(e);
@@ -43,18 +45,16 @@ export function Chat({ v, visible, onFoco }) {
     } finally { setEsperando(false); }
   }
 
-  // A conversation: your question on the right, the answer in a bubble on the left with the Orbe, chart and quotes inside it.
-  // Suggestions stay under the thread (minus the ones already asked); Entrada is the design system's input.
   const pendientes = SUGERENCIAS.filter(s => !mensajes.some(m => m.rol === 'user' && m.texto === s));
   return (
-    <div className="chat" hidden={!visible}>
+    <div className="chat">
       <div className="chat-cab">
         <h2>Pregúntale a las voces</h2>
         {mensajes.length > 0 && <button type="button" className="chat-nueva" onClick={() => setMensajes([])} disabled={esperando}>Nueva conversación</button>}
       </div>
       <div className="chat-hilo" ref={hilo} role="log" aria-live="polite">
         {!mensajes.length && <>
-          <p className="chat-vacio">Respondo con lo que dijeron las {v.casos} personas y armo un gráfico con los conteos reales. Prueba con una de estas:</p>
+          <p className="chat-vacio">Pregunta qué piensa la gente y por qué. Respondo desde lo que dijeron las {v.casos} personas de la bola, con sus palabras, y te marco en la bola quiénes lo dicen.</p>
           <div className="chat-inicio">{SUGERENCIAS.map(s => <button key={s} type="button" className="au-sug-chip" onClick={() => enviar(s)}>{s}</button>)}</div>
         </>}
         {mensajes.map((m, i) => m.rol === 'user'
@@ -63,44 +63,16 @@ export function Chat({ v, visible, onFoco }) {
               <Simbolo alto={24} />
               <div className={`chat-burbuja${m.error ? ' es-error' : ''}`}>
                 <p className="chat-texto">{m.texto}</p>
-                <Grafico g={grafico(v, m.grafico)} casos={v.casos} />
-                {m.citas?.length > 0 && <div className="chat-citas">{m.citas.slice(0, 3).map((c, j) => <blockquote key={j}>«{c}»</blockquote>)}</div>}
-                {!m.error && <p className="chat-base">Basado en {v.casos} {v.casos === 1 ? 'persona' : 'personas'} de esta consulta</p>}
+                {m.voces?.length > 0 && <div className="chat-voces">{m.voces.map((x, j) =>
+                  <button key={j} type="button" className="chat-voz" onClick={() => onVer(x.persona)}>
+                    <q>{x.cita}</q><span>{quien.get(x.persona) || 'Una persona'}</span>
+                  </button>)}</div>}
               </div>
             </div>)}
         {esperando && <div className="chat-turno"><Simbolo alto={24} /><div className="chat-burbuja chat-escribiendo" aria-label="Leyendo las voces"><i></i><i></i><i></i></div></div>}
       </div>
       {!esperando && mensajes.length > 0 && pendientes.length > 0 && <div className="au-sug chat-sug" role="group" aria-label="Preguntas sugeridas">{pendientes.map(s => <button key={s} type="button" className="au-sug-chip" onClick={() => enviar(s)}>{s}</button>)}</div>}
-      <Entrada onEnviar={enviar} deshabilitado={esperando} pensando={esperando} placeholder="Pregunta sobre lo que dijo la gente…" />
+      <Entrada onEnviar={enviar} deshabilitado={esperando} pensando={esperando} placeholder="¿Qué piensa la gente de…?" />
     </div>
-  );
-}
-
-// Horizontal bars in SVG: stacked by tone, or plain counts. Every value is from the data, with its n.
-function Grafico({ g, casos }) {
-  if (!g) return null;
-  // Drawn at the bubble's own width (~270 px) so 11 px text stays 11 px.
-  const fila = 24, izq = 104, ancho = 112, alto = g.filas.length * fila + 4;
-  const corto = s => s.length > 14 ? s.slice(0, 13) + '…' : s;
-  return (
-    <figure className="grafico">
-      <figcaption>{g.titulo}</figcaption>
-      <svg viewBox={`0 0 ${izq + ancho + 56} ${alto}`} role="img" aria-label={`${g.titulo}: ${g.filas.map(f => `${f.nombre} ${f.n}`).join(', ')}`}>
-        {g.filas.map((f, i) => {
-          const y = i * fila + 4, esc = ancho / Math.max(1, g.max);
-          let x = izq;
-          return (
-            <g key={f.nombre}>
-              <text x={izq - 8} y={y + 13} textAnchor="end"><title>{f.nombre}</title>{corto(f.nombre)}</text>
-              {g.tipo === 'tono'
-                ? ['pos', 'neu', 'neg'].map(t => { const w = f[t] * esc, r = <rect key={t} x={x} y={y} width={w} height={16} rx={3} fill={`var(--${t})`} />; x += w; return r; })
-                : <rect x={izq} y={y} width={f.n * esc} height={16} rx={3} fill={f.tono ? `var(--${f.tono})` : 'var(--tinta-suave)'} opacity={f.tono ? 1 : 0.55} />}
-              <text className="num" x={izq + f.n * esc + 6} y={y + 13}>{g.tipo === 'tono' ? `${f.pos} / ${f.neu} / ${f.neg}` : f.n}</text>
-            </g>
-          );
-        })}
-      </svg>
-      <p className="metodo-mini num">{g.tipo === 'tono' ? 'pos / neu / neg, en personas' : 'personas'} · Casos: {casos}</p>
-    </figure>
   );
 }

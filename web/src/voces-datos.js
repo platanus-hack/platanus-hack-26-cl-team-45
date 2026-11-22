@@ -128,18 +128,3 @@ export function lecturas(v, max = 6) {
     texto: `Sumando todas las menciones: ${n('pos')} positivas, ${n('neu')} neutras o mixtas y ${n('neg')} negativas.` });
   return out;
 }
-
-// Chart for a chat answer. The model only picks the kind and the axes; every number comes from v.
-export function grafico(v, g) {
-  if (!v || !g || g.tipo === 'ninguno') return null;
-  if (g.tipo === 'emociones') {
-    const filas = v.emociones.slice(0, 8).map(e => ({ nombre: e.emocion, n: e.n, tono: tono(e.emocion) }));
-    return filas.length ? { tipo: 'barras', titulo: g.titulo, filas, max: Math.max(...filas.map(f => f.n)) } : null;
-  }
-  const pedidos = g.ejes?.length ? g.ejes.map(id => v.ejes.find(e => e.id === id)).filter(Boolean) : [];
-  const ejes = pedidos.length ? pedidos : v.ejes.slice(0, 6);
-  if (!ejes.length) return null;
-  if (g.tipo === 'personas_por_eje')
-    return { tipo: 'barras', titulo: g.titulo, ejes: ejes.map(e => e.id), filas: ejes.map(e => ({ nombre: e.nombre, n: e.personas })), max: Math.max(...ejes.map(e => e.personas)) };
-  return { tipo: 'tono', titulo: g.titulo, ejes: ejes.map(e => e.id), filas: ejes.map(e => ({ nombre: e.nombre, pos: e.pos, neu: e.neu, neg: e.neg, n: e.personas })), max: Math.max(...ejes.map(e => e.personas)) };
-}

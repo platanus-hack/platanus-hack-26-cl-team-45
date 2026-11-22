@@ -276,7 +276,9 @@ export function montar({ escenario, svg, onSelect }) {
       const tapado = z < 0 && Math.hypot(x - cx, y - cy) < U * BOLA * 1.1;  // behind the blob
       p.g.setAttribute('transform', `translate(${x},${y})`);
       p.g.lastChild.setAttribute('r', p.radio * f);
-      p.g.style.opacity = k > 0 ? (tapado ? 0.12 : 0.55 + 0.45 * Math.min(1, Math.max(0, (z + 1.8) / 2.4))) : 0;
+      // Depth fades the far ones; a reading or a chat answer dims everyone outside it (inline opacity would override .dim).
+      const base = k > 0 ? (tapado ? 0.12 : 0.55 + 0.45 * Math.min(1, Math.max(0, (z + 1.8) / 2.4))) : 0;
+      p.g.style.opacity = p.g.classList.contains('dim') ? base * 0.15 : base;
       lista.push([z, p.g]);
     }
     if (++orden % 15 === 0) {                            // paint far dots first so near ones stay on top
@@ -308,5 +310,5 @@ export function montar({ escenario, svg, onSelect }) {
   }).catch(() => {});                                    // without Three.js the axes and dots still work
   requestAnimationFrame(cuadro);
 
-  return { recibir, resaltar, deseleccionar: () => seleccionar(null) };
+  return { recibir, resaltar, seleccionar: k => seleccionar(personas.has(k) ? k : null), deseleccionar: () => seleccionar(null) };
 }
