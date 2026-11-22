@@ -183,6 +183,7 @@
 .au-voz-orbe:active:not(:disabled) { transform: scale(.97); }
 .au-voz-orbe:focus-visible { outline: 2px solid var(--foco); outline-offset: 6px; }
 .au-voz-orbe:disabled { cursor: progress; }
+.au-voz.is-revisar .au-voz-orbe, .au-voz.is-listo .au-voz-orbe { cursor: default; }
 .au-voz-icono { position: relative; z-index: 1; fill: none; stroke: var(--on-coral); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 2px rgba(30, 23, 25, .3)); }
 .au-voz-icono .is-lleno { fill: var(--on-coral); stroke: none; }
 .au-voz.is-grabando .au-voz-pulso { opacity: calc(.55 + var(--nivel) * .45); }
@@ -216,10 +217,7 @@
 .au-micro-link:hover { color: var(--tinta); }
 .au-micro-link:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
 .au-micro-texto { padding: var(--esp-12) 0 var(--esp-4); max-width: 560px; }
-.au-micro-voces { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: var(--esp-3); margin-top: var(--esp-4); }
-.au-micro-voces-tit { margin: 0; color: var(--tinta-suave); font: 500 11px/14px var(--font-texto); text-align: left; }
-.au-micro-voces ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--esp-2); }
-.au-micro-voces li { display: flex; align-items: center; gap: var(--esp-3); min-width: 0; padding: 10px 16px; border: 1px solid var(--linea); border-radius: var(--radio-pildora); background: var(--lienzo); text-align: left; animation: au-entra .45s ease-out both; }
-.au-micro-voces li span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--tinta-suave); font: 300 14px/20px var(--font-texto); }
+.au-micro-revisar { width: 100%; max-width: 360px; display: flex; flex-direction: column; align-items: center; gap: var(--esp-4); }
+.au-micro-revisar audio { width: 100%; }
+.au-micro-acciones { display: flex; gap: var(--esp-3); }
 @media (max-width: 480px) { .au-micro-pregunta h1 { font-size: 28px; } }
-@media (prefers-reduced-motion: reduce) { .au-micro-voces li { animation: none; } }
