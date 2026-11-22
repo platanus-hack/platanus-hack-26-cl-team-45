@@ -3,7 +3,7 @@
 /* Marca */
 .au-marca { display: inline-flex; align-items: center; gap: .26em; color: var(--tinta); line-height: 1; }
 .au-simbolo { flex: none; display: block; }
-.au-simbolo-punto { fill: var(--coral); }
+.au-simbolo-brillo { fill: #fff; opacity: .5; }
 .au-marca-txt { display: flex; flex-direction: column; font-family: var(--font-display); }
 .au-marca-nombre { font-weight: 800; letter-spacing: -.035em; line-height: .86; }
 .au-marca-segunda { font-weight: 300; letter-spacing: -.02em; line-height: .86; }
