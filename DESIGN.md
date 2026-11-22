@@ -36,7 +36,7 @@ El sistema visual vive en [`design-system/`](design-system/README.md): tokens (`
 | Punto | color | tono de la frase (en Tópicos: saldo de la persona) |
 | Punto | tamaño (radio) | intensidad 0–1 |
 | Círculo de tema | área | número de frases del tema |
-| Anillo de tinta | presencia | una de las 2 frases más recientes (las mismas del panel «Lo último») |
+| Anillo de tinta | presencia | una de las 2 frases más recientes |
 | Cinta (vista Flujo) | color · grosor | respuesta→frase en gris; frase→concepto con el tono y grosor por intensidad; concepto→tema en gris con grosor = n.º de frases |
 | Píldora de concepto (vista Flujo) | tamaño de letra | n.º de frases que lo mencionan |
 | Burbuja de tema (vista Flujo) | área · anillos | área = % de personas; un anillo concéntrico por persona (el centro queda más oscuro) |
@@ -46,7 +46,6 @@ El sistema visual vive en [`design-system/`](design-system/README.md): tokens (`
 - Debajo de cada figura va una nota de método con el n total y cómo se agrupó.
 
 ## Dos vistas, mismos datos
-- **Panel en vivo** (`web/src/Panel.jsx` + `panel-dibujo.js`): para la pantalla grande. Controlable con línea de tiempo, filtro de tono y detalle por tema. Una sola vista: **Temas**, una grilla de círculos con una frase por punto.
 - **Flujo** (`web/src/Flujo.jsx` + `flujo-dibujo.js`): el camino completo en 4 columnas, respuestas → frases → conceptos → temas, con cintas curvas. Pasar el cursor por cualquier nodo ilumina todo lo que comparte frases con él. Los temas van ordenados por personas; el resto se ordena por baricentro para que las cintas se crucen poco.
 - Los tokens y las reglas de tono son compartidos (`web/src/comun.css`, `web/src/comun.js`). Ninguna vista define sus propios colores.
 - **Tópicos** (`/<slug>/voces`: `web/src/Voces.jsx` + `voces-dibujo.js` + `voces-datos.js`): sirve para cualquier pregunta. `voces-datos.js` lleva `encuestas.topicos` (o, si esa query falta o viene vacía, los grupos de `encuestas.mapa`) a una sola forma: ejes con una celda por persona (tono, intensidad, citas). Un blob 3D (Three.js desde cdnjs) tiene un eje por cada uno de los 6 con más personas y crece hacia el más mencionado (el rango se estira: el menor de los 6 queda en 0,2 y el mayor en 1). Cada lóbulo toma el tono neto de su eje, (pos − neg) / personas, con los colores `--pos`, `--neu` y `--neg`; turquesa si domina lo positivo, coral si domina lo negativo y oro si está mezclado; entre lóbulos queda `--linea-fuerte`. Junto al nombre de cada eje van los conteos `pos · neu · neg`.

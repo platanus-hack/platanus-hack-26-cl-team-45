@@ -7,7 +7,7 @@ import './comun.css';
 // The dev deployment that `convex dev` keeps in sync is the one the demo uses (public URL, not a secret); VITE_CONVEX_URL overrides it.
 const cvx = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL ?? 'https://intent-ox-498.convex.cloud');
 
-// The poll is the first path segment: /<slug>, /<slug>/panel, /<slug>/flujo. '' on / and /admin.
+// The poll is the first path segment: /<slug>, /<slug>/voces, /<slug>/flujo. '' on / and /admin.
 const seg = location.pathname.split('/')[1] || '';
 export const SLUG = seg === 'admin' ? '' : seg;
 // Convex wraps server errors ("Uncaught Error: msg\n at ..."); show only the message.

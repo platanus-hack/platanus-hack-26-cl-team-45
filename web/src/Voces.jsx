@@ -79,7 +79,6 @@ function Voces() {
             <button className="au-sel-op" aria-pressed={modo === 'chat'} onClick={() => cambiar('chat')}>Conversar</button>
             <button className="au-sel-op" aria-pressed={modo === 'lecturas'} onClick={() => cambiar('lecturas')}>Lecturas</button>
           </div>}
-          {!DEMO && <a className="au-btn au-btn--contorno" href={`/${SLUG}/panel`}>Mapa</a>}
           {!DEMO && <a className="au-btn au-btn--contorno" href={`/${SLUG}/flujo`}>Flujo</a>}
         </nav>
         {hay && <p className="clave-fila">

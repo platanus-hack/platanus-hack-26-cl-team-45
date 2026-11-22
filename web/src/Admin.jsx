@@ -98,7 +98,7 @@ function Detalle({ e, clave }) {
       <h2>{e.pregunta}</h2>
       <div className="acciones">
         <Boton variante="contorno" onClick={() => abrirCerrar({ clave, encuestaId: e._id, abierta: !e.abierta }).catch(fallo)}>{e.abierta ? 'Cerrar encuesta' : 'Reabrir encuesta'}</Boton>
-        <a className="au-btn au-btn--contorno" href={urlDe(e.slug, 'panel')} target="_blank">Panel en vivo</a>
+        <a className="au-btn au-btn--contorno" href={urlDe(e.slug, 'voces')} target="_blank">Tópicos en vivo</a>
         <a className="au-btn au-btn--contorno" href={urlDe(e.slug, 'flujo')} target="_blank">Flujo</a>
       </div>
       <div className="qr">

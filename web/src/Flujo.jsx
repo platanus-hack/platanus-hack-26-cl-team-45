@@ -20,7 +20,7 @@ const Lienzo = memo(() => (
   <>
     <header className="barra-sup">
       <a href="/" aria-label="Inicio"><Marca tamano={28} /></a>
-      <nav><a className="au-btn au-btn--contorno" href={`/${SLUG}/panel`}>Ver panel</a></nav>
+      <nav><a className="au-btn au-btn--contorno" href={`/${SLUG}/voces`}>Ver tópicos</a></nav>
       <h1 id="pregunta">Audem</h1>
     </header>
     <main>

@@ -1,0 +1,15 @@
+/* Landing: brand and Orbe, the wave, then the poll cards. Tokens and components: design-system/. Rules: DESIGN.md. */
+.portada { min-height: 100svh; display: flex; flex-direction: column; padding: var(--esp-12) var(--esp-8) var(--esp-16); max-width: 1200px; margin: 0 auto; }
+.portada header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 560px); align-items: center; gap: var(--esp-8); }
+.portada .presenta p { margin: var(--esp-6) 0 0; max-width: 34ch; font-weight: 300; line-height: 28px; color: var(--tinta-suave); }
+.portada .au-onda { margin: var(--esp-12) 0; }
+.portada main { display: grid; padding: 0; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--esp-6); }
+.portada section { display: flex; flex-direction: column; align-items: flex-start; gap: var(--esp-3); padding: var(--esp-6); }
+.portada h2 { margin: 0; font: 500 28px/34px var(--font-display); }
+.portada .au-marca { font-size: clamp(56px, 9vw, 88px) !important; }
+.portada .meta { margin: 0; }
+.portada .acciones { display: flex; gap: var(--esp-2); flex-wrap: wrap; margin-top: auto; padding-top: var(--esp-2); }
+@media (max-width: 760px) {
+  .portada { padding: var(--esp-8) var(--esp-4) var(--esp-12); }
+  .portada header { grid-template-columns: 1fr; }
+}
