@@ -6,9 +6,12 @@ import { v } from "convex/values";
 import { z } from "zod";
 import { action } from "./_generated/server";
 import { api } from "./_generated/api";
+import camaras from "./demos/camaras.json";
 
 const MODELO = { model: "claude-haiku-5-5", effort: "low" } as const; // a chat answer should arrive in a few seconds
 const MAX_CITAS_POR_EJE = 8;
+// Synthetic polls processed offline (evals/camaras/procesar.ts): their slug has no poll in the database, the web draws them from the same file.
+const DEMOS: Record<string, any> = { camaras };
 
 const Respuesta = z.object({
   respuesta: z.string().describe("Respuesta en español, 1 a 4 oraciones, con los conteos de los datos (personas, no porcentajes inventados)"),
@@ -50,7 +53,7 @@ export const preguntar = action({
     // Public and it costs a model call: keep inputs small.
     if (pregunta.trim().length < 2 || pregunta.length > 500) throw new Error("La pregunta debe tener entre 2 y 500 caracteres");
     const previos = historial.slice(-8).map(h => ({ role: h.rol, content: h.texto.slice(0, 2000) }));
-    const t = await ctx.runQuery(api.encuestas.topicos, { slug });
+    const t = DEMOS[slug] ?? await ctx.runQuery(api.encuestas.topicos, { slug });
     const m = t?.topicos?.length ? null : await ctx.runQuery(api.encuestas.mapa, { slug });
     const datos = contexto(t, m);
     if (!datos) throw new Error("Esta encuesta todavía no tiene respuestas analizadas");

@@ -60,14 +60,35 @@ header h1 { font-size: clamp(28px, 2.4vw, 40px); }
   #tarjeta { left: var(--esp-4); right: var(--esp-4); top: auto; bottom: var(--esp-4); width: auto; max-height: 36vh; }
 }
 
-/* Preguntar: the design system's Agente fills the card; messages scroll, the Entrada stays at the bottom. */
+/* Preguntar: a chat thread that fills the card. Questions right, answers in bubbles with the Orbe; the Entrada stays at the bottom. */
 #tarjeta:has(.chat:not([hidden])) { padding-bottom: var(--esp-4); }
-.chat { flex: 1; }
+.chat { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--esp-3); }
 .chat[hidden] { display: none; }
-.chat .au-ag-lista { display: flex; flex-direction: column; gap: var(--esp-6); }
-.chat .au-ag-texto { font-size: 19px; line-height: 27px; }
-.chat .au-ag-texto.es-error { color: var(--coral-texto); }
-.chat .au-sug { justify-content: flex-start; }
+.chat-cab { display: flex; align-items: center; justify-content: space-between; gap: var(--esp-3); padding-bottom: var(--esp-2); border-bottom: 1px solid var(--linea); }
+.chat-cab h2 { margin: 0; }
+.chat-nueva { background: none; border: 0; padding: 0; font-size: 13px; color: var(--tinta-suave); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.chat-nueva:hover { color: var(--tinta); }
+.chat-hilo { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: var(--esp-2); padding-right: var(--esp-1); scrollbar-width: thin; }
+.chat-vacio { margin: 0; color: var(--tinta-suave); font-size: 15px; line-height: 22px; }
+.chat-yo { align-self: flex-end; max-width: 82%; margin: var(--esp-4) 0 0; padding: 8px 14px; background: var(--tinta); color: var(--lienzo); border-radius: 18px 18px 4px 18px; font-size: 15px; line-height: 21px; }
+.chat-yo:first-child { margin-top: 0; }
+.chat-turno { display: flex; align-items: flex-start; gap: var(--esp-2); }
+.chat-turno .au-simbolo { flex: none; margin-top: 2px; }
+.chat-burbuja { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--esp-3); padding: 12px 14px; background: var(--rubor); border-radius: 4px 18px 18px 18px; }
+.chat-texto { margin: 0; font-size: 16px; line-height: 24px; }
+.chat-burbuja.es-error .chat-texto { color: var(--coral-texto); }
+.chat-citas { display: flex; flex-direction: column; gap: var(--esp-2); }
+.chat-citas blockquote { margin: 0; padding-left: var(--esp-3); border-left: 2px solid var(--linea-fuerte); color: var(--tinta-suave); font-size: 13px; line-height: 19px; font-style: italic; }
+.chat-base { margin: 0; color: var(--tinta-suave); font-size: 11px; line-height: 14px; }
+.chat-escribiendo { flex: none; flex-direction: row; gap: 5px; padding: 14px 16px; }
+.chat-escribiendo i { width: 6px; height: 6px; border-radius: 50%; background: var(--tinta-suave); animation: escribe 1.2s ease-in-out infinite; }
+.chat-escribiendo i:nth-child(2) { animation-delay: .15s; }
+.chat-escribiendo i:nth-child(3) { animation-delay: .3s; }
+@keyframes escribe { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+.chat-inicio { display: flex; flex-direction: column; align-items: flex-start; gap: var(--esp-2); }
+.chat-sug { justify-content: flex-start; flex-wrap: wrap; gap: var(--esp-2); }
+.chat-sug .au-sug-chip { font-size: 13px; padding: 6px 12px; }
+.chat .au-entrada { max-width: none; }
 .grafico { margin: 0; }
 .grafico figcaption { font-size: 13px; font-weight: 500; margin-bottom: var(--esp-2); }
 .grafico svg { width: 100%; height: auto; display: block; }

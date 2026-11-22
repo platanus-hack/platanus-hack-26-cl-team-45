@@ -1,5 +1,5 @@
 // Runs the app's tópicos pipeline offline over data/camaras.json and writes what encuestas.topicos would return,
-// so /camaras/voces can draw the blob without a live poll. Same functions and models as the app (convex/extraccion.ts):
+// so /camaras/voces (and its chat, convex/chat.ts) work without a live poll. Same functions and models as the app (convex/extraccion.ts):
 // Haiku reads each answer, then every tema is regrouped into tópicos as answers come in, like evals/hackaton/normalizar.ts.
 // The live app stops regrouping after UMBRAL_CONVERGENCIA answers and only assigns; here that split the question's own
 // subject into two tópicos and filed police response under municipal complaints, so the demo regroups to the end.
@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { analizarRespuesta, normalizarTemas } from "../../convex/extraccion.ts";
 
 const raiz = new URL("../../", import.meta.url).pathname;
-const SALIDA = raiz + "web/src/demo-camaras.json";
+const SALIDA = raiz + "convex/demos/camaras.json";
 const { pregunta, respuestas }: { pregunta: string; respuestas: { id: number; participante: string; cerrada: string; texto: string }[] } =
   JSON.parse(readFileSync(raiz + "data/camaras.json", "utf8"));
 const claude = new Anthropic({ maxRetries: 6 });

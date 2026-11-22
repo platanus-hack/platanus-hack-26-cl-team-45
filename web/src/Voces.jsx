@@ -4,7 +4,7 @@ import { api } from '../../convex/_generated/api';
 import { arrancar, SLUG } from './convex.jsx';
 import { NOMBRE_TONO, tono, plural } from './comun.js';
 import { elegir, lecturas, clave } from './voces-datos.js';
-import demoCamaras from './demo-camaras.json';
+import demoCamaras from '../../convex/demos/camaras.json';
 import { Chat } from './Chat.jsx';
 import { montar } from './voces-dibujo.js';
 import { Boton, Marca, Pastilla } from './ds.js';

@@ -4,7 +4,7 @@ import { useAction } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { SLUG, mensaje } from './convex.jsx';
 import { grafico } from './voces-datos.js';
-import { Entrada } from './ds.js';
+import { Entrada, Simbolo } from './ds.js';
 
 const SUGERENCIAS = ['¿Qué es lo que más molesta?', 'Compara el tono de los temas principales', '¿Qué emociones predominan?', '¿Qué propone la gente?'];
 
@@ -29,29 +29,44 @@ export function Chat({ v, visible, onFoco }) {
       const r = await preguntar({ slug: SLUG, pregunta: q, historial });
       setMensajes(ms => [...ms, { rol: 'assistant', texto: r.respuesta, grafico: r.grafico, citas: r.citas }]);
     } catch (e) {
-      const m = mensaje(e);   // the missing-function detail is on the second line of e.message
-      const txt = /Could not find public function/.test(e.message) ? 'El chat todavía no está desplegado en Convex. Hay que correr npx convex deploy (o npx convex dev).' : m;
+      // Say what happened in plain words; the raw message stays in the console.
+      console.error(e);
+      const txt = /Could not find public function/.test(e.message) ? 'El chat todavía no está desplegado en Convex (npx convex deploy).'
+        : /authentication|api[_ ]?key|401/i.test(e.message) ? 'No pude leer las voces: falta la clave de Anthropic en Convex (npx convex env set ANTHROPIC_API_KEY …).'
+        : `No pude responder ahora. Intenta de nuevo. (${mensaje(e)})`;
       setMensajes(ms => [...ms, { rol: 'assistant', texto: txt, error: true }]);
     } finally { setEsperando(false); }
   }
 
-  // The design system's Agente pieces (au-ag-*, Entrada); the chart stays ours because Agente has no chart slot.
+  // A conversation: your question on the right, the answer in a bubble on the left with the Orbe, chart and quotes inside it.
+  // Suggestions stay under the thread (minus the ones already asked); Entrada is the design system's input.
+  const pendientes = SUGERENCIAS.filter(s => !mensajes.some(m => m.rol === 'user' && m.texto === s));
   return (
-    <div className="chat au-ag" hidden={!visible}>
-      <div className="au-ag-lista" aria-live="polite">
-        {!mensajes.length && <p className="au-ag-vacio">Pregunta qué dijo la gente. Respondo con lo que dijeron las {v.casos} personas y armo un gráfico con los conteos reales.</p>}
+    <div className="chat" hidden={!visible}>
+      <div className="chat-cab">
+        <h2>Pregúntale a las voces</h2>
+        {mensajes.length > 0 && <button type="button" className="chat-nueva" onClick={() => setMensajes([])} disabled={esperando}>Nueva conversación</button>}
+      </div>
+      <div className="chat-hilo" role="log" aria-live="polite">
+        {!mensajes.length && <>
+          <p className="chat-vacio">Respondo con lo que dijeron las {v.casos} personas y armo un gráfico con los conteos reales. Prueba con una de estas:</p>
+          <div className="chat-inicio">{SUGERENCIAS.map(s => <button key={s} type="button" className="au-sug-chip" onClick={() => enviar(s)}>{s}</button>)}</div>
+        </>}
         {mensajes.map((m, i) => m.rol === 'user'
-          ? <p key={i} className="au-ag-yo">{m.texto}</p>
-          : <div key={i} className="au-ag-msg">
-              <p className={`au-ag-texto${m.error ? ' es-error' : ''}`}>{m.texto}</p>
-              <Grafico g={grafico(v, m.grafico)} casos={v.casos} />
-              {m.citas?.length > 0 && <div className="au-ag-citas">{m.citas.slice(0, 3).map((c, j) => <figure key={j} className="au-ag-cita"><blockquote>«{c}»</blockquote></figure>)}</div>}
-              {!m.error && <p className="au-ag-base">Basado en {v.casos} {v.casos === 1 ? 'persona' : 'personas'} de esta consulta</p>}
+          ? <p key={i} className="chat-yo">{m.texto}</p>
+          : <div key={i} className="chat-turno">
+              <Simbolo alto={24} />
+              <div className={`chat-burbuja${m.error ? ' es-error' : ''}`}>
+                <p className="chat-texto">{m.texto}</p>
+                <Grafico g={grafico(v, m.grafico)} casos={v.casos} />
+                {m.citas?.length > 0 && <div className="chat-citas">{m.citas.slice(0, 3).map((c, j) => <blockquote key={j}>«{c}»</blockquote>)}</div>}
+                {!m.error && <p className="chat-base">Basado en {v.casos} {v.casos === 1 ? 'persona' : 'personas'} de esta consulta</p>}
+              </div>
             </div>)}
-        {esperando && <p className="au-ag-pensando">Leyendo las voces…</p>}
+        {esperando && <div className="chat-turno"><Simbolo alto={24} /><div className="chat-burbuja chat-escribiendo" aria-label="Leyendo las voces"><i></i><i></i><i></i></div></div>}
         <div ref={fin}></div>
       </div>
-      {!esperando && !mensajes.length && <div className="au-sug" role="group" aria-label="Preguntas sugeridas">{SUGERENCIAS.map(s => <button key={s} type="button" className="au-sug-chip" onClick={() => enviar(s)}>{s}</button>)}</div>}
+      {!esperando && mensajes.length > 0 && pendientes.length > 0 && <div className="au-sug chat-sug" role="group" aria-label="Preguntas sugeridas">{pendientes.map(s => <button key={s} type="button" className="au-sug-chip" onClick={() => enviar(s)}>{s}</button>)}</div>}
       <Entrada onEnviar={enviar} deshabilitado={esperando} pensando={esperando} placeholder="Pregunta sobre lo que dijo la gente…" />
     </div>
   );
