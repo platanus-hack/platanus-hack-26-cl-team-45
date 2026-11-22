@@ -10,13 +10,8 @@ Entrega: POR CONFIRMAR (¿domingo 22-nov en la mañana?) · Formato del pitch: P
 - Edo: datos sintéticos (rotulados como sintéticos en la demo)
 - Josefa: ausente por ahora
 
-## Contratos entre lanes
-Kaina → Gonzalo: `respuesta {id, participante_id, ronda, audio_url, transcripcion|null, creado_en}`
-Gonzalo → Diego: `frase {id, respuesta_id, texto, cita, emocion, intensidad 0-1, cluster_id, conceptos: [1-2 palabras en minúscula, vocabulario compartido]}` y `cluster {id, nombre, resumen, n, x, y}`
-Diego lee `GET /api/mapa` → `{pregunta, clusters: [...], frases: [...], respuestas: [{id, texto}], total_participantes}` (`respuestas` y `conceptos` alimentan la vista Flujo; si faltan, se degrada sin romperse) y consulta cada 2-3 s.
-
-## Stack (propuesta)
-Canal: WhatsApp vía Kapso (webhook entrante + envío) · Backend: FastAPI + Postgres · STT: el que ya tenga key el equipo (español chileno) · LLM: Claude para extracción y nombres de clusters · Embeddings + UMAP + k-means para el mapa · Front: Next.js, pantalla en vivo que consulta cada 2-3 s · Deploy: Render (URL: pendiente)
+## Stack
+Todo el backend vive en Convex (`convex/`): queries y mutaciones en `encuestas.ts`, acciones que llaman a modelos en `procesar.ts`, prompts y schemas en `extraccion.ts`. Front en React + Vite (`web/src/`), deploy en Vercel (audem.vercel.app) contra Convex dev. Paquetes con pnpm (`pnpm dev` levanta Convex y Vite). STT con Whisper y análisis con Claude. Hoy se responde desde la web; `whatsapp/` es el webhook de Kapso. El recorrido de una respuesta está en `PIPELINE.md` y el diseño en `DESIGN.md`.
 
 ## Idea
 One-liner: Encuestas de opinión que se responden con un audio y muestran lo que piensa la gente en un mapa, no en un porcentaje.
@@ -34,13 +29,7 @@ Diferencia vs lo que ya existe: Cadem y Criteria miden con respuestas discretas;
 Proyección (solo pitch, por decidir): que el sistema también elija la mejor forma de visualizar las posturas a medida que crecen las respuestas. No va en la descripción de la entrega.
 
 ## Estado compartido
-| Entidad | Quién escribe | Quién ve | Notas |
-|---|---|---|---|
-| participante (teléfono hash, ronda actual) | webhook Kapso | backend | sin nombre |
-| respuesta (audio_url, transcripción, ronda) | webhook + worker STT | pantalla | audio se puede borrar tras transcribir |
-| frase (texto, cita, emoción, intensidad, embedding, cluster_id) | worker LLM | pantalla | 1-5 frases por respuesta |
-| cluster (nombre, resumen, x/y) | job de clustering | pantalla + ronda 2 | se recalcula al entrar respuestas |
-| mensaje ronda 2 (participante, texto) | agente mediador | participante por WhatsApp | |
+Las tablas están en `convex/schema.ts`: `encuestas`, `respuestas`, `frases` y `temas` (mapa por postura), `analisis` y `topicos` (conteo por tópico neutro).
 
 ## Scorecard
 | Criterio | Peso | Score | Pero | Acción |

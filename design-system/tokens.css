@@ -1,0 +1,94 @@
+/* Audem — generado desde tokens.json. Claro por defecto; Noche con prefers-color-scheme o data-theme="dark". */
+:root, [data-theme="light"] {
+  --lienzo: #ffffff;
+  --rubor: #fcedea;
+  --rubor-hondo: #f7dfda;
+  --linea: #efd3ce;
+  --linea-fuerte: #93706b;
+  --tinta: #1e1719;
+  --tinta-suave: #6b585b;
+  --coral: #d94a3d;
+  --coral-texto: #b3362b;
+  --on-coral: #ffffff;
+  --turquesa: #3db5c4;
+  --turquesa-texto: #0f6b77;
+  --oro: #f2c46d;
+  --lila: #b7a5e6;
+  --lila-texto: #5e4ba8;
+  --halo: #e5594c47;
+  --foco: #b3362b;
+  --sombra-flota: 0 32px 64px -28px rgba(217, 74, 61, 0.40);
+  --sombra-tirador: 0 1px 3px rgba(30, 23, 25, 0.25);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --lienzo: #141012;
+  --rubor: #211a1c;
+  --rubor-hondo: #2b2225;
+  --linea: #3d3134;
+  --linea-fuerte: #8c7478;
+  --tinta: #f7eeec;
+  --tinta-suave: #bfaaad;
+  --coral: #ff7466;
+  --coral-texto: #ff9184;
+  --on-coral: #141012;
+  --turquesa: #52cad8;
+  --turquesa-texto: #6fd3df;
+  --oro: #f5cf84;
+  --lila: #9d8ad6;
+  --lila-texto: #b9a9f0;
+  --halo: #ff746640;
+  --foco: #ff9184;
+  --sombra-flota: 0 32px 64px -28px rgba(0, 0, 0, 0.70);
+  --sombra-tirador: 0 1px 3px rgba(0, 0, 0, 0.60);
+    color-scheme: dark;
+  }
+}
+[data-theme="dark"] {
+  --lienzo: #141012;
+  --rubor: #211a1c;
+  --rubor-hondo: #2b2225;
+  --linea: #3d3134;
+  --linea-fuerte: #8c7478;
+  --tinta: #f7eeec;
+  --tinta-suave: #bfaaad;
+  --coral: #ff7466;
+  --coral-texto: #ff9184;
+  --on-coral: #141012;
+  --turquesa: #52cad8;
+  --turquesa-texto: #6fd3df;
+  --oro: #f5cf84;
+  --lila: #9d8ad6;
+  --lila-texto: #b9a9f0;
+  --halo: #ff746640;
+  --foco: #ff9184;
+  --sombra-flota: 0 32px 64px -28px rgba(0, 0, 0, 0.70);
+  --sombra-tirador: 0 1px 3px rgba(0, 0, 0, 0.60);
+  color-scheme: dark;
+}
+:root {
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-6: 24px;
+  --esp-8: 32px;
+  --esp-12: 48px;
+  --esp-16: 64px;
+  --radio-0: 0px;
+  --radio-sm: 4px;
+  --radio-md: 10px;
+  --radio-pildora: 999px;
+  --font-display: "Outfit", "Avenir Next", "Century Gothic", sans-serif;
+  --font-texto: "Poppins", "Avenir Next", system-ui, sans-serif;
+}
+.marca { font-family: var(--font-display); font-size: 96px; line-height: 0.86; font-weight: 800; letter-spacing: -0.035em; }
+.marca-ligera { font-family: var(--font-display); font-size: 96px; line-height: 0.86; font-weight: 300; letter-spacing: -0.02em; }
+.titulo { font-family: var(--font-display); font-size: 40px; line-height: 46px; font-weight: 500; letter-spacing: -0.01em; }
+.subtitulo { font-family: var(--font-display); font-size: 28px; line-height: 34px; font-weight: 500; }
+.cifra { font-family: var(--font-display); font-size: 64px; line-height: 64px; font-weight: 300; }
+.cuerpo { font-family: var(--font-texto); font-size: 16px; line-height: 28px; font-weight: 300; }
+.cuerpo-medio { font-family: var(--font-texto); font-size: 16px; line-height: 24px; font-weight: 400; }
+.seccion { font-family: var(--font-texto); font-size: 13px; line-height: 18px; font-weight: 600; }
+.etiqueta { font-family: var(--font-texto); font-size: 11px; line-height: 14px; font-weight: 500; }
+.pastilla { font-family: var(--font-texto); font-size: 10px; line-height: 12px; font-weight: 600; letter-spacing: 0.12em; }

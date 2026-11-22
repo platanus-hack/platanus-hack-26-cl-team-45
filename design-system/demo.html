@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audem · sistema visual</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="audem-ds.css">
+<style>
+  body { margin: 0; background: var(--lienzo); color: var(--tinta); font-family: var(--font-texto); }
+  main { max-width: 1040px; margin: 0 auto; padding: 48px max(16px, 4vw) 96px; display: flex; flex-direction: column; gap: 48px; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  h2 { margin: 0 0 16px; font: 500 13px/18px var(--font-texto); color: var(--tinta-suave); }
+  .fila { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .mapa { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; background: var(--rubor); border-radius: var(--radio-sm); padding: 24px; box-shadow: var(--sombra-flota); }
+  .lado { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .nota { font-size: 11px; color: var(--tinta-suave); margin: 0; }
+  @media (max-width: 760px) { .mapa { grid-template-columns: 1fr; } }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="audem-ds.js"></script>
+</head>
+<body>
+<main id="root"></main>
+<script>
+  var A = window.Audem, h = React.createElement;
+  function App() {
+    var tema = React.useState(null);
+    React.useEffect(function () { if (tema[0]) document.documentElement.dataset.theme = tema[0]; }, [tema[0]]);
+    var ramas = [
+      { etiqueta: 'Más árboles y sombra', detalle: '38 % · ±4,5', peso: 0.95, estado: 'validada' },
+      { etiqueta: 'Ciclovía segura', detalle: '21 %', peso: 0.6, estado: 'validada' },
+      { etiqueta: 'Luz de noche', detalle: '16 %', peso: 0.5 },
+      { etiqueta: 'Juegos para niños', detalle: '6 %', peso: 0.2 },
+      { etiqueta: 'Feria ordenada', detalle: '10 %', peso: 0.35 },
+      { etiqueta: 'Centro sin autos', detalle: '9 % · minoritaria', peso: 0.3, estado: 'minoritaria' }
+    ];
+    return h(React.Fragment, null,
+      h('header', null,
+        h(A.Marca, { tamano: 72, segunda: 'escucha' }),
+        h(A.Selector, { etiqueta: 'Tema', opciones: [{ valor: 'light', etiqueta: 'Claro' }, { valor: 'dark', etiqueta: 'Noche' }], valorInicial: 'light', onChange: tema[1] })),
+      h('p', { className: 'cuerpo', style: { margin: 0, maxWidth: '60ch' } }, 'Escucha ciudadana por WhatsApp. Hablas dos minutos y tu voz se suma al mapa de tu comuna.'),
+      h(A.Onda, null),
+      h('section', null, h('h2', null, 'El mapa · datos de ejemplo'),
+        h('div', { className: 'mapa' },
+          h(A.Orbe, { ramas: ramas, descripcion: 'Seis posturas sobre la plaza; la más respaldada es más árboles y sombra, 38 %.' }),
+          h('div', { className: 'lado' },
+            h(A.Panel, { titulo: 'Margen por rama', accion: 'En vivo', hondo: true },
+              h(A.Perilla, { valor: 31, max: 31, texto: '±31', etiqueta: '10 voces', tamano: 56 }),
+              h(A.Perilla, { valor: 10, max: 31, texto: '±10', etiqueta: '100 voces', tamano: 56 }),
+              h(A.Perilla, { valor: 3.1, max: 31, texto: '±3', etiqueta: '1.000 voces', tamano: 56 })),
+            h('div', null,
+              h(A.Rama, { texto: 'Más árboles y sombra en la plaza', porcentaje: 38, voces: 482, estado: 'validada' }),
+              h(A.Rama, { texto: 'Iluminación para caminar de noche', porcentaje: 16, voces: 482 }),
+              h(A.Rama, { texto: 'Cerrar el centro a los autos los domingos', porcentaje: 9, voces: 482, estado: 'minoritaria' }))))),
+      h('section', null, h('h2', null, 'Acciones'),
+        h('div', { className: 'fila' },
+          h(A.Boton, null, 'Pruébalo'), h(A.Boton, { variante: 'contorno' }, 'Ver el mapa'),
+          h(A.Boton, { variante: 'grabar' }), h(A.Boton, { variante: 'grabar', activo: true }),
+          h(A.Selector, { etiqueta: 'Responder por', opciones: ['Texto', 'Audio'] }))),
+      h('section', null, h('h2', null, 'Estados'),
+        h('div', { className: 'fila' },
+          h(A.Pastilla, { tono: 'turquesa' }, 'Validada'), h(A.Pastilla, { tono: 'neutro' }, 'Provisional'),
+          h(A.Pastilla, { tono: 'lila' }, 'Minoritaria'), h(A.Pastilla, null, 'En vivo'))),
+      h('section', null, h('h2', null, 'Tipografía'),
+        h('p', { className: 'titulo', style: { margin: 0 } }, '¿Qué le falta a tu barrio?'),
+        h('p', { className: 'cifra', style: { margin: '8px 0' } }, '1.240 voces'),
+        h('p', { className: 'cuerpo', style: { margin: 0 } }, 'Cada voz que se suma afina el mapa.')),
+      h('p', { className: 'nota' }, 'Propuesta de sistema visual. El estándar vigente es DESIGN.md.'));
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300..800&family=Poppins:wght@300;400;500;600&display=swap");
+
+/* Marca */
+.au-marca { display: inline-flex; align-items: center; gap: .26em; color: var(--tinta); line-height: 1; }
+.au-simbolo { flex: none; display: block; }
+.au-simbolo-punto { fill: var(--coral); }
+.au-marca-txt { display: flex; flex-direction: column; font-family: var(--font-display); }
+.au-marca-nombre { font-weight: 800; letter-spacing: -.035em; line-height: .86; }
+.au-marca-segunda { font-weight: 300; letter-spacing: -.02em; line-height: .86; }
+
+/* Onda */
+.au-onda { display: block; width: 100%; height: 64px; overflow: visible; }
+.au-onda path { stroke: var(--tinta); stroke-width: 1.5; }
+
+/* Boton */
+.au-btn { font: 500 15px/1.2 var(--font-texto); padding: 12px 24px; border-radius: var(--radio-0); border: 1.5px solid var(--tinta); cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
+.au-btn--primario { background: var(--tinta); color: var(--lienzo); }
+.au-btn--primario:hover { background: var(--coral-texto); border-color: var(--coral-texto); }
+.au-btn--contorno { background: transparent; color: var(--tinta); }
+.au-btn--contorno:hover { background: var(--rubor-hondo); }
+.au-btn:disabled { opacity: .45; cursor: not-allowed; }
+.au-btn-grabar { width: 44px; height: 44px; padding: 0; border: 0; border-radius: var(--radio-pildora); background: var(--coral); display: inline-grid; place-items: center; cursor: pointer; box-shadow: var(--sombra-tirador); }
+.au-btn-grabar-icono { width: 14px; height: 14px; border-radius: var(--radio-pildora); background: var(--on-coral); transition: border-radius .2s; }
+.au-btn-grabar.is-on .au-btn-grabar-icono { border-radius: 2px; }
+.au-btn:focus-visible, .au-btn-grabar:focus-visible, .au-sel-op:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
+
+/* Selector */
+.au-campo { display: inline-flex; flex-direction: column; align-items: center; gap: var(--esp-2); }
+.au-campo-etq { font: 500 11px/14px var(--font-texto); color: var(--tinta-suave); }
+.au-sel { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--linea-fuerte); border-radius: var(--radio-pildora); background: var(--lienzo); }
+.au-sel-op { font: 500 12px/1 var(--font-texto); color: var(--tinta-suave); background: transparent; border: 0; padding: 8px 14px; border-radius: var(--radio-pildora); cursor: pointer; }
+.au-sel-op:hover { color: var(--tinta); }
+.au-sel-op[aria-pressed="true"] { color: var(--coral-texto); box-shadow: inset 0 0 0 1.5px var(--coral); }
+
+/* Pastilla */
+.au-pas { display: inline-flex; align-items: center; height: 20px; padding: 0 9px; border: 1px solid currentColor; border-radius: var(--radio-pildora); font: 600 10px/1 var(--font-texto); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.au-pas--coral { color: var(--coral-texto); }
+.au-pas--turquesa { color: var(--turquesa-texto); }
+.au-pas--lila { color: var(--lila-texto); }
+.au-pas--neutro { color: var(--tinta-suave); }
+
+/* Perilla */
+.au-peri { display: inline-flex; flex-direction: column; align-items: center; gap: var(--esp-2); }
+.au-peri svg { display: block; overflow: visible; }
+.au-peri-pista { fill: none; stroke: var(--linea); stroke-width: 2; stroke-linecap: round; }
+.au-peri-valor { fill: none; stroke: var(--coral); stroke-width: 2.5; stroke-linecap: round; }
+.au-peri-num { font-family: var(--font-display); font-weight: 300; fill: var(--tinta); font-variant-numeric: tabular-nums; }
+.au-peri-etq { font: 500 11px/14px var(--font-texto); color: var(--tinta-suave); text-align: center; }
+
+/* Rama */
+.au-rama { display: flex; flex-direction: column; gap: 10px; padding: var(--esp-4) 0; border-bottom: 1px solid var(--linea); font-family: var(--font-texto); color: var(--tinta); }
+.au-rama-fila { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--esp-4); }
+.au-rama-txt { margin: 0; min-width: 0; font-size: 16px; line-height: 24px; font-weight: 400; }
+.au-rama-barra { position: relative; height: 6px; border-radius: var(--radio-pildora); background: var(--rubor-hondo); }
+.au-rama-banda { position: absolute; top: -4px; bottom: -4px; border-radius: var(--radio-pildora); background: var(--halo); }
+.au-rama-valor { position: absolute; left: 0; top: 0; bottom: 0; border-radius: var(--radio-pildora); background: var(--coral); }
+.au-rama.is-validada .au-rama-valor { background: var(--turquesa-texto); }
+.au-rama.is-minoritaria .au-rama-valor { background: var(--lila-texto); }
+.au-rama-meta { margin: 0; font-size: 12px; line-height: 16px; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.au-rama-meta strong { color: var(--tinta); font-weight: 600; }
+
+/* Orbe */
+.au-orbe { display: block; width: 100%; height: auto; max-width: 100%; overflow: visible; }
+.au-orbe-orbita { fill: none; stroke: var(--linea); stroke-width: 1; }
+.au-orbe-radio { stroke: var(--linea); stroke-width: 1; }
+.au-orbe-halo { fill: var(--halo); }
+.au-orbe-coral { fill: var(--coral); }
+.au-orbe-lila { fill: var(--lila); }
+.au-orbe-oro { fill: var(--oro); }
+.au-orbe-brillo { fill: var(--lienzo); opacity: .55; }
+.au-orbe-tirador { fill: var(--lienzo); stroke: var(--coral); stroke-width: 2; filter: drop-shadow(0 1px 2px rgba(30, 23, 25, .25)); }
+.au-orbe-tirador.is-validada { fill: var(--coral); stroke: var(--lienzo); }
+.au-orbe-tirador.is-minoritaria { stroke: var(--lila-texto); }
+.au-orbe-etq { font: 500 12px var(--font-texto); fill: var(--tinta); }
+.au-orbe-det { font: 400 11px var(--font-texto); fill: var(--tinta-suave); }
+.au-orbe-giro { transform-box: view-box; animation: au-giro 26s linear infinite; }
+.au-orbe-respira { transform-box: view-box; animation: au-respira 7s ease-in-out infinite alternate; }
+@keyframes au-giro { to { transform: rotate(360deg); } }
+@keyframes au-respira { from { transform: scale(.985); } to { transform: scale(1.02); } }
+.au-orbe.is-quieto .au-orbe-giro, .au-orbe.is-quieto .au-orbe-respira { animation: none; }
+@media (prefers-reduced-motion: reduce) { .au-orbe-giro, .au-orbe-respira { animation: none; } }
+
+/* Panel */
+.au-panel { background: var(--rubor); border-radius: var(--radio-sm); padding: var(--esp-4) var(--esp-6) var(--esp-6); color: var(--tinta); font-family: var(--font-texto); }
+.au-panel.is-hondo { background: var(--rubor-hondo); }
+.au-panel-cab { display: flex; align-items: center; justify-content: space-between; gap: var(--esp-3); padding-bottom: var(--esp-3); margin-bottom: var(--esp-4); border-bottom: 1px solid var(--linea); }
+.au-panel-tit { margin: 0; display: flex; align-items: center; gap: var(--esp-2); font: 600 13px/18px var(--font-texto); }
+.au-panel-flecha { color: var(--tinta-suave); font-weight: 400; }
+.au-panel-cuerpo { display: flex; flex-wrap: wrap; gap: var(--esp-4) var(--esp-6); }
