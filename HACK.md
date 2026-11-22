@@ -66,6 +66,7 @@ Proyección (solo pitch, por decidir): que el sistema también elija la mejor fo
 - 22-nov: agrupar y normalizar pasan a Haiku low para que el mapa se actualice más rápido (~15 s desde que entra un texto, antes ~22 s). Sin eval de calidad, solo tiempos (`evals/hackaton/latencia.ts`).
 - 22-nov: pitch y descripción de la entrega reenfocados en encuestas de opinión con respuestas continuas, como alternativa a Cadem y Criteria. La ronda 2 cruzada sale de la descripción y del pitch. Se dice "un audio, como en WhatsApp", porque hoy se responde en la web.
 - 22-nov: pantalla de tópicos en `/<slug>/voces` para cualquier pregunta: lee `encuestas.topicos` y, mientras esa query no esté desplegada o venga vacía, usa los grupos de `encuestas.mapa`. Las lecturas se calculan de los datos (sin texto escrito a mano). Se quitó la página estática `/voces.html`.
+- 22-nov: chat «Preguntar» al lado del blob (`convex/chat.ts`, acción pública `chat.preguntar`, Haiku low). El modelo elige el gráfico y los ejes; los números los calcula la web. Necesita desplegar Convex para funcionar.
 - 22-nov: los grupos convergen hacia la respuesta 8 (`evals/hackaton/CONVERGENCIA.md`). Hasta la 9 se reagrupa todo; desde la 10 cada respuesta solo se asigna a los grupos existentes, sin espera y en paralelo. El proxy de la hackatón da 429 con muchas llamadas concurrentes: el cliente reintenta hasta 6 veces.
 
 ## Pendientes

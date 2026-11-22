@@ -1,6 +1,6 @@
 // node web/src/voces-datos.check.js — fails loudly if the Voces data layer breaks.
 import assert from 'node:assert/strict';
-import { elegir, lecturas, clave } from './voces-datos.js';
+import { elegir, lecturas, clave, grafico } from './voces-datos.js';
 
 const celda = (id, direccion, intensidad = 'moderada') => ({ respuestaId: id, participante: id, direccion, tendencia: 'no_dice', temas: [{ tema: 'x', direccion, intensidad, cita: `cita ${id}` }] });
 const topicos = {
@@ -47,4 +47,10 @@ assert.match(por('Lo que más molesta').texto, /^Sueño: 2/);
 assert.deepEqual(por('Lo que va junto').hilos, [[clave('a', 'r1'), clave('b', 'r1')], [clave('a', 'r2'), clave('b', 'r2')]]);
 assert.ok(por('Lo que proponen'));
 assert.equal(lecturas({ ...v, ejes: [] }).length, 0);
+// Chat charts: numbers always come from the data; unknown axis ids fall back to the main axes.
+const g = grafico(v, { tipo: 'tono_por_eje', ejes: ['b'], titulo: 'tono' });
+assert.deepEqual(g.filas, [{ nombre: 'Sueño', pos: 0, neu: 0, neg: 2, n: 2 }]);
+assert.equal(grafico(v, { tipo: 'personas_por_eje', ejes: ['inventado'], titulo: 'x' }).filas.length, 2);
+assert.equal(grafico(v, { tipo: 'emociones', ejes: [], titulo: 'x' }).filas[0].tono, 'neg');
+assert.equal(grafico(v, { tipo: 'ninguno', ejes: [], titulo: 'x' }), null);
 console.log('voces-datos ok');

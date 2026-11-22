@@ -54,3 +54,25 @@ nav { display: flex; gap: var(--s2); flex-wrap: wrap; }
   .clave-fila .clave:last-child { display: none; }   /* the card's persona line and the method note carry it */
   #tarjeta { left: var(--s4); right: var(--s4); top: auto; bottom: var(--s4); width: auto; max-height: 36vh; }
 }
+
+/* Chat: fills the card; messages scroll, the input stays at the bottom. */
+#tarjeta:has(.chat:not([hidden])) { padding-bottom: 0; }
+.chat { display: flex; flex-direction: column; gap: var(--s3); flex: 1; min-height: 0; }
+.chat[hidden] { display: none; }
+.chat-mensajes { flex: 1; overflow: auto; display: flex; flex-direction: column; gap: var(--s3); }
+.sugerencias { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.sugerencias button { font-size: var(--t-1); min-height: 32px; padding: 0 var(--s3); text-align: left; }
+.msg { margin: 0; font-size: var(--t-1); line-height: 1.5; }
+.msg.yo { align-self: flex-end; max-width: 85%; background: linear-gradient(180deg, #c9eff4, #e9fafc); color: var(--accent-ink); padding: var(--s2) var(--s3); border-radius: 12px 12px 4px 12px; }
+.msg.claude p { margin: 0 0 var(--s2); font-size: var(--t0); line-height: 1.45; }
+.msg.claude q { display: block; font-size: var(--t-1); color: var(--ink-2); font-style: italic; border-left: 2px solid var(--line); padding-left: var(--s2); margin-top: var(--s1); }
+.msg.error p { color: var(--neg); }
+.grafico { margin: var(--s2) 0; }
+.grafico figcaption { font-size: var(--t-1); font-weight: 500; color: var(--ink); margin-bottom: var(--s1); }
+.grafico svg { width: 100%; height: auto; display: block; }
+.grafico text { font-family: var(--sans); font-size: 11px; fill: var(--ink-2); }
+.grafico text.num { font-family: var(--mono); fill: var(--muted); }
+.metodo-mini { margin: var(--s1) 0 0; font-size: var(--t-1); color: var(--muted); }
+.chat-form { position: sticky; bottom: 0; display: flex; gap: var(--s2); padding: var(--s3) 0 var(--s4); background: var(--surface); border-top: 1px solid var(--line); }
+.chat-form input { flex: 1; min-width: 0; font: inherit; font-size: var(--t-1); padding: var(--s2) var(--s3); border: 1px solid var(--edge); border-radius: 999px; background: var(--surface); color: var(--ink); }
+@media (max-width: 999px) { #tarjeta:has(.chat:not([hidden])) { max-height: 52vh; } }
