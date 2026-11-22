@@ -3,3 +3,4 @@
 .cerrada h1 { font-size: 28px; line-height: 34px; }
 .cerrada p { margin: 0; color: var(--tinta-suave); }
 .volver { position: fixed; top: var(--esp-4); left: var(--esp-4); z-index: 1; }
+.ver-mapa { position: fixed; bottom: var(--esp-8); left: 50%; transform: translateX(-50%); z-index: 1; }

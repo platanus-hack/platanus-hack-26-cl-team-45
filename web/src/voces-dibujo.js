@@ -95,9 +95,9 @@ const hash = s => { let h = 2166136261; for (const ch of s) h = Math.imul(h ^ ch
 // One dot per person, placed as a vector: the sum of the directions of the axes they talk about, weighted by intensity.
 // Someone who only talks about one tópico sits off that axis; someone who talks about two sits between them; the
 // stronger and the more they say, the farther from the blob. Drag to turn it.
-export function montar({ escenario, svg, onSelect }) {
+export function montar({ escenario, svg, onSelect = () => {}, zona = null }) {
   let THREE, renderer, camera, scene, blob, uniforms, clock;
-  let W, H, cx, cy, U, ancho, derecha;                  // U = px per scene unit at depth 0 (blob radius = 1 unit)
+  let W, H, cx, cy, U, ancho, izquierda, derecha;                  // U = px per scene unit at depth 0 (blob radius = 1 unit)
   const ejeDe = new Map();                               // eje id → axis index, stable while it stays in the top 6
   const datoDe = Array(EJES).fill(null);                 // axis → eje
   const personas = new Map();                            // persona id → { g, pos:[x,y,z], nacio, celdas:[{eje, celda}], claves:Set }
@@ -115,17 +115,21 @@ export function montar({ escenario, svg, onSelect }) {
   }
   const capaPuntos = svg.appendChild(el('g'));
 
-  // The scene is centered in the free area between the header and the card, and sized so labels fit there.
+  // The scene is centered in zona() (a screen rect); by default the free area between the header and the card.
+  function zonaVoces() {
+    const cab = document.querySelector('header')?.getBoundingClientRect(), tar = document.getElementById('tarjeta')?.getBoundingClientRect();
+    return { left: 0, top: (cab?.bottom ?? 0) + 8, bottom: ancho || !tar ? H - 8 : tar.top - 8, right: ancho && tar ? tar.left - 8 : W };
+  }
   function medir() {
     W = innerWidth; H = innerHeight;
-    const cab = document.querySelector('header')?.getBoundingClientRect(), tar = document.getElementById('tarjeta')?.getBoundingClientRect();
     ancho = W >= 1000;                                   // wide: card on the right; narrow: card at the bottom
-    const arriba = (cab?.bottom ?? 0) + 8, abajo = ancho || !tar ? H - 8 : tar.top - 8;
-    derecha = ancho && tar ? tar.left - 8 : W;
-    const alto = Math.max(160, abajo - arriba);
-    cx = derecha / 2; cy = arriba + alto / 2;
+    const z = (zona ?? zonaVoces)();
+    izquierda = z.left; derecha = z.right;
+    const alto = Math.max(160, z.bottom - z.top);
+    cx = (izquierda + derecha) / 2; cy = (z.top + z.bottom) / 2;
     // Labels sit at 2.45 units; leave ~40 px for a label above/below and ~150 px beside (less on phones).
-    U = Math.max(30, Math.min((alto / 2 - 44) / 2.45, (derecha / 2 - (ancho ? 150 : 60)) / (0.87 * 2.45)));
+    U = Math.max(30, Math.min((alto / 2 - 44) / 2.45, ((derecha - izquierda) / 2 - (ancho ? 150 : 60)) / (0.87 * 2.45)));
+    U *= z.zoom ?? 1;                                    // a zona without labels (the pitch cover) can ask for a bigger blob
     if (!renderer) return;
     renderer.setSize(W, H);
     camera.aspect = W / H; camera.updateProjectionMatrix();
@@ -258,7 +262,7 @@ export function montar({ escenario, svg, onSelect }) {
       const dx = x - cx, dy = y0 - cy, y = y0 + (dy < -U * 0.8 ? -14 : dy > U * 0.8 ? 12 : -4);
       const ancla = dx > U * 0.3 ? 'start' : dx < -U * 0.3 ? 'end' : 'middle';
       // Cut the name to the room it has before the card or the screen edge (~7 px per character at 15 px Outfit).
-      const sitio = ancla === 'start' ? derecha - x - 8 : ancla === 'end' ? x - 8 : Math.min(x, derecha - x) * 2 - 16;
+      const sitio = ancla === 'start' ? derecha - x - 8 : ancla === 'end' ? x - izquierda - 8 : Math.min(x - izquierda, derecha - x) * 2 - 16;
       const caben = Math.max(6, Math.floor(sitio / 7.4) - String(e.personas).length - 3);
       const nombre = e.nombre.length > caben ? e.nombre.slice(0, caben - 1) + '…' : e.nombre;
       nombres[i].setAttribute('x', x); nombres[i].setAttribute('y', y); nombres[i].setAttribute('text-anchor', ancla);
@@ -289,6 +293,13 @@ export function montar({ escenario, svg, onSelect }) {
     requestAnimationFrame(cuadro);
   }
 
+  // Tone tokens from the page (comun.css); call again after a theme change.
+  function pintar() {
+    if (!uniforms) return;
+    const css = getComputedStyle(document.documentElement);
+    for (const [u, v] of [['neg', '--neg'], ['pos', '--pos'], ['neu', '--neu'], ['base', '--linea-fuerte'], ['luz', '--tinta']]) uniforms[u].value.set(css.getPropertyValue(v).trim());
+  }
+
   cargarThree().then(T => {
     THREE = T; clock = new THREE.Clock();
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -299,8 +310,8 @@ export function montar({ escenario, svg, onSelect }) {
     camera.position.z = 6;
     const dirs = DIRS.map(([x, y, z]) => new THREE.Vector3(x, y, z));
     uniforms = { uTime: { value: 0 }, uDirs: { value: dirs }, uVals: { value: Array(EJES).fill(0) }, uPulse: { value: Array(EJES).fill(0) }, uAmp: { value: 0.03 }, uTono: { value: Array(EJES).fill(0) } };
-    const css = getComputedStyle(document.documentElement), color = v => ({ value: new THREE.Color(css.getPropertyValue(v).trim()) });
-    Object.assign(uniforms, { neg: color('--neg'), pos: color('--pos'), neu: color('--neu'), base: color('--linea-fuerte'), luz: color('--tinta') });
+    Object.assign(uniforms, { neg: { value: new THREE.Color() }, pos: { value: new THREE.Color() }, neu: { value: new THREE.Color() }, base: { value: new THREE.Color() }, luz: { value: new THREE.Color() } });
+    pintar();
     blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 64), new THREE.ShaderMaterial({ uniforms, vertexShader: VERT, fragmentShader: FRAG }));
     scene.add(blob);
     const antes = performance.now() / 1000;            // switch dot clocks to the Three clock
@@ -310,5 +321,5 @@ export function montar({ escenario, svg, onSelect }) {
   }).catch(() => {});                                    // without Three.js the axes and dots still work
   requestAnimationFrame(cuadro);
 
-  return { recibir, resaltar, seleccionar: k => seleccionar(personas.has(k) ? k : null), deseleccionar: () => seleccionar(null) };
+  return { recibir, resaltar, medir, pintar, seleccionar: k => seleccionar(personas.has(k) ? k : null), deseleccionar: () => seleccionar(null) };
 }

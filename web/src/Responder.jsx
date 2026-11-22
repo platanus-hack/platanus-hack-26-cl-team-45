@@ -87,6 +87,7 @@ function Responder() {
     <a className="au-btn au-btn--contorno volver" href="/">← Volver</a>
     <Microfono pregunta={encuesta.pregunta} limite={MAX_S} estado={estado} onEstado={setEstado} nivel={estado === 'grabando' ? nivel : null}
       onGrabar={grabar} onDetener={detener} previa={previa?.url} onEnviar={enviar} onDescartar={descartar} onEnviarTexto={enviarTexto} />
+    {estado === 'listo' && <a className="au-btn au-btn--primario ver-mapa" href={`/${SLUG}/voces`}>Ver el mapa →</a>}
   </>);
 }
 

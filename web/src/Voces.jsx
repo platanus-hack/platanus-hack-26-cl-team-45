@@ -48,6 +48,11 @@ function Voces() {
     const chat = modo === 'chat' && focoChat && v ? { ejes: focoChat.ejes, claves: v.ejes.flatMap(e => e.celdas.filter(c => ps.has(c.id)).map(c => clave(e.id, c.id))) } : null;
     dibujo.current.resaltar(lectura ?? chat);
   }, [lectura, modo, focoChat, v]);
+  const arranco = useRef(false);
+  useEffect(() => {                                       // the map always opens replaying how it formed
+    if (arranco.current || total < 2) return;
+    arranco.current = true; setN(1); setReproduciendo(true);
+  }, [total]);
   useEffect(() => {                                       // play: one more answer every 0.6 s until all are in
     if (!reproduciendo) return;
     const id = setInterval(() => setN(x => {
