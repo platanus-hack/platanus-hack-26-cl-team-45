@@ -1,8 +1,9 @@
-// Voces: any poll as a 3D blob (Three.js), one axis per tópico or map group and one dot per person.
+// Voces: any poll as a 3D blob (Three.js), one axis per tópico or map group and one dot per person, placed as a vector.
 // Vanilla on purpose, like flujo-dibujo.js: React owns the card, this file owns canvas + SVG.
 // Three.js comes from cdnjs like qrcode in index.html, so it adds nothing to the bundle or the lockfiles.
 
 const EJES = 6;                                          // the 6 tópicos with most people get an axis
+const BOLA = 0.7;                                        // blob radius in scene units: people float between 1.3 and 2.1
 const NS = 'http://www.w3.org/2000/svg';
 const el = (tag, attrs = {}) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
 
@@ -76,59 +77,80 @@ void main(){
   gl_FragColor = vec4(mix(col, luz, pow(diff, 24.) * 0.6), 1.);
 }`;
 
-// recibir(v) takes the shape from voces-datos.js; resaltar(lectura) dims everything but the lectura's dots and draws its threads.
+// The 6 axes alternate toward and away from the viewer (an octahedron seen down its diagonal): on screen they read as
+// a hexagon, axis 0 up, but each is a real 3D direction shared by the blob's bulges and the people's positions.
+const DIRS = [...Array(EJES)].map((_, i) => {
+  const a = Math.PI / 2 + i * Math.PI / 3, z = i % 2 ? -0.7 : 0.7, n = Math.hypot(1, z);
+  return [Math.cos(a) / n, Math.sin(a) / n, z / n];
+});
+const hash = s => { let h = 2166136261; for (const ch of s) h = Math.imul(h ^ ch.charCodeAt(0), 16777619); return (h >>> 0) / 4294967296; };
+
+// recibir(v) takes the shape from voces-datos.js; resaltar(lectura) dims everything but the people in the lectura.
+// One dot per person, placed as a vector: the sum of the directions of the axes they talk about, weighted by intensity.
+// Someone who only talks about one tópico sits off that axis; someone who talks about two sits between them; the
+// stronger and the more they say, the farther from the blob. Drag to turn it.
 export function montar({ escenario, svg, onSelect }) {
   let THREE, renderer, camera, scene, blob, uniforms, clock;
-  let W, H, cx, cy, R;
+  let W, H, cx, cy, U, ancho, derecha;                  // U = px per scene unit at depth 0 (blob radius = 1 unit)
   const ejeDe = new Map();                               // eje id → axis index, stable while it stays in the top 6
   const datoDe = Array(EJES).fill(null);                 // axis → eje
-  const puntos = new Map();                              // clave → { g, eje, j, n, nacio, celda }
+  const personas = new Map();                            // persona id → { g, pos:[x,y,z], nacio, celdas:[{eje, celda}], claves:Set }
   const objetivo = Array(EJES).fill(0), pulsoEn = Array(EJES).fill(-99);
-  let ampObjetivo = 0.03, primera = true, seleccion = null, foco = null, hilos = [];
+  let ampObjetivo = 0.03, primera = true, seleccion = null, foco = null;
+  let giroX = 0, giroY = 0, arrastre = null;
   const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ahora = () => clock ? clock.getElapsedTime() : performance.now() / 1000;
 
-  const anillo = svg.appendChild(el('circle', { class: 'anillo' }));
-  const ejes = [], nodos = [], nombres = [], cuentas = [];
+  const ejes = [], nombres = [], cuentas = [];
   for (let i = 0; i < EJES; i++) {
     ejes.push(svg.appendChild(el('line', { class: 'eje' })));
-    nodos.push(svg.appendChild(el('circle', { r: 6, class: 'nodo' })));
     nombres.push(svg.appendChild(el('text', { class: 'nombre' })));
     cuentas.push(svg.appendChild(el('text', { class: 'cuenta num' })));
   }
-  const capaHilos = svg.appendChild(el('g'));
   const capaPuntos = svg.appendChild(el('g'));
-  const angulo = i => -(Math.PI / 2 + i * Math.PI / 3);  // screen angle, y down; axis 0 points up
 
-  // The blob is centered in the free area between the header and the card, whatever their size.
+  // The scene is centered in the free area between the header and the card, and sized so labels fit there.
   function medir() {
     W = innerWidth; H = innerHeight;
     const cab = document.querySelector('header')?.getBoundingClientRect(), tar = document.getElementById('tarjeta')?.getBoundingClientRect();
-    const ancho = W >= 1000;                             // wide: card on the right; narrow: card at the bottom
-    const arriba = (cab?.bottom ?? 0) + 8, abajo = ancho || !tar ? H : tar.top - 8, derecha = ancho && tar ? tar.left : W;
+    ancho = W >= 1000;                                   // wide: card on the right; narrow: card at the bottom
+    const arriba = (cab?.bottom ?? 0) + 8, abajo = ancho || !tar ? H - 8 : tar.top - 8;
+    derecha = ancho && tar ? tar.left - 8 : W;
     const alto = Math.max(160, abajo - arriba);
     cx = derecha / 2; cy = arriba + alto / 2;
-    R = Math.min(derecha * 0.2, alto / 2 - 52);
-    anillo.setAttribute('cx', cx); anillo.setAttribute('cy', cy); anillo.setAttribute('r', R * 0.45);
+    // Labels sit at 2.45 units; leave ~40 px for a label above/below and ~150 px beside (less on phones).
+    U = Math.max(30, Math.min((alto / 2 - 44) / 2.45, (derecha / 2 - (ancho ? 150 : 60)) / (0.87 * 2.45)));
     if (!renderer) return;
     renderer.setSize(W, H);
     camera.aspect = W / H; camera.updateProjectionMatrix();
     camera.setViewOffset(W, H, W / 2 - cx, H / 2 - cy, W, H);
-    blob.scale.setScalar(1.63 * R / H);                  // blob radius ≈ inner ring (1 unit = H / 3.784 px at fov 35, z 6)
+    blob.scale.setScalar(BOLA * 3.784 * U / H);          // 1 unit = H / 3.784 px at depth 0 (fov 35, camera z 6)
   }
   addEventListener('resize', medir); medir();
 
-  function lugar(p) {                                    // arc of dots at the end of the axis, 7 per row
-    const fila = Math.floor(p.j / 7), enFila = Math.min(7, p.n - fila * 7), col = p.j % 7;
-    const a = angulo(p.eje) + (col - (enFila - 1) / 2) * 0.13, r = R * (1.04 + fila * 0.1);
-    return [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
+  // Same rotation as the blob (Euler XYZ: y first, then x) and the same perspective as the camera, by hand.
+  function proyectar([x, y, z]) {
+    const cY = Math.cos(giroY), sY = Math.sin(giroY), cX = Math.cos(giroX), sX = Math.sin(giroX);
+    const x1 = x * cY + z * sY, z1 = -x * sY + z * cY;
+    const y2 = y * cX - z1 * sX, z2 = y * sX + z1 * cX;
+    const k = 3.784 * U / H, f = 6 / (6 - z2 * k);       // world depth = z2 * k; camera at z = 6
+    return [cx + x1 * U * f, cy - y2 * U * f, z2, f];
   }
+
+  escenario.style.touchAction = 'none';
+  escenario.addEventListener('pointerdown', e => { arrastre = [e.clientX, e.clientY, giroX, giroY]; escenario.setPointerCapture(e.pointerId); });
+  escenario.addEventListener('pointermove', e => {
+    if (!arrastre) return;
+    giroY = arrastre[3] + (e.clientX - arrastre[0]) * 0.008;
+    giroX = Math.max(-1.2, Math.min(1.2, arrastre[2] + (e.clientY - arrastre[1]) * 0.008));
+  });
+  escenario.addEventListener('pointerup', () => { arrastre = null; });
 
   function seleccionar(k) {
     seleccion = k;
-    for (const [kk, p] of puntos) p.g.classList.toggle('sel', kk === k);
-    const p = puntos.get(k);
-    onSelect(p ? { eje: datoDe[p.eje], celda: p.celda } : null);
+    for (const [kk, p] of personas) p.g.classList.toggle('sel', kk === k);
+    const p = personas.get(k);
+    onSelect(p ? { celdas: p.celdas } : null);
   }
 
   function nuevoPunto(k) {
@@ -149,52 +171,61 @@ export function montar({ escenario, svg, onSelect }) {
       datoDe[ejeDe.get(e.id)] = e;
     }
     const max = Math.max(1, ...tops.map(e => e.personas));
-    const vivos = new Set();
-    let nuevo = null;
+    const porPersona = new Map();
     for (const e of tops) {
       const i = ejeDe.get(e.id), antes = objetivo[i];
       objetivo[i] = e.personas / max;
-      e.celdas.forEach((c, j) => {
-        const k = `${e.id}|${c.id}`;
-        vivos.add(k);
-        let p = puntos.get(k);
-        if (!p) {
-          p = { g: nuevoPunto(k), nacio: ahora() + (primera ? j * 0.06 : 0) };
-          puntos.set(k, p);
-          if (!primera) { pulsoEn[i] = ahora(); nuevo = k; }
-        }
-        Object.assign(p, { eje: i, j, n: e.celdas.length, celda: c });
-        const bola = p.g.lastChild;
-        bola.setAttribute('r', 3.5 + c.fuerza * 3);
-        bola.setAttribute('fill', `url(#g-${c.tono})`);
-        p.g.setAttribute('aria-label', `${e.nombre}, ${c.postura}: ${c.citas[0] ?? ''}`);
-      });
       if (!primera && objetivo[i] > antes && pulsoEn[i] < ahora() - 0.1) pulsoEn[i] = ahora();
+      for (const c of e.celdas) {
+        if (!porPersona.has(c.id)) porPersona.set(c.id, []);
+        porPersona.get(c.id).push({ eje: e, i, celda: c });
+      }
     }
     for (let i = 0; i < EJES; i++) if (!datoDe[i]) objetivo[i] = 0;
-    for (const [k, p] of puntos) if (!vivos.has(k)) { p.g.remove(); puntos.delete(k); }
+
+    let nuevo = null;
+    for (const [id, cs] of porPersona) {
+      // The vector: sum of axis directions weighted by intensity. Its direction says what they talk about, its length how much.
+      const s = [0, 0, 0];
+      for (const { i, celda } of cs) for (let d = 0; d < 3; d++) s[d] += DIRS[i][d] * celda.fuerza;
+      const largo = Math.hypot(...s) || 1, h1 = hash(id), h2 = hash(id + '·');
+      // A little deterministic scatter so people who said the same thing don't land on one pixel.
+      const dir = s.map((x, d) => x / largo + (d === 0 ? h1 - 0.5 : d === 1 ? h2 - 0.5 : (h1 + h2) / 2 - 0.5) * 0.35);
+      const n = Math.hypot(...dir), r = 1.3 + 0.7 * Math.min(1, largo / 1.6) + (h2 - 0.5) * 0.15;
+      let p = personas.get(id);
+      if (!p) {
+        p = { g: nuevoPunto(id), nacio: ahora() + (primera ? personas.size * 0.03 : 0) };
+        personas.set(id, p);
+        if (!primera) nuevo = id;
+      }
+      // Color = their balance: each stance weighted by intensity (cameras yes, but furious about the dark = negative).
+      const saldo = cs.reduce((a, { celda: c }) => a + (c.tono === 'pos' ? 1 : c.tono === 'neg' ? -1 : 0) * c.fuerza, 0);
+      const tono = saldo > 0.2 ? 'pos' : saldo < -0.2 ? 'neg' : 'neu';
+      Object.assign(p, { pos: dir.map(x => x / n * r), celdas: cs.map(({ eje, celda }) => ({ eje, celda })), claves: new Set(cs.map(c => `${c.eje.id}|${id}`)) });
+      const bola = p.g.lastChild;
+      p.radio = 3 + Math.max(...cs.map(c => c.celda.fuerza)) * 2.5 + Math.min(cs.length - 1, 3);
+      bola.setAttribute('fill', `url(#g-${tono})`);
+      p.g.setAttribute('aria-label', `${cs.map(c => `${c.eje.nombre}, ${c.celda.postura}`).join('; ')}: ${cs[0].celda.citas[0] ?? ''}`);
+    }
+    for (const [k, p] of personas) if (!porPersona.has(k)) { p.g.remove(); personas.delete(k); }
     requestAnimationFrame(medir);                        // header and card may have changed size with the data
     ampObjetivo = 0.03 + Math.min((v?.casos ?? 0) / 40, 1) * 0.07;    // more answers = livelier surface
     if (nuevo) seleccionar(nuevo);                                     // the newest person shows in the card
-    else if (seleccion && !puntos.has(seleccion)) seleccionar(null);
+    else if (seleccion && !personas.has(seleccion)) seleccionar(null);
     aplicarFoco();
     if (v) primera = false;
   }
 
   function aplicarFoco() {
     const lit = foco?.claves ? new Set(foco.claves) : null;
-    for (const [k, p] of puntos) p.g.classList.toggle('dim', !!lit && !lit.has(k));
-    capaHilos.replaceChildren();
-    hilos = (foco?.hilos ?? []).filter(([a, b]) => puntos.has(a) && puntos.has(b)).map(([a, b], n) => {
-      const path = capaHilos.appendChild(el('path', { class: 'hilo', pathLength: 1 }));
-      path.style.animationDelay = `${n * 0.2}s`;
-      return [a, b, path];
-    });
+    for (const p of personas.values()) p.g.classList.toggle('dim', !!lit && ![...p.claves].some(k => lit.has(k)));
   }
   function resaltar(lectura) { foco = lectura; aplicarFoco(); }
 
+  let orden = 0;
   function cuadro() {
     const t = ahora(), lento = t * (reducir ? 0.2 : 1);
+    if (!arrastre && !reducir) giroY += Math.sin(lento * 0.25) * 0.0015;   // a slow sway so depth reads without touching
     if (uniforms) {
       uniforms.uTime.value = lento;
       const u = uniforms.uVals.value;
@@ -204,39 +235,44 @@ export function montar({ escenario, svg, onSelect }) {
         uniforms.uPulse.value[i] = reducir ? 0 : Math.exp(-edad * 3) * Math.sin(edad * 14);
       }
       uniforms.uAmp.value += (ampObjetivo - uniforms.uAmp.value) * 0.02;
-      blob.rotation.y = Math.sin(lento * 0.08) * 0.1;
+      blob.rotation.set(giroX, giroY, 0);
     }
-    const u = uniforms ? uniforms.uVals.value : objetivo, angosto = W < 700, ejesFoco = new Set(foco?.ejes ?? []);
+    const ejesFoco = new Set(foco?.ejes ?? []);
     for (let i = 0; i < EJES; i++) {
-      const e = datoDe[i], a = angulo(i), c = Math.cos(a), s = Math.sin(a), r = R * (0.45 + 0.55 * u[i]);
-      [ejes[i], nodos[i], nombres[i], cuentas[i]].forEach(n => n.setAttribute('visibility', e ? 'visible' : 'hidden'));
-      nodos[i].setAttribute('cx', cx + c * r); nodos[i].setAttribute('cy', cy + s * r);
-      ejes[i].setAttribute('x1', cx + c * R * 0.45); ejes[i].setAttribute('y1', cy + s * R * 0.45);
-      ejes[i].setAttribute('x2', cx + c * R); ejes[i].setAttribute('y2', cy + s * R);
+      const e = datoDe[i];
+      [ejes[i], nombres[i], cuentas[i]].forEach(n => n.setAttribute('visibility', e ? 'visible' : 'hidden'));
       if (!e) continue;
-      const filas = Math.ceil(e.celdas.length / 7), lr = R * (1.04 + (filas - 1) * 0.1) + 22;
-      const x = cx + c * lr, y = cy + s * lr + (s < -0.5 ? -20 : s > 0.5 ? 14 : -4);
-      const ancla = c > 0.3 ? 'start' : c < -0.3 ? 'end' : 'middle';
-      // Cut the name to the room it has on screen (~7 px per character at 13 px Poppins).
-      const sitio = ancla === 'start' ? W - x - 8 : ancla === 'end' ? x - 8 : Math.min(x, W - x) * 2 - 16;
-      const caben = Math.max(6, Math.floor(sitio / 7.2) - String(e.personas).length - 3);
+      const [x1, y1, z1] = proyectar(DIRS[i].map(d => d * BOLA * 1.1)), [x2, y2] = proyectar(DIRS[i].map(d => d * 2.15));
+      const [x, y0, z] = proyectar(DIRS[i].map(d => d * 2.45));
+      ejes[i].setAttribute('x1', x1); ejes[i].setAttribute('y1', y1); ejes[i].setAttribute('x2', x2); ejes[i].setAttribute('y2', y2);
+      ejes[i].style.opacity = z1 < 0 ? 0.35 : 1;
+      const dx = x - cx, dy = y0 - cy, y = y0 + (dy < -U * 0.8 ? -14 : dy > U * 0.8 ? 12 : -4);
+      const ancla = dx > U * 0.3 ? 'start' : dx < -U * 0.3 ? 'end' : 'middle';
+      // Cut the name to the room it has before the card or the screen edge (~7 px per character at 15 px Outfit).
+      const sitio = ancla === 'start' ? derecha - x - 8 : ancla === 'end' ? x - 8 : Math.min(x, derecha - x) * 2 - 16;
+      const caben = Math.max(6, Math.floor(sitio / 7.4) - String(e.personas).length - 3);
       const nombre = e.nombre.length > caben ? e.nombre.slice(0, caben - 1) + '…' : e.nombre;
       nombres[i].setAttribute('x', x); nombres[i].setAttribute('y', y); nombres[i].setAttribute('text-anchor', ancla);
       nombres[i].textContent = `${nombre} · ${e.personas}`;
       nombres[i].classList.toggle('on', t - pulsoEn[i] < 1.5 || ejesFoco.has(e.id));
       nombres[i].classList.toggle('dim', !!foco && !ejesFoco.has(e.id) && foco.ejes.length > 0);
+      nombres[i].style.opacity = z < -0.8 ? 0.6 : '';
       cuentas[i].setAttribute('x', x); cuentas[i].setAttribute('y', y + 17); cuentas[i].setAttribute('text-anchor', ancla);
-      cuentas[i].textContent = angosto ? '' : `${e.pos} pos · ${e.neu} neu · ${e.neg} neg`;
+      cuentas[i].textContent = W < 700 ? '' : `${e.pos} pos · ${e.neu} neu · ${e.neg} neg`;
     }
-    for (const p of puntos.values()) {                   // dots fly out of the blob to their place
-      const k = reducir ? 1 : Math.max(0, Math.min(1, (t - p.nacio) / 0.9)), q = 1 - Math.pow(1 - k, 3), [tx, ty] = lugar(p);
-      p.g.setAttribute('transform', `translate(${cx + (tx - cx) * q},${cy + (ty - cy) * q})`);
-      p.g.style.opacity = k > 0 ? '' : 0;
+    const lista = [];
+    for (const p of personas.values()) {                 // people fly out of the blob to their vector
+      const k = reducir ? 1 : Math.max(0, Math.min(1, (t - p.nacio) / 0.9)), q = 1 - Math.pow(1 - k, 3);
+      const [x, y, z, f] = proyectar(p.pos.map(c => c * q));
+      const tapado = z < 0 && Math.hypot(x - cx, y - cy) < U * BOLA * 1.1;  // behind the blob
+      p.g.setAttribute('transform', `translate(${x},${y})`);
+      p.g.lastChild.setAttribute('r', p.radio * f);
+      p.g.style.opacity = k > 0 ? (tapado ? 0.12 : 0.55 + 0.45 * Math.min(1, Math.max(0, (z + 1.8) / 2.4))) : 0;
+      lista.push([z, p.g]);
     }
-    for (const [a, b, path] of hilos) {                  // curves between two dots, pulled toward the center
-      const [ax, ay] = lugar(puntos.get(a)), [bx, by] = lugar(puntos.get(b));
-      const mx = (ax + bx) / 2, my = (ay + by) / 2;
-      path.setAttribute('d', `M${ax},${ay} Q${mx + (cx - mx) * 0.7},${my + (cy - my) * 0.7} ${bx},${by}`);
+    if (++orden % 15 === 0) {                            // paint far dots first so near ones stay on top
+      lista.sort((a, b) => a[0] - b[0]);
+      for (const [, g] of lista) if (capaPuntos.lastChild !== g) capaPuntos.appendChild(g);
     }
     if (renderer) renderer.render(scene, camera);
     requestAnimationFrame(cuadro);
@@ -250,12 +286,12 @@ export function montar({ escenario, svg, onSelect }) {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
     camera.position.z = 6;
-    const dirs = [...Array(EJES)].map((_, i) => { const a = Math.PI / 2 + i * Math.PI / 3; return new THREE.Vector3(Math.cos(a), Math.sin(a), 0.35).normalize(); });
+    const dirs = DIRS.map(([x, y, z]) => new THREE.Vector3(x, y, z));
     uniforms = { uTime: { value: 0 }, uDirs: { value: dirs }, uVals: { value: Array(EJES).fill(0) }, uPulse: { value: Array(EJES).fill(0) }, uAmp: { value: 0.03 } };
     blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 64), new THREE.ShaderMaterial({ uniforms, vertexShader: VERT, fragmentShader: FRAG }));
     scene.add(blob);
     const antes = performance.now() / 1000;            // switch dot clocks to the Three clock
-    for (const p of puntos.values()) p.nacio -= antes;
+    for (const p of personas.values()) p.nacio -= antes;
     pulsoEn.fill(-99);
     medir();
   }).catch(() => {});                                    // without Three.js the axes and dots still work

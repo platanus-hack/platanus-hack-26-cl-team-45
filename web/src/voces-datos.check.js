@@ -1,6 +1,6 @@
 // node web/src/voces-datos.check.js — fails loudly if the Voces data layer breaks.
 import assert from 'node:assert/strict';
-import { elegir, lecturas, clave, grafico } from './voces-datos.js';
+import { elegir, lecturas, clave, grafico, recortar } from './voces-datos.js';
 
 const celda = (id, direccion, intensidad = 'moderada') => ({ respuestaId: id, participante: id, direccion, tendencia: 'no_dice', temas: [{ tema: 'x', direccion, intensidad, cita: `cita ${id}` }] });
 const topicos = {
@@ -44,7 +44,7 @@ assert.deepEqual(m.emociones.find(e => e.emocion === 'alegria'), { emocion: 'ale
 const ls = lecturas(v), por = t => ls.find(l => l.titulo === t);
 assert.match(por('Donde hay división').texto, /Comida: 1 lo ven bien y 1 lo ven mal/);
 assert.match(por('Lo que más molesta').texto, /^Sueño: 2/);
-assert.deepEqual(por('Lo que va junto').hilos, [[clave('a', 'r1'), clave('b', 'r1')], [clave('a', 'r2'), clave('b', 'r2')]]);
+assert.deepEqual(por('Lo que va junto').claves, [clave('a', 'r1'), clave('b', 'r1'), clave('a', 'r2'), clave('b', 'r2')]);
 assert.ok(por('Lo que proponen'));
 assert.equal(lecturas({ ...v, ejes: [] }).length, 0);
 // Chat charts: numbers always come from the data; unknown axis ids fall back to the main axes.
@@ -53,4 +53,14 @@ assert.deepEqual(g.filas, [{ nombre: 'Sueño', pos: 0, neu: 0, neg: 2, n: 2 }]);
 assert.equal(grafico(v, { tipo: 'personas_por_eje', ejes: ['inventado'], titulo: 'x' }).filas.length, 2);
 assert.equal(grafico(v, { tipo: 'emociones', ejes: [], titulo: 'x' }).filas[0].tono, 'neg');
 assert.equal(grafico(v, { tipo: 'ninguno', ejes: [], titulo: 'x' }), null);
+// Replay: the first n answers, counts recomputed; without arrival order nothing is cut.
+const conOrden = { ...topicos, respuestas: ['r1', 'r2', 'r3'].map(id => ({ respuestaId: id, participante: id, emocion: id === 'r1' ? 'alegria' : 'cansancio', cerrada: 'sí' })) };
+const uno = elegir(conOrden, mapa, 1);
+assert.equal(uno.casos, 1);
+assert.deepEqual(uno.ejes.map(e => [e.id, e.personas]), [['a', 1], ['b', 1]]);
+assert.deepEqual(uno.emociones, [{ emocion: 'alegria', n: 1 }]);
+assert.equal(uno.propuestas.length, 0);
+assert.deepEqual(uno.cerrada, { si: 1, total: 1 });
+assert.equal(recortar(topicos, 1), topicos);
+assert.equal(elegir(conOrden, mapa, 2).ejes[0].personas, 2);
 console.log('voces-datos ok');

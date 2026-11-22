@@ -189,6 +189,7 @@ export const topicos = query({
     const as = await ctx.db.query("analisis").withIndex("by_encuesta", q => q.eq("encuestaId", e._id)).collect();
     const ks = await ctx.db.query("topicos").withIndex("by_encuesta", q => q.eq("encuestaId", e._id)).collect();
     const quien = new Map(rs.map(r => [r._id as string, r.participante]));
+    const emocionDe = new Map(as.map(a => [a.respuestaId as string, a.emocion]));
     return {
       pregunta: e.pregunta,
       analizadas: as.length,
@@ -205,6 +206,8 @@ export const topicos = query({
           ...cuenta, mejora: celdas.filter(c => c.tendencia === "mejora").length, empeora: celdas.filter(c => c.tendencia === "empeora").length, celdas };
       }).filter(k => k.personas > 0).sort((a, b) => b.personas - a.personas),
       propuestas: as.filter(a => a.propone).map(a => ({ respuestaId: a.respuestaId, participante: quien.get(a.respuestaId) ?? "", texto: a.propone! })),
+      // Arrival order with each answer's emotion, so the view can replay the poll from the first answer.
+      respuestas: rs.filter(r => emocionDe.has(r._id)).map(r => ({ respuestaId: r._id, participante: r.participante, emocion: emocionDe.get(r._id)! })),
       emociones: Object.entries(as.reduce<Record<string, number>>((acc, a) => ({ ...acc, [a.emocion]: (acc[a.emocion] ?? 0) + 1 }), {}))
         .map(([emocion, n]) => ({ emocion, n })).sort((a, b) => b.n - a.n),
     };

@@ -46,7 +46,8 @@ const celda = (dirs: string[]) => {
 const salida = {
   pregunta,
   analizadas: analisis.length,
-  cerrada: { si: respuestas.filter(r => r.cerrada === "sí").length, total: respuestas.length }, // what a Sí / No poll would show
+  // Arrival order + emotion per answer (like encuestas.topicos) so the view can replay the poll; cerrada is what a Sí / No poll would show.
+  respuestas: respuestas.map((r, i) => ({ respuestaId: `r${r.id}`, participante: r.participante, emocion: analisis[i].emocion, cerrada: r.cerrada })),
   topicos: topicos.map(k => {
     const celdas = analisis.flatMap((a, i) => {
       const ts = a.temas.filter((_, j) => topicoDe.get(temaId(i, j)) === k.id);

@@ -1,20 +1,378 @@
 {
   "pregunta": "La municipalidad quiere instalar cámaras de televigilancia en tu barrio. ¿Qué te parece?",
   "analizadas": 60,
-  "cerrada": {
-    "si": 50,
-    "total": 60
-  },
+  "respuestas": [
+    {
+      "respuestaId": "r1",
+      "participante": "Rosa, 71, jubilada, pasaje Los Copihues",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r2",
+      "participante": "Javier, 34, repartidor en moto",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r3",
+      "participante": "Daniela, 29, profesora de básica",
+      "emocion": "tristeza",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r4",
+      "participante": "Héctor, 58, dueño de almacén",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r5",
+      "participante": "Fernanda, 22, estudiante de derecho",
+      "emocion": "preocupacion",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r6",
+      "participante": "Marta, 45, presidenta junta de vecinos",
+      "emocion": "molestia",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r7",
+      "participante": "Luis, 39, guardia, ex operador de monitoreo",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r8",
+      "participante": "Camila, 31, mamá de dos",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r9",
+      "participante": "Pedro, 19, juega a la pelota en la cancha",
+      "emocion": "enojo",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r10",
+      "participante": "Gladys, 64, feriante",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r11",
+      "participante": "Andrés, 42, ingeniero informático",
+      "emocion": "duda",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r12",
+      "participante": "Sergio, 50, taxista",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r13",
+      "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r14",
+      "participante": "Ignacio, 27, trabajador social",
+      "emocion": "preocupacion",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r15",
+      "participante": "Carmen, 52, vive frente a la plaza",
+      "emocion": "miedo",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r16",
+      "participante": "Mauricio, 46, dueño de ferretería",
+      "emocion": "entusiasmo",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r17",
+      "participante": "Valentina, 24, enfermera",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r18",
+      "participante": "Ramón, 78, vive solo",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r19",
+      "participante": "Paola, 35, cuidadora, llegó de Venezuela",
+      "emocion": "confianza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r20",
+      "participante": "Tomás, 41, conductor de aplicación",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r21",
+      "participante": "Hugo, 55, maestro de construcción",
+      "emocion": "frustracion",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r22",
+      "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
+      "emocion": "duda",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r23",
+      "participante": "Luisa, 60, catequista de la parroquia",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r24",
+      "participante": "Claudia, 48, directora de jardín infantil",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r25",
+      "participante": "Roberto, 66, ex dirigente vecinal",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r26",
+      "participante": "Patricia, 43, vecina de la villa El Esfuerzo",
+      "emocion": "confianza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r27",
+      "participante": "Cristian, 36, maestro gásfiter",
+      "emocion": "confianza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r28",
+      "participante": "Marisol, 50, comerciante de la avenida",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r29",
+      "participante": "Benjamín, 23, estudiante de ingeniería",
+      "emocion": "preocupacion",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r30",
+      "participante": "Elena, 69, jubilada, vive con su marido",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r31",
+      "participante": "Felipe, 38, papá, trabaja en bodega",
+      "emocion": "rabia",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r32",
+      "participante": "Rocío, 27, vende comida por delivery",
+      "emocion": "miedo",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r33",
+      "participante": "Óscar, 61, ex carabinero",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r34",
+      "participante": "Karen, 33, mamá soltera",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r35",
+      "participante": "Diego, 30, profesor de educación física",
+      "emocion": "rabia",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r36",
+      "participante": "Silvia, 57, dueña de casa",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r37",
+      "participante": "Gonzalo, 45, técnico electricista",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r38",
+      "participante": "Antonia, 26, psicóloga en el CESFAM",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r39",
+      "participante": "Raúl, 53, conductor de micro",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r40",
+      "participante": "Daniela, 40, abogada, vive en el sector nuevo",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r41",
+      "participante": "Manuel, 72, jubilado, presidente del club de adulto mayor",
+      "emocion": "esperanza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r42",
+      "participante": "Bastián, 21, trabaja en un supermercado",
+      "emocion": "miedo",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r43",
+      "participante": "Lorena, 47, apoderada del liceo",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r44",
+      "participante": "Jorge, 59, chofer de colectivo",
+      "emocion": "duda",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r45",
+      "participante": "Camila, 19, estudiante de técnico en enfermería",
+      "emocion": "miedo",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r46",
+      "participante": "Iván, 48, dueño de taller mecánico",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r47",
+      "participante": "Verónica, 39, dirigenta del comité de vivienda",
+      "emocion": "confianza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r48",
+      "participante": "Nicolás, 34, programador, trabaja remoto",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r49",
+      "participante": "Ana María, 66, vive frente a la cancha",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r50",
+      "participante": "Sebastián, 29, garzón",
+      "emocion": "esperanza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r51",
+      "participante": "Mónica, 55, auxiliar de jardín infantil",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r52",
+      "participante": "Alejandro, 42, sociólogo, investigador",
+      "emocion": "neutral",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r53",
+      "participante": "Gabriela, 31, vendedora en la feria",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r54",
+      "participante": "Hernán, 63, taxista jubilado",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r55",
+      "participante": "Fabiola, 37, cuidadora de su mamá",
+      "emocion": "confianza",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r56",
+      "participante": "Tomás, 25, artista, hace murales en el barrio",
+      "emocion": "orgullo",
+      "cerrada": "no"
+    },
+    {
+      "respuestaId": "r57",
+      "participante": "Carolina, 44, enfermera, hace turnos de noche",
+      "emocion": "preocupacion",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r58",
+      "participante": "Pablo, 52, dueño de botillería",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r59",
+      "participante": "Rosa, 48, trabajadora de casa particular",
+      "emocion": "neutral",
+      "cerrada": "sí"
+    },
+    {
+      "respuestaId": "r60",
+      "participante": "Luis, 70, dirigente de la sede vecinal",
+      "emocion": "frustracion",
+      "cerrada": "sí"
+    }
+  ],
   "topicos": [
     {
       "id": "k1",
       "nombre": "cámaras de televigilancia",
-      "descripcion": "Opiniones generales a favor o en contra de instalar cámaras de televigilancia en el barrio, incluidas las condiciones que se ponen.",
-      "personas": 45,
-      "positivo": 32,
-      "negativo": 4,
+      "descripcion": "Opiniones generales a favor o en contra de instalar cámaras, su utilidad y capacidad de prevención.",
+      "personas": 49,
+      "positivo": 33,
+      "negativo": 6,
       "mixto": 7,
-      "neutro": 2,
+      "neutro": 3,
       "mejora": 0,
       "empeora": 0,
       "celdas": [
@@ -27,7 +385,7 @@
             {
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
-              "intensidad": "moderada",
+              "intensidad": "leve",
               "cita": "Sí, mijito, que las pongan, cómo no voy a querer."
             }
           ]
@@ -49,28 +407,34 @@
         {
           "respuestaId": "r6",
           "participante": "Marta, 45, presidenta junta de vecinos",
-          "direccion": "mixto",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "instalación de cámaras",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "nosotros como junta estamos a favor, lo votamos en asamblea"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r10",
-          "participante": "Gladys, 64, feriante",
           "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
+              "tema": "apoyo a las cámaras",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "Una cámara en la entrada de la feria ayudaría"
+              "cita": "nosotros como junta estamos a favor, lo votamos en asamblea incluso"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r7",
+          "participante": "Luis, 39, guardia, ex operador de monitoreo",
+          "direccion": "mixto",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "utilidad de las cámaras",
+              "direccion": "mixto",
+              "intensidad": null,
+              "cita": "Igual digo que sí, porque algo ayuda, la gente se siente más tranquila"
+            },
+            {
+              "tema": "capacidad de prevención",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Pero que nadie se crea que una cámara previene un asalto."
             }
           ]
         },
@@ -98,13 +462,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "fuerte",
-              "cita": "Sí, obvio que sí."
-            },
-            {
-              "tema": "seguridad en el barrio",
-              "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "Todo lo que sea seguridad, bienvenido."
+              "cita": "Sí, obvio que sí. Todo lo que sea seguridad, bienvenido."
             }
           ]
         },
@@ -123,16 +481,36 @@
           ]
         },
         {
+          "respuestaId": "r14",
+          "participante": "Ignacio, 27, trabajador social",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "La evidencia de que las cámaras bajan los delitos es súper débil; a veces el delito se mueve a la cuadra siguiente"
+            }
+          ]
+        },
+        {
           "respuestaId": "r15",
           "participante": "Carmen, 52, vive frente a la plaza",
           "direccion": "mixto",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
-              "intensidad": null,
+              "tema": "cámaras en el barrio",
+              "direccion": "positivo",
+              "intensidad": "leve",
               "cita": "Yo estoy de acuerdo con las cámaras, en general."
+            },
+            {
+              "tema": "cámara en su poste",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "que no la pongan en mi poste"
             }
           ]
         },
@@ -143,10 +521,10 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
+              "tema": "convenio con cámaras privadas",
               "direccion": "positivo",
-              "intensidad": "leve",
-              "cita": "Sí, de acuerdo."
+              "intensidad": "fuerte",
+              "cita": "Yo lo firmaría altiro"
             }
           ]
         },
@@ -160,7 +538,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "neutro",
               "intensidad": null,
-              "cita": "da lo mismo, pónganlas"
+              "cita": "digo que sí, da lo mismo, pónganlas"
             }
           ]
         },
@@ -174,7 +552,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "neutro",
               "intensidad": null,
-              "cita": "está bien, si los jóvenes dicen que sirven, que las pongan"
+              "cita": "Las cámaras, bueno, está bien, si los jóvenes dicen que sirven, que las pongan."
             }
           ]
         },
@@ -188,7 +566,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "Yo sí estoy de acuerdo, y te digo por qué"
+              "cita": "Yo sí estoy de acuerdo"
             }
           ]
         },
@@ -202,7 +580,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "Sí, de acuerdo... Entonces sí, cámaras"
+              "cita": "Sí, de acuerdo"
             }
           ]
         },
@@ -216,7 +594,21 @@
               "tema": "cámaras de televigilancia",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "No, para qué."
+              "cita": "No, para qué. Pusieron una en la esquina de la avenida con Los Pinos y al mes la rompieron a piedrazos."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r22",
+          "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "seguridad en el barrio",
+              "direccion": "positivo",
+              "intensidad": null,
+              "cita": "mi primera reacción es que sí, porque igual me da miedo llegar de noche"
             }
           ]
         },
@@ -271,7 +663,7 @@
             {
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
-              "intensidad": "moderada",
+              "intensidad": "fuerte",
               "cita": "Sí, estoy de acuerdo, y te cuento por qué"
             }
           ]
@@ -283,10 +675,16 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de seguridad",
+              "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "Prefiero que me graben a que me asalten."
+              "cita": "Yo no tengo problema que me graben, si no ando haciendo nada malo"
+            },
+            {
+              "tema": "seguridad en el barrio",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Prefiero que me graben a que me asalten"
             }
           ]
         },
@@ -297,7 +695,7 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de vigilancia",
+              "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "leve",
               "cita": "yo estoy de acuerdo con las cámaras"
@@ -311,7 +709,7 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "instalación de cámaras",
+              "tema": "instalación de cámaras municipales",
               "direccion": "negativo",
               "intensidad": "moderada",
               "cita": "Yo digo que no, o sea no así"
@@ -325,7 +723,7 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
+              "tema": "seguridad del barrio",
               "direccion": "positivo",
               "intensidad": "moderada",
               "cita": "Sí, sí, que las pongan."
@@ -342,7 +740,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "Sí, de acuerdo. Si con la cámara se puede probar, perfecto, pero tiene que haber consecuencias"
+              "cita": "Sí, de acuerdo. Si con la cámara se puede probar, perfecto"
             }
           ]
         },
@@ -361,16 +759,16 @@
           ]
         },
         {
-          "respuestaId": "r34",
-          "participante": "Karen, 33, mamá soltera",
-          "direccion": "positivo",
+          "respuestaId": "r33",
+          "participante": "Óscar, 61, ex carabinero",
+          "direccion": "mixto",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras en la plaza",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Sí. Pero en la plaza. Pongan la cámara en la plaza"
+              "tema": "cámaras de televigilancia",
+              "direccion": "mixto",
+              "intensidad": null,
+              "cita": "Las cámaras ayudan, eso es cierto, sobre todo para la investigación."
             }
           ]
         },
@@ -384,21 +782,35 @@
               "tema": "cámaras de televigilancia",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "Yo digo que no. Las cámaras graban el problema, el deporte lo previene."
+              "cita": "Yo digo que no."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r37",
+          "participante": "Gonzalo, 45, técnico electricista",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "funcionamiento de las cámaras",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Pero sí, bien hecho funciona"
             }
           ]
         },
         {
           "respuestaId": "r38",
           "participante": "Antonia, 26, psicóloga en el CESFAM",
-          "direccion": "mixto",
+          "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
               "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "si las cámaras hacen que la gente se sienta un poco más tranquila, bienvenidas. Pero el miedo no se va solo con cámaras"
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "si las cámaras hacen que la gente se sienta un poco más tranquila, bienvenidas"
             }
           ]
         },
@@ -411,7 +823,7 @@
             {
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
-              "intensidad": "fuerte",
+              "intensidad": "moderada",
               "cita": "Sí, que las pongan, y que pongan en los paraderos también"
             }
           ]
@@ -419,14 +831,14 @@
         {
           "respuestaId": "r40",
           "participante": "Daniela, 40, abogada, vive en el sector nuevo",
-          "direccion": "positivo",
+          "direccion": "mixto",
           "tendencia": "no_dice",
           "temas": [
             {
               "tema": "cámaras de televigilancia",
-              "direccion": "positivo",
-              "intensidad": "leve",
-              "cita": "Estoy a favor, pero con reglas."
+              "direccion": "mixto",
+              "intensidad": null,
+              "cita": "Estoy a favor, pero con reglas"
             }
           ]
         },
@@ -447,6 +859,20 @@
         {
           "respuestaId": "r42",
           "participante": "Bastián, 21, trabaja en un supermercado",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "Sí, igual sí... pero peor es nada."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r44",
+          "participante": "Jorge, 59, chofer de colectivo",
           "direccion": "mixto",
           "tendencia": "no_dice",
           "temas": [
@@ -454,21 +880,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "mixto",
               "intensidad": null,
-              "cita": "Las cámaras no sé si sirvan tanto, pero peor es nada."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r43",
-          "participante": "Lorena, 47, apoderada del liceo",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "cámaras de televigilancia",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Sí, de acuerdo. Una cámara ahí ayudaría a que los inspectores sepan qué pasa."
+              "cita": "Sí, bien. Pero ojo, que ya hay varias puestas en el centro de la comuna"
             }
           ]
         },
@@ -495,8 +907,8 @@
             {
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Entonces sí a las cámaras"
+              "intensidad": "leve",
+              "cita": "Entonces sí a las cámaras, pero que la muni también apoye a las organizaciones"
             }
           ]
         },
@@ -510,7 +922,13 @@
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "Sí, estoy a favor, con dos condiciones"
+              "cita": "Sí, estoy a favor, con dos condiciones."
+            },
+            {
+              "tema": "cámaras de patentes",
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "Las de patentes me parecen bien, para los autos robados."
             }
           ]
         },
@@ -521,10 +939,10 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
+              "tema": "cámaras de vigilancia",
               "direccion": "positivo",
               "intensidad": "leve",
-              "cita": "Sí, que pongan cámaras ahí"
+              "cita": "Sí, que pongan cámaras ahí, pero también que pongan luz en la cancha"
             }
           ]
         },
@@ -557,30 +975,44 @@
           ]
         },
         {
-          "respuestaId": "r53",
-          "participante": "Gabriela, 31, vendedora en la feria",
-          "direccion": "positivo",
+          "respuestaId": "r52",
+          "participante": "Alejandro, 42, sociólogo, investigador",
+          "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras en la feria",
-              "direccion": "positivo",
+              "tema": "cámaras de televigilancia",
+              "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "Sí, cámaras en la feria, por favor."
+              "cita": "en barrios residenciales bastante menos, además desplazan el delito a la calle de al lado"
             }
           ]
         },
         {
           "respuestaId": "r54",
           "participante": "Hernán, 63, taxista jubilado",
-          "direccion": "mixto",
+          "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
               "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "Sí, que se pongan... uno dice que sí, qué más va a decir"
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "Sí, que se pongan."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r55",
+          "participante": "Fabiola, 37, cuidadora de su mamá",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "positivo",
+              "intensidad": "fuerte",
+              "cita": "yo sí creo que sirven, de verdad. Para más cosas que para los robos."
             }
           ]
         },
@@ -593,8 +1025,8 @@
             {
               "tema": "cámaras de televigilancia",
               "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "No. Este barrio no necesita más vigilancia"
+              "intensidad": "fuerte",
+              "cita": "No. Este barrio no necesita más vigilancia, necesita más vida."
             }
           ]
         },
@@ -608,7 +1040,7 @@
               "tema": "cámaras de televigilancia",
               "direccion": "mixto",
               "intensidad": null,
-              "cita": "Sí, de acuerdo, pero que se complementen. ... La cámara no se ve."
+              "cita": "Sí, de acuerdo, pero que se complementen... La cámara no se ve."
             }
           ]
         },
@@ -623,6 +1055,12 @@
               "direccion": "positivo",
               "intensidad": "moderada",
               "cita": "Sí, por supuesto."
+            },
+            {
+              "tema": "cámaras de comerciantes",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Si la muni hace un convenio, las comparto feliz."
             }
           ]
         },
@@ -636,20 +1074,20 @@
               "tema": "cámaras de televigilancia",
               "direccion": "positivo",
               "intensidad": "leve",
-              "cita": "Sí, está bien... pero las cámaras están bien también, cualquier cosa ayuda"
+              "cita": "Sí, está bien... las cámaras están bien también, cualquier cosa ayuda"
             }
           ]
         },
         {
           "respuestaId": "r60",
           "participante": "Luis, 70, dirigente de la sede vecinal",
-          "direccion": "positivo",
+          "direccion": "neutro",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
-              "direccion": "positivo",
-              "intensidad": "leve",
+              "tema": "televigilancia",
+              "direccion": "neutro",
+              "intensidad": null,
               "cita": "voy a decir que sí porque la gente lo pide"
             }
           ]
@@ -657,17 +1095,361 @@
       ]
     },
     {
-      "id": "k3",
-      "nombre": "asaltos, robos, acoso e inseguridad",
-      "descripcion": "Robos, asaltos, acoso en la calle, riesgos en la feria y paraderos, y la sensación general de inseguridad y miedo.",
-      "personas": 18,
+      "id": "k4",
+      "nombre": "alumbrado público",
+      "descripcion": "Focos, luminarias y canchas sin iluminación en el espacio público que están dañados o sin reparar.",
+      "personas": 10,
       "positivo": 1,
-      "negativo": 17,
+      "negativo": 9,
+      "mixto": 0,
+      "neutro": 0,
+      "mejora": 0,
+      "empeora": 0,
+      "celdas": [
+        {
+          "respuestaId": "r1",
+          "participante": "Rosa, 71, jubilada, pasaje Los Copihues",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "foco del poste",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "el foco del poste de la esquina está quemado hace como ocho meses"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r9",
+          "participante": "Pedro, 19, juega a la pelota en la cancha",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cancha sin iluminación",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "la cancha no tiene luz y a las siete ya no se ve nada"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r13",
+          "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "iluminación del camino",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Son seis cuadras caminando a oscuras. Seis."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r30",
+          "participante": "Elena, 69, jubilada, vive con su marido",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "alumbrado público",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "En nuestra cuadra hay tres postes y funciona uno."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r32",
+          "participante": "Rocío, 27, vende comida por delivery",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "alumbrado público",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Hay calles enteras sin luz, la calle Los Olmos completa está oscura."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r37",
+          "participante": "Gonzalo, 45, técnico electricista",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "iluminación nocturna",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "en la noche, sin buena luz, la imagen no sirve para identificar a nadie"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r51",
+          "participante": "Mónica, 55, auxiliar de jardín infantil",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "seguridad en los pasajes",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Los pasajes de atrás, donde vive la gente, son los peligrosos, y ahí nunca llega nada. Ni luz, ni patrulla, ni nada."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r52",
+          "participante": "Alejandro, 42, sociólogo, investigador",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "iluminación pública",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Lo que sí tiene evidencia sólida es la iluminación pública y la recuperación de espacios"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r54",
+          "participante": "Hernán, 63, taxista jubilado",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "alumbrado municipal",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "la muni no arregla la luz"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r57",
+          "participante": "Carolina, 44, enfermera, hace turnos de noche",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "iluminación de las calles",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Las tres cuadras a mi casa son oscuras."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k2",
+      "nombre": "uso y privacidad de grabaciones",
+      "descripcion": "Preocupaciones sobre quién accede a las grabaciones, qué registran, cómo se usan, protección de datos, reconocimiento facial y transparencia de resultados.",
+      "personas": 9,
+      "positivo": 0,
+      "negativo": 7,
+      "mixto": 2,
+      "neutro": 0,
+      "mejora": 0,
+      "empeora": 0,
+      "celdas": [
+        {
+          "respuestaId": "r2",
+          "participante": "Javier, 34, repartidor en moto",
+          "direccion": "mixto",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cámaras de vigilancia",
+              "direccion": "mixto",
+              "intensidad": null,
+              "cita": "cámaras, sí, bacán, pero si el video después no le sirve a nadie, ¿para qué?"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r5",
+          "participante": "Fernanda, 22, estudiante de derecho",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "privacidad de las grabaciones",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "me van a estar grabando entrando y saliendo, con quién ando, a qué hora llego"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r9",
+          "participante": "Pedro, 19, juega a la pelota en la cancha",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "No po, hermano, no. Porque yo sé pa quién son esas cámaras. Son pa nosotros"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r22",
+          "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "privacidad",
+              "direccion": "negativo",
+              "intensidad": "leve",
+              "cita": "me incomoda un poco, no sé, que me graben todo el día"
+            },
+            {
+              "tema": "uso de las grabaciones",
+              "direccion": "neutro",
+              "intensidad": null,
+              "cita": "Que haya un registro público, aunque sea cada seis meses, de para qué se usaron las grabaciones"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r27",
+          "participante": "Cristian, 36, maestro gásfiter",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "privacidad",
+              "direccion": "negativo",
+              "intensidad": "leve",
+              "cita": "Los que reclaman por la privacidad, no sé, me parece que están exagerando"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r29",
+          "participante": "Benjamín, 23, estudiante de ingeniería",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "protección de datos de grabaciones",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Me preocupa harto el tema de los datos"
+            },
+            {
+              "tema": "reconocimiento facial en cámaras",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "es súper fácil agregarles reconocimiento facial con una actualización"
+            },
+            {
+              "tema": "ciberseguridad municipal",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "la muni no tiene ningún equipo de ciberseguridad"
+            },
+            {
+              "tema": "uso indebido por funcionarios",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Si un funcionario las usa para ver con quién anda su ex"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r40",
+          "participante": "Daniela, 40, abogada, vive en el sector nuevo",
+          "direccion": "mixto",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "acceso y uso de grabaciones",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "sin ellas, me parece riesgoso"
+            },
+            {
+              "tema": "transparencia hacia vecinos",
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "Y que lo informen a los vecinos, que lo publiquen."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r45",
+          "participante": "Camila, 19, estudiante de técnico en enfermería",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "a mí me incomoda... y ahora además una cámara. Y no sé quién está mirando atrás"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r48",
+          "participante": "Nicolás, 34, programador, trabaja remoto",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "transparencia de resultados",
+              "direccion": "neutro",
+              "intensidad": null,
+              "cita": "Una, que publiquen cada cierto tiempo cuántas veces las grabaciones sirvieron para algo, para saber si funcionan."
+            },
+            {
+              "tema": "reconocimiento facial",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Y dos, que no tengan reconocimiento facial."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k6",
+      "nombre": "seguridad y delincuencia",
+      "descripcion": "Robos, asaltos, peleas, venta de sustancias, sensación de inseguridad y atribuir los delitos a extranjeros sin fundamento.",
+      "personas": 9,
+      "positivo": 1,
+      "negativo": 8,
       "mixto": 0,
       "neutro": 0,
       "mejora": 1,
       "empeora": 1,
       "celdas": [
+        {
+          "respuestaId": "r1",
+          "participante": "Rosa, 71, jubilada, pasaje Los Copihues",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "seguridad nocturna",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Yo ya no salgo después de las siete, ni a comprar el pan."
+            }
+          ]
+        },
         {
           "respuestaId": "r4",
           "participante": "Héctor, 58, dueño de almacén",
@@ -679,62 +1461,26 @@
               "direccion": "negativo",
               "intensidad": "fuerte",
               "cita": "A mí me han asaltado dos veces, la segunda con pistola"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r10",
-          "participante": "Gladys, 64, feriante",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
+            },
             {
-              "tema": "seguridad en la feria",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "ahí es terrible, los lanzas andan en grupo y le sacan la billetera a las señoras"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r13",
-          "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "acoso en la calle",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Me han gritado cosas, una vez un auto me siguió una cuadra entera despacito."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r20",
-          "participante": "Tomás, 41, conductor de aplicación",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "seguridad del barrio",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "me hicieron un portonazo hace un año... Fue horrible"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r22",
-          "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "seguridad en el barrio",
+              "tema": "pérdida de ventas por cerrar temprano",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "me da miedo llegar de noche y a mi pareja le robaron el celular en la esquina"
+              "cita": "Desde ahí cierro a las siete y pierdo la venta de la tarde, que era la mejor."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r19",
+          "participante": "Paola, 35, cuidadora, llegó de Venezuela",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "culpar a extranjeros",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "la gente dice altiro fueron los extranjeros"
             }
           ]
         },
@@ -753,44 +1499,16 @@
           ]
         },
         {
-          "respuestaId": "r30",
-          "participante": "Elena, 69, jubilada, vive con su marido",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "seguridad de adultos mayores",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Nosotros ya estamos viejos y no podemos hacer mucho si nos pasa algo."
-            }
-          ]
-        },
-        {
           "respuestaId": "r31",
           "participante": "Felipe, 38, papá, trabaja en bodega",
           "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "robos en el barrio",
+              "tema": "robos a jóvenes en el barrio",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "A mi hijo de catorce le robaron el celular saliendo del colegio"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r32",
-          "participante": "Rocío, 27, vende comida por delivery",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "seguridad de noche",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Yo voy con miedo, con el celular apretado"
+              "cita": "a mi hijo de catorce le robaron el celular saliendo del colegio"
             }
           ]
         },
@@ -801,24 +1519,10 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "inseguridad y miedo en el barrio",
+              "tema": "miedo e inseguridad en el barrio",
               "direccion": "negativo",
               "intensidad": "fuerte",
               "cita": "La inseguridad nos está enfermando"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r39",
-          "participante": "Raúl, 53, conductor de micro",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "asaltos en paraderos",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "en el paradero de la pasarela asaltan a la gente esperando, sobre todo temprano"
             }
           ]
         },
@@ -833,34 +1537,6 @@
               "direccion": "negativo",
               "intensidad": "fuerte",
               "cita": "Me han asaltado una vez, con cuchillo. Desde ahí me voy con miedo."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r43",
-          "participante": "Lorena, 47, apoderada del liceo",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "peleas afuera del liceo",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "hay peleas casi todas las semanas, a veces con gente de afuera"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r45",
-          "participante": "Camila, 19, estudiante de técnico en enfermería",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "miradas de hombres en la calle",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Una ya siente que la miran todo el día en la calle, los hombres, los autos"
             }
           ]
         },
@@ -891,681 +1567,35 @@
               "cita": "En la noche se junta gente, ponen música fuerte, toman, a veces hay balazos. Yo no duermo."
             }
           ]
-        },
-        {
-          "respuestaId": "r53",
-          "participante": "Gabriela, 31, vendedora en la feria",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "desorden en la feria los domingos",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Los domingos es un desorden, los lanzas, los que se pelean por los puestos."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r57",
-          "participante": "Carolina, 44, enfermera, hace turnos de noche",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "seguridad al volver de noche",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Yo llego de mis turnos a la una de la mañana, en colectivo, y me bajo en la esquina."
-            }
-          ]
         }
       ]
     },
     {
-      "id": "k4",
-      "nombre": "alumbrado, espacios públicos y transporte",
-      "descripcion": "Estado de la iluminación, plazas, canchas, multicanchas, paraderos, micros, velocidad de autos, aseo y basura y otros espacios públicos.",
-      "personas": 15,
-      "positivo": 2,
-      "negativo": 13,
-      "mixto": 0,
-      "neutro": 0,
-      "mejora": 0,
-      "empeora": 1,
-      "celdas": [
-        {
-          "respuestaId": "r1",
-          "participante": "Rosa, 71, jubilada, pasaje Los Copihues",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "alumbrado público",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "el foco del poste de la esquina está quemado hace como ocho meses"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r8",
-          "participante": "Camila, 31, mamá de dos",
-          "direccion": "negativo",
-          "tendencia": "empeora",
-          "temas": [
-            {
-              "tema": "estado de la plaza",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "la plaza de la calle Las Acacias, la del tobogán rojo, que ya no tiene tobogán."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r9",
-          "participante": "Pedro, 19, juega a la pelota en la cancha",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "iluminación de la cancha",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "la cancha no tiene luz y a las siete ya no se ve nada"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r13",
-          "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "falta de iluminación",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Son seis cuadras caminando a oscuras."
-            },
-            {
-              "tema": "paradero sin luz ni techo",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "el paradero no tiene luz, no tiene techo, no tiene nada"
-            },
-            {
-              "tema": "frecuencia de micros de madrugada",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "A esa hora pasa una micro cada veinte minutos con suerte"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r24",
-          "participante": "Claudia, 48, directora de jardín infantil",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "velocidad de autos frente al jardín",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "los autos pasan por fuera del jardín a ochenta por hora"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r25",
-          "participante": "Roberto, 66, ex dirigente vecinal",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "multicancha de la plaza",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Y nadie la usa porque está oscura y tomada"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r30",
-          "participante": "Elena, 69, jubilada, vive con su marido",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "alumbrado público",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "En nuestra cuadra hay tres postes y funciona uno."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r32",
-          "participante": "Rocío, 27, vende comida por delivery",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "iluminación de calles",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Hay calles enteras sin luz, la calle Los Olmos completa está oscura"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r36",
-          "participante": "Silvia, 57, dueña de casa",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "punto limpio",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "ahora huele mal todo el verano"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r39",
-          "participante": "Raúl, 53, conductor de micro",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "iluminación de paraderos",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Ahí no hay luz, no hay nada"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r45",
-          "participante": "Camila, 19, estudiante de técnico en enfermería",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "luz y gente en la calle",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Prefiero que haya luz y más gente en la calle, eso me hace sentir segura"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r51",
-          "participante": "Mónica, 55, auxiliar de jardín infantil",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "seguridad en pasajes traseros",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Los pasajes de atrás, donde vive la gente, son los peligrosos, y ahí nunca llega nada. Ni luz, ni patrulla, ni nada."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r52",
-          "participante": "Alejandro, 42, sociólogo, investigador",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "iluminación pública",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Lo que sí tiene evidencia sólida es la iluminación pública y la recuperación de espacios"
-            },
-            {
-              "tema": "recuperación de plazas",
-              "direccion": "positivo",
-              "intensidad": "leve",
-              "cita": "pondría luminarias y arreglaría plazas"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r57",
-          "participante": "Carolina, 44, enfermera, hace turnos de noche",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "iluminación de calles",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Las tres cuadras a mi casa son oscuras."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r59",
-          "participante": "Rosa, 48, trabajadora de casa particular",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "iluminación camino al paradero",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "casi no estoy en el barrio con luz. Lo que pido es que el camino al paradero tenga luz"
-            },
-            {
-              "tema": "frecuencia de la micro",
-              "direccion": "negativo",
-              "intensidad": "leve",
-              "cita": "que la micro pase seguido"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "k24",
-      "nombre": "prevención comunitaria, organización vecinal y actividades",
-      "descripcion": "Programas preventivos, sedes vecinales, talleres y actividades para jóvenes, así como iniciativas propias de vecinos y relaciones de convivencia.",
-      "personas": 12,
-      "positivo": 6,
-      "negativo": 5,
-      "mixto": 0,
-      "neutro": 1,
-      "mejora": 2,
-      "empeora": 4,
-      "celdas": [
-        {
-          "respuestaId": "r3",
-          "participante": "Daniela, 29, profesora de básica",
-          "direccion": "negativo",
-          "tendencia": "empeora",
-          "temas": [
-            {
-              "tema": "talleres para niños",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Antes había un taller de fútbol en la sede y un taller de música, los cerraron hace dos años"
-            },
-            {
-              "tema": "niños después de clases",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Salen a la una y media, los papás trabajan hasta las siete, y quedan en la calle o encerrados con el celular"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r6",
-          "participante": "Marta, 45, presidenta junta de vecinos",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "organización vecinal",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Nosotros tenemos un grupo de WhatsApp por pasaje, tenemos alarmas comunitarias que compramos con un bingo"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r14",
-          "participante": "Ignacio, 27, trabajador social",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "prevención comunitaria",
-              "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "Lo que sí sabemos que funciona es la prevención: sedes vecinales abiertas en la tarde, programas para jóvenes, mediación entre vecinos"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r18",
-          "participante": "Ramón, 78, vive solo",
-          "direccion": "negativo",
-          "tendencia": "empeora",
-          "temas": [
-            {
-              "tema": "vecindad y conocerse",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Ahora yo no sé quién vive al lado mío. Llegan, se van, arriendan, no saludan."
-            },
-            {
-              "tema": "sede comunitaria",
-              "direccion": "neutro",
-              "intensidad": null,
-              "cita": "Que la sede se abra, que haya once comunitaria"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r20",
-          "participante": "Tomás, 41, conductor de aplicación",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "prevención con jóvenes",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Hay que hacer algo con esos cabros antes, porque a los quince años alguien ya los dejó tirados"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r23",
-          "participante": "Luisa, 60, catequista de la parroquia",
-          "direccion": "negativo",
-          "tendencia": "empeora",
-          "temas": [
-            {
-              "tema": "actividades de la parroquia de noche",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Antes teníamos actividades en la tarde... Ahora nadie quiere salir de noche, entonces cerramos a las seis"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r34",
-          "participante": "Karen, 33, mamá soltera",
-          "direccion": "neutro",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "uso de columpios para niños",
-              "direccion": "neutro",
-              "intensidad": null,
-              "cita": "Que mi hija pueda ir a los columpios"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r35",
-          "participante": "Diego, 30, profesor de educación física",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "prevención juvenil con deporte",
-              "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "esos treinta cabros los sábados no están en la esquina"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r38",
-          "participante": "Antonia, 26, psicóloga en el CESFAM",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "actividades y vida en la calle",
-              "direccion": "positivo",
-              "intensidad": "leve",
-              "cita": "Se va cuando la gente vuelve a estar en la calle, cuando se conoce, cuando hay actividades"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r41",
-          "participante": "Manuel, 72, jubilado, presidente del club de adulto mayor",
-          "direccion": "negativo",
-          "tendencia": "empeora",
-          "temas": [
-            {
-              "tema": "relación entre vecinos",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "antes los vecinos se cuidaban entre ellos... Eso se perdió."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r47",
-          "participante": "Verónica, 39, dirigenta del comité de vivienda",
-          "direccion": "positivo",
-          "tendencia": "mejora",
-          "temas": [
-            {
-              "tema": "organización vecinal",
-              "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "Desde que nos organizamos no ha entrado nadie"
-            },
-            {
-              "tema": "apoyo municipal a organizaciones",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "que la muni también apoye a las organizaciones, con alarmas comunitarias, con capacitaciones"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r56",
-          "participante": "Tomás, 25, artista, hace murales en el barrio",
-          "direccion": "positivo",
-          "tendencia": "mejora",
-          "temas": [
-            {
-              "tema": "murales en el pasaje",
-              "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "Los murales que hicimos con los cabros en el pasaje Las Rosas cambiaron el pasaje"
-            },
-            {
-              "tema": "vida y convivencia en el barrio",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "la gente empezó a salir, a sentarse afuera"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "k9",
-      "nombre": "privacidad, vigilancia, datos y cámaras privadas",
-      "descripcion": "Temor a que las cámaras graben o vigilen a las personas, reconocimiento facial, uso indebido de datos, temor a represalias y convenios para compartir señal de cámaras privadas.",
-      "personas": 10,
-      "positivo": 2,
-      "negativo": 8,
-      "mixto": 0,
-      "neutro": 0,
-      "mejora": 0,
-      "empeora": 0,
-      "celdas": [
-        {
-          "respuestaId": "r5",
-          "participante": "Fernanda, 22, estudiante de derecho",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "grabación de vecinos",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "me van a estar grabando entrando y saliendo, con quién ando, a qué hora llego"
-            },
-            {
-              "tema": "reconocimiento facial futuro",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "se agrega después y nadie se entera"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r9",
-          "participante": "Pedro, 19, juega a la pelota en la cancha",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "cámaras de televigilancia",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "No po, hermano, no. Porque yo sé pa quién son esas cámaras. Son pa nosotros"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r15",
-          "participante": "Carmen, 52, vive frente a la plaza",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "temor a represalias de vecinos",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Y yo tengo miedo. Porque los que venden ahí van a pensar que yo la pedí, que yo soy la sapa."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r16",
-          "participante": "Mauricio, 46, dueño de ferretería",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "convenio con cámaras privadas",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Uno firma, comparte la señal de las cámaras que miran a la calle... Yo lo firmaría altiro."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r22",
-          "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "privacidad en la calle",
-              "direccion": "negativo",
-              "intensidad": "leve",
-              "cita": "me incomoda un poco, no sé, que me graben todo el día cada vez que salgo a comprar"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r27",
-          "participante": "Cristian, 36, maestro gásfiter",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "privacidad",
-              "direccion": "negativo",
-              "intensidad": "leve",
-              "cita": "Los que reclaman por la privacidad, no sé, me parece que están exagerando."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r29",
-          "participante": "Benjamín, 23, estudiante de ingeniería",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "protección de datos",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Me preocupa harto el tema de los datos"
-            },
-            {
-              "tema": "ciberseguridad municipal",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "la muni no tiene ningún equipo de ciberseguridad"
-            },
-            {
-              "tema": "reconocimiento facial",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "es súper fácil agregarles reconocimiento facial con una actualización"
-            },
-            {
-              "tema": "uso indebido por funcionarios",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "si un funcionario las usa para ver con quién anda su ex"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r45",
-          "participante": "Camila, 19, estudiante de técnico en enfermería",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "cámaras de televigilancia",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "a mí me incomoda... y no sé quién está mirando atrás"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r48",
-          "participante": "Nicolás, 34, programador, trabaja remoto",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "reconocimiento facial",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "que no tengan reconocimiento facial"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r58",
-          "participante": "Pablo, 52, dueño de botillería",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "cámaras de comerciantes",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Si la muni hace un convenio, las comparto feliz."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "k16",
-      "nombre": "presencia de inspectores y patrullaje",
-      "descripcion": "Frecuencia con que se ven inspectores o patrullas, dotación policial y tiempos de respuesta.",
+      "id": "k22",
+      "nombre": "respuesta policial e inspectores",
+      "descripcion": "Demoras o falta de llegada de carabineros o patrullas, controles a vecinos, dotación policial y ausencia de inspectores.",
       "personas": 8,
-      "positivo": 0,
+      "positivo": 1,
       "negativo": 6,
       "mixto": 0,
-      "neutro": 2,
+      "neutro": 1,
       "mejora": 0,
       "empeora": 1,
       "celdas": [
+        {
+          "respuestaId": "r9",
+          "participante": "Pedro, 19, juega a la pelota en la cancha",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "controles policiales",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "pasa la patrulla y nos piden el carnet a todos, a mí me han controlado como diez veces este año y yo no he hecho nada"
+            }
+          ]
+        },
         {
           "respuestaId": "r10",
           "participante": "Gladys, 64, feriante",
@@ -1587,10 +1617,10 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "tiempo de respuesta patrulla",
+              "tema": "tiempo de respuesta policial",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "la patrulla llegó una hora y media después"
+              "cita": "Me tuvieron esperando, me pidieron la dirección como tres veces, y la patrulla llegó una hora y media después."
             }
           ]
         },
@@ -1618,7 +1648,7 @@
               "tema": "respuesta de la patrulla",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "llamé al cuadrante, llamé al ciento treinta y tres, y nadie llegó. Llegaron a las ocho de la mañana"
+              "cita": "llamé al cuadrante, llamé al ciento treinta y tres, y nadie llegó"
             }
           ]
         },
@@ -1629,24 +1659,10 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "dotación policial nocturna",
+              "tema": "dotación de patrullas",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "hay dos patrullas para toda la comuna en la noche. Dos."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r43",
-          "participante": "Lorena, 47, apoderada del liceo",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "falta de inspectores y orientadores",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "el liceo necesita más inspectores, más orientadores. Los chiquillos están solos."
+              "cita": "hay dos patrullas para toda la comuna en la noche. Dos. Y cuarenta mil habitantes."
             }
           ]
         },
@@ -1657,9 +1673,9 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "carabineros",
+              "tema": "respuesta de carabineros",
               "direccion": "negativo",
-              "intensidad": "fuerte",
+              "intensidad": "moderada",
               "cita": "Los carabineros no llegan"
             }
           ]
@@ -1667,13 +1683,13 @@
         {
           "respuestaId": "r57",
           "participante": "Carolina, 44, enfermera, hace turnos de noche",
-          "direccion": "neutro",
+          "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
               "tema": "presencia policial",
-              "direccion": "neutro",
-              "intensidad": null,
+              "direccion": "positivo",
+              "intensidad": "leve",
               "cita": "que pase la patrulla de vez en cuando, que se vea."
             }
           ]
@@ -1681,48 +1697,28 @@
       ]
     },
     {
-      "id": "k2",
-      "nombre": "funcionamiento y mantención de las cámaras",
-      "descripcion": "Qué hacen las cámaras (solo grabar o monitoreo en vivo), cuántos operadores tienen, quién paga su mantención, calidad de imagen y si están operativas.",
+      "id": "k15",
+      "nombre": "mantención, costo y operadores de cámaras",
+      "descripcion": "Quién paga la mantención, el gasto de recursos públicos y la cantidad de personas que monitorean las cámaras.",
       "personas": 7,
       "positivo": 1,
-      "negativo": 2,
-      "mixto": 4,
+      "negativo": 6,
+      "mixto": 0,
       "neutro": 0,
       "mejora": 0,
       "empeora": 0,
       "celdas": [
         {
-          "respuestaId": "r2",
-          "participante": "Javier, 34, repartidor en moto",
-          "direccion": "mixto",
+          "respuestaId": "r3",
+          "participante": "Daniela, 29, profesora de básica",
+          "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
               "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "cámaras, sí, bacán, pero si el video después no le sirve a nadie, ¿para qué?"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r4",
-          "participante": "Héctor, 58, dueño de almacén",
-          "direccion": "mixto",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "monitoreo en vivo de las cámaras",
-              "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "Que haya una central, con gente, que si ven algo raro llamen a la patrulla."
-            },
-            {
-              "tema": "cámaras que solo graban",
               "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Si es para grabar y después ver la grabación cuando ya te asaltaron, eso ya lo tengo."
+              "intensidad": "fuerte",
+              "cita": "no porque esté en contra de la seguridad, obvio que no, sino porque cada vez que hay plata para algo se va en esto"
             }
           ]
         },
@@ -1736,13 +1732,7 @@
               "tema": "dotación de operadores",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "Somos dos operadores por turno mirando sesenta, setenta pantallas"
-            },
-            {
-              "tema": "monitoreo en vivo",
-              "direccion": "negativo",
-              "intensidad": "leve",
-              "cita": "Tú no ves nada en vivo, es imposible, a menos que justo estés mirando esa"
+              "cita": "Somos dos operadores por turno mirando sesenta, setenta pantallas."
             }
           ]
         },
@@ -1755,80 +1745,304 @@
             {
               "tema": "mantención de cámaras",
               "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Nadie paga la mantención, ese es el tema."
-            },
+              "intensidad": "fuerte",
+              "cita": "Nadie paga la mantención, ese es el tema. Comprar la cámara es lo fácil, sale en la foto."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r21",
+          "participante": "Hugo, 55, maestro de construcción",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
             {
-              "tema": "cámaras apagadas en Los Aromos",
+              "tema": "gasto municipal en cámaras",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "A los tres meses dos estaban apagadas. Y siguen apagadas."
+              "cita": "Van a botar la plata."
             }
           ]
         },
         {
           "respuestaId": "r37",
           "participante": "Gonzalo, 45, técnico electricista",
-          "direccion": "mixto",
+          "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
               "tema": "mantención de cámaras",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "Si no, con el polvo, la lluvia y las arañas, al año ya graba mal"
-            },
-            {
-              "tema": "iluminación nocturna",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "en la noche, sin buena luz, la imagen no sirve para identificar a nadie"
-            },
-            {
-              "tema": "cámaras bien instaladas",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Pero sí, bien hecho funciona"
+              "cita": "Que presupueste mantención, porque si no es plata tirada"
             }
           ]
         },
         {
           "respuestaId": "r44",
           "participante": "Jorge, 59, chofer de colectivo",
-          "direccion": "mixto",
+          "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
-            {
-              "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "Sí, bien. Pero ojo, que ya hay varias puestas en el centro de la comuna y la mitad no funciona."
-            },
             {
               "tema": "mantención de cámaras existentes",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "la cámara está con la lucecita apagada hace meses"
-            },
-            {
-              "tema": "durabilidad de nuevas cámaras",
-              "direccion": "negativo",
-              "intensidad": "leve",
-              "cita": "¿quién me asegura que estas van a durar?"
+              "cita": "la mitad no funciona... la cámara está con la lucecita apagada hace meses"
             }
           ]
         },
         {
-          "respuestaId": "r48",
-          "participante": "Nicolás, 34, programador, trabaja remoto",
+          "respuestaId": "r58",
+          "participante": "Pablo, 52, dueño de botillería",
           "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de patentes",
+              "tema": "gasto municipal",
               "direccion": "positivo",
               "intensidad": "leve",
-              "cita": "Las de patentes me parecen bien, para los autos robados"
+              "cita": "Así no gastan tanto y cubren más."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k17",
+      "nombre": "prevención social",
+      "descripcion": "Alternativas no tecnológicas como sedes abiertas, programas para jóvenes, actividades y mediación entre vecinos.",
+      "personas": 7,
+      "positivo": 4,
+      "negativo": 3,
+      "mixto": 0,
+      "neutro": 0,
+      "mejora": 1,
+      "empeora": 1,
+      "celdas": [
+        {
+          "respuestaId": "r14",
+          "participante": "Ignacio, 27, trabajador social",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "prevención comunitaria",
+              "direccion": "positivo",
+              "intensidad": "fuerte",
+              "cita": "Lo que sí sabemos que funciona es la prevención: sedes vecinales abiertas en la tarde, programas para jóvenes, mediación entre vecinos"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r18",
+          "participante": "Ramón, 78, vive solo",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "sede comunitaria",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Que la sede se abra, que haya once comunitaria"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r20",
+          "participante": "Tomás, 41, conductor de aplicación",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "prevención con jóvenes",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Hay que hacer algo con esos cabros antes, porque a los quince años alguien ya los dejó tirados"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r23",
+          "participante": "Luisa, 60, catequista de la parroquia",
+          "direccion": "negativo",
+          "tendencia": "empeora",
+          "temas": [
+            {
+              "tema": "actividades de la parroquia",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Antes teníamos actividades en la tarde, catequesis, el grupo de jóvenes, el coro"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r35",
+          "participante": "Diego, 30, profesor de educación física",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "deporte como prevención",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "el deporte lo previene"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r38",
+          "participante": "Antonia, 26, psicóloga en el CESFAM",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "actividades y vida en la calle",
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "Se va cuando la gente vuelve a estar en la calle, cuando se conoce, cuando hay actividades. Ojalá esto venga con algo de eso."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r56",
+          "participante": "Tomás, 25, artista, hace murales en el barrio",
+          "direccion": "positivo",
+          "tendencia": "mejora",
+          "temas": [
+            {
+              "tema": "murales en el pasaje",
+              "direccion": "positivo",
+              "intensidad": "fuerte",
+              "cita": "Los murales que hicimos con los cabros en el pasaje Las Rosas cambiaron el pasaje, la gente empezó a salir, a sentarse afuera."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k16",
+      "nombre": "seguridad en el trayecto y transporte",
+      "descripcion": "Caminar de noche, paraderos sin techo ni luz, frecuencia de micros, velocidad de autos y acoso en la calle.",
+      "personas": 6,
+      "positivo": 0,
+      "negativo": 5,
+      "mixto": 1,
+      "neutro": 0,
+      "mejora": 0,
+      "empeora": 1,
+      "celdas": [
+        {
+          "respuestaId": "r13",
+          "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "paradero sin techo ni luz",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "el paradero no tiene luz, no tiene techo, no tiene nada"
+            },
+            {
+              "tema": "frecuencia de micros de madrugada",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "A esa hora pasa una micro cada veinte minutos con suerte"
+            },
+            {
+              "tema": "seguridad personal en la calle",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Me han gritado cosas, una vez un auto me siguió una cuadra entera despacito"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r23",
+          "participante": "Luisa, 60, catequista de la parroquia",
+          "direccion": "negativo",
+          "tendencia": "empeora",
+          "temas": [
+            {
+              "tema": "calle vacía de noche",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "cuando cerramos la calle queda vacía, y la calle vacía es peor"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r24",
+          "participante": "Claudia, 48, directora de jardín infantil",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "velocidad de autos frente al jardín",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "los autos pasan por fuera del jardín a ochenta por hora"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r39",
+          "participante": "Raúl, 53, conductor de micro",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "asaltos en paraderos",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "en el paradero de la pasarela asaltan a la gente esperando, sobre todo temprano"
+            },
+            {
+              "tema": "iluminación del paradero",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Ahí no hay luz, no hay nada"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r45",
+          "participante": "Camila, 19, estudiante de técnico en enfermería",
+          "direccion": "mixto",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "acoso callejero",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Una ya siente que la miran todo el día en la calle, los hombres, los autos"
+            },
+            {
+              "tema": "luz y gente en la calle",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Prefiero que haya luz y más gente en la calle, eso me hace sentir segura"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r59",
+          "participante": "Rosa, 48, trabajadora de casa particular",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "iluminación del camino al paradero",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "casi no estoy en el barrio con luz. Lo que pido es que el camino al paradero tenga luz"
+            },
+            {
+              "tema": "frecuencia de la micro",
+              "direccion": "negativo",
+              "intensidad": "leve",
+              "cita": "que la micro pase seguido"
             }
           ]
         }
@@ -1836,15 +2050,15 @@
     },
     {
       "id": "k5",
-      "nombre": "atención y seguimiento municipal",
-      "descripcion": "Trato, respuesta y seguimiento de reclamos, denuncias o llamados a la municipalidad y a emergencias.",
-      "personas": 6,
+      "nombre": "reclamos a la municipalidad",
+      "descripcion": "Respuesta, seguimiento y tramitación de llamados o denuncias hechas a la municipalidad.",
+      "personas": 5,
       "positivo": 0,
-      "negativo": 6,
+      "negativo": 5,
       "mixto": 0,
       "neutro": 0,
       "mejora": 0,
-      "empeora": 0,
+      "empeora": 1,
       "celdas": [
         {
           "respuestaId": "r1",
@@ -1853,7 +2067,7 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "atención municipal",
+              "tema": "respuesta de la municipalidad",
               "direccion": "negativo",
               "intensidad": "fuerte",
               "cita": "Yo llamé a la municipalidad tres veces, la última vez me dijeron que estaba ingresado."
@@ -1875,16 +2089,16 @@
           ]
         },
         {
-          "respuestaId": "r17",
-          "participante": "Valentina, 24, enfermera",
+          "respuestaId": "r30",
+          "participante": "Elena, 69, jubilada, vive con su marido",
           "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "atención llamadas de emergencia",
+              "tema": "falta de respuesta de la municipalidad",
               "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Me tuvieron esperando, me pidieron la dirección como tres veces"
+              "intensidad": "moderada",
+              "cita": "Yo le he dicho a la muni, a la junta, a todos."
             }
           ]
         },
@@ -1895,7 +2109,7 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "seguimiento de denuncias",
+              "tema": "gestión de denuncias",
               "direccion": "negativo",
               "intensidad": "fuerte",
               "cita": "alguien se ponga las pilas con las denuncias, porque uno hace todo y no pasa nada."
@@ -1903,221 +2117,121 @@
           ]
         },
         {
-          "respuestaId": "r54",
-          "participante": "Hernán, 63, taxista jubilado",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "municipalidad",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "la muni no arregla la luz"
-            }
-          ]
-        },
-        {
           "respuestaId": "r60",
           "participante": "Luis, 70, dirigente de la sede vecinal",
           "direccion": "negativo",
-          "tendencia": "no_dice",
+          "tendencia": "empeora",
           "temas": [
             {
-              "tema": "promesas incumplidas de la muni",
+              "tema": "encuestas sin seguimiento",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "Hace tres años vino la muni con una encuesta parecida... Dijimos la sede. Nunca llegó. ... Uno ya no cree."
+              "cita": "Nunca llegó. Después vinieron con otra encuesta... Uno ya no cree."
             }
           ]
         }
       ]
     },
     {
-      "id": "k20",
-      "nombre": "eficacia de las cámaras",
-      "descripcion": "Si las cámaras realmente previenen o bajan los delitos, o ayudan a investigar, según evidencia o experiencia.",
-      "personas": 6,
+      "id": "k7",
+      "nombre": "espacios y talleres para niños",
+      "descripcion": "Falta de talleres, recintos, patios, plazas y lugares de juego o cuidado para niños y jóvenes fuera del colegio, y su deterioro.",
+      "personas": 5,
       "positivo": 1,
-      "negativo": 2,
-      "mixto": 3,
-      "neutro": 0,
+      "negativo": 3,
+      "mixto": 0,
+      "neutro": 1,
       "mejora": 0,
-      "empeora": 0,
+      "empeora": 3,
       "celdas": [
         {
-          "respuestaId": "r7",
-          "participante": "Luis, 39, guardia, ex operador de monitoreo",
-          "direccion": "mixto",
-          "tendencia": "no_dice",
+          "respuestaId": "r3",
+          "participante": "Daniela, 29, profesora de básica",
+          "direccion": "negativo",
+          "tendencia": "empeora",
           "temas": [
             {
-              "tema": "efectividad de las cámaras",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "algo ayuda, la gente se siente más tranquila y algunos lanzas se van a otro lado. Pero que nadie se crea que una cámara previene un asalto"
+              "tema": "talleres extraescolares",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Antes había un taller de fútbol en la sede y un taller de música, los cerraron hace dos años porque no había fondos"
+            },
+            {
+              "tema": "falta de espacios para niños",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Salen a la una y media, los papás trabajan hasta las siete, y quedan en la calle o encerrados con el celular"
             }
           ]
         },
         {
           "respuestaId": "r8",
           "participante": "Camila, 31, mamá de dos",
-          "direccion": "mixto",
-          "tendencia": "no_dice",
+          "direccion": "negativo",
+          "tendencia": "empeora",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
-              "intensidad": null,
-              "cita": "Una cámara mirando una plaza vacía no me devuelve la plaza."
+              "tema": "estado de la plaza",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Que la arreglen, que pongan luz, juegos nuevos... ya no tiene tobogán."
+            },
+            {
+              "tema": "espacio de juego para los niños",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "juegan en el patio, que es chiquitito, porque no hay otro lugar."
             }
           ]
         },
         {
-          "respuestaId": "r14",
-          "participante": "Ignacio, 27, trabajador social",
+          "respuestaId": "r35",
+          "participante": "Diego, 30, profesor de educación física",
           "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "eficacia de las cámaras",
+              "tema": "falta de apoyo al taller deportivo",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "La evidencia de que las cámaras bajan los delitos es súper débil"
+              "cita": "me da rabia"
             }
           ]
         },
         {
-          "respuestaId": "r33",
-          "participante": "Óscar, 61, ex carabinero",
-          "direccion": "mixto",
-          "tendencia": "no_dice",
+          "respuestaId": "r49",
+          "participante": "Ana María, 66, vive frente a la cancha",
+          "direccion": "neutro",
+          "tendencia": "empeora",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
-              "direccion": "mixto",
+              "tema": "uso familiar de la cancha",
+              "direccion": "neutro",
               "intensidad": null,
-              "cita": "Las cámaras ayudan, eso es cierto, sobre todo para la investigación"
+              "cita": "Cuando había liga los domingos, la cancha era otra cosa. La recuerdo llena de familias."
             }
           ]
         },
         {
           "respuestaId": "r52",
           "participante": "Alejandro, 42, sociólogo, investigador",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "cámaras de televigilancia",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "las cámaras sirven en lugares cerrados y acotados, como estacionamientos, y bastante menos en barrios residenciales"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r55",
-          "participante": "Fabiola, 37, cuidadora de su mamá",
           "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "cámaras de televigilancia",
+              "tema": "recuperación de plazas",
               "direccion": "positivo",
-              "intensidad": "fuerte",
-              "cita": "yo sí creo que sirven, de verdad. Para más cosas que para los robos."
+              "intensidad": "leve",
+              "cita": "arreglaría plazas"
             }
           ]
         }
       ]
     },
     {
-      "id": "k10",
-      "nombre": "reglas, regulación y transparencia",
-      "descripcion": "Existencia o ausencia de normas, ordenanzas y registros públicos que regulen el uso de las cámaras.",
-      "personas": 5,
-      "positivo": 2,
-      "negativo": 1,
-      "mixto": 0,
-      "neutro": 2,
-      "mejora": 0,
-      "empeora": 0,
-      "celdas": [
-        {
-          "respuestaId": "r5",
-          "participante": "Fernanda, 22, estudiante de derecho",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "falta de reglamento",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "no hay ninguna regla que yo conozca"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r19",
-          "participante": "Paola, 35, cuidadora, llegó de Venezuela",
-          "direccion": "neutro",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "uso de las cámaras",
-              "direccion": "neutro",
-              "intensidad": null,
-              "cita": "que se usen bien, que no sea para perseguir a nadie por cómo se ve"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r22",
-          "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "transparencia de las grabaciones",
-              "direccion": "positivo",
-              "intensidad": null,
-              "cita": "Que haya un registro público, aunque sea cada seis meses, de para qué se usaron las grabaciones"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r40",
-          "participante": "Daniela, 40, abogada, vive en el sector nuevo",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "regulación de las cámaras",
-              "direccion": "positivo",
-              "intensidad": "moderada",
-              "cita": "Lo que pido es que la municipalidad apruebe una ordenanza antes de instalarlas"
-            }
-          ]
-        },
-        {
-          "respuestaId": "r48",
-          "participante": "Nicolás, 34, programador, trabaja remoto",
-          "direccion": "neutro",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "transparencia de resultados",
-              "direccion": "neutro",
-              "intensidad": null,
-              "cita": "que publiquen cada cierto tiempo cuántas veces las grabaciones sirvieron para algo"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "k17",
-      "nombre": "participación en la decisión",
-      "descripcion": "Si los vecinos fueron consultados sobre la instalación, ubicación o diagnóstico previo, y el diseño de la encuesta.",
+      "id": "k9",
+      "nombre": "participación en decisiones de cámaras",
+      "descripcion": "Falta de consulta a vecinos sobre dónde y cómo se instalan cámaras u otros equipamientos.",
       "personas": 5,
       "positivo": 1,
       "negativo": 3,
@@ -2137,6 +2251,12 @@
               "direccion": "negativo",
               "intensidad": "moderada",
               "cita": "Nadie nos preguntó dónde ponerlas. Nos llegó el plano y van todas en la avenida principal"
+            },
+            {
+              "tema": "falta de consulta previa",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Lo que pedimos es que nos sienten en una mesa antes de decidir, no después"
             }
           ]
         },
@@ -2150,7 +2270,7 @@
               "tema": "diagnóstico con vecinos",
               "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "que haga un diagnóstico con los vecinos primero, por sector, y que con eso decida"
+              "cita": "Que haga un diagnóstico con los vecinos primero, por sector, y que con eso decida"
             }
           ]
         },
@@ -2161,16 +2281,10 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "encuestas municipales",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Marque A, B o C. Yo marqué la multicancha porque era lo menos malo, pero lo que queríamos era otra cosa"
-            },
-            {
               "tema": "participación ciudadana",
               "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Que esta vez lo que uno dice llegue de verdad a alguien que decida"
+              "intensidad": "fuerte",
+              "cita": "Marqué la multicancha porque era lo menos malo, pero lo que queríamos era otra cosa"
             }
           ]
         },
@@ -2189,8 +2303,14 @@
             {
               "tema": "participación vecinal",
               "direccion": "negativo",
-              "intensidad": "moderada",
+              "intensidad": "fuerte",
               "cita": "a nosotros nunca nos preguntan nada"
+            },
+            {
+              "tema": "punto limpio",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Pusieron el punto limpio frente a mi casa sin preguntar, y ahora huele mal todo el verano."
             }
           ]
         },
@@ -2211,89 +2331,13 @@
       ]
     },
     {
-      "id": "k7",
-      "nombre": "gasto municipal",
-      "descripcion": "Decisiones sobre en qué se destinan los fondos municipales y prioridades de gasto.",
-      "personas": 4,
-      "positivo": 1,
-      "negativo": 3,
-      "mixto": 0,
-      "neutro": 0,
-      "mejora": 0,
-      "empeora": 0,
-      "celdas": [
-        {
-          "respuestaId": "r3",
-          "participante": "Daniela, 29, profesora de básica",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "cámaras de televigilancia",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "te diría que no... cada vez que hay plata para algo se va en esto"
-            },
-            {
-              "tema": "prioridades de gasto municipal",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Y ahora hay fondos para cámaras."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r21",
-          "participante": "Hugo, 55, maestro de construcción",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "gasto municipal en cámaras",
-              "direccion": "negativo",
-              "intensidad": "moderada",
-              "cita": "Van a botar la plata."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r35",
-          "participante": "Diego, 30, profesor de educación física",
-          "direccion": "negativo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "apoyo al taller deportivo",
-              "direccion": "negativo",
-              "intensidad": "fuerte",
-              "cita": "Cuando veo que hay plata para cámaras y para mi taller no hay ni para comprar balones, me da rabia."
-            }
-          ]
-        },
-        {
-          "respuestaId": "r58",
-          "participante": "Pablo, 52, dueño de botillería",
-          "direccion": "positivo",
-          "tendencia": "no_dice",
-          "temas": [
-            {
-              "tema": "gasto municipal",
-              "direccion": "positivo",
-              "intensidad": "leve",
-              "cita": "Así no gastan tanto y cubren más."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "k13",
-      "nombre": "venta de drogas en espacios públicos",
-      "descripcion": "Venta de drogas y otros productos en plazas y espacios públicos y su efecto en las familias.",
-      "personas": 3,
+      "id": "k25",
+      "nombre": "seguridad de la feria y plaza",
+      "descripcion": "Robos y venta de drogas en la feria y la plaza, y el abandono de estos espacios.",
+      "personas": 5,
       "positivo": 0,
-      "negativo": 3,
-      "mixto": 0,
+      "negativo": 1,
+      "mixto": 4,
       "neutro": 0,
       "mejora": 0,
       "empeora": 1,
@@ -2301,23 +2345,69 @@
         {
           "respuestaId": "r8",
           "participante": "Camila, 31, mamá de dos",
-          "direccion": "negativo",
+          "direccion": "mixto",
           "tendencia": "empeora",
           "temas": [
             {
-              "tema": "venta en la plaza",
+              "tema": "venta de drogas en la plaza",
               "direccion": "negativo",
               "intensidad": "fuerte",
-              "cita": "Hay unos cabros que venden ahí, todo el mundo sabe, y desde que llegaron yo no llevo a mis hijos."
+              "cita": "La plaza está tomada. Hay unos cabros que venden ahí, todo el mundo sabe, y desde que llegaron yo no llevo a mis hijos."
+            },
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "mixto",
+              "intensidad": null,
+              "cita": "Entonces sí, que pongan una cámara ahí, ojalá. ... Una cámara mirando una plaza vacía no me devuelve la plaza."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r10",
+          "participante": "Gladys, 64, feriante",
+          "direccion": "mixto",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "seguridad en la feria",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "ahí es terrible, los lanzas andan en grupo y le sacan la billetera a las señoras"
+            },
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "positivo",
+              "intensidad": "leve",
+              "cita": "Una cámara en la entrada de la feria ayudaría"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r25",
+          "participante": "Roberto, 66, ex dirigente vecinal",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "multicancha de la plaza",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Nadie la usa porque está oscura y tomada"
             }
           ]
         },
         {
           "respuestaId": "r34",
           "participante": "Karen, 33, mamá soltera",
-          "direccion": "negativo",
+          "direccion": "mixto",
           "tendencia": "no_dice",
           "temas": [
+            {
+              "tema": "cámaras de televigilancia",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Sí. Pero en la plaza. Pongan la cámara en la plaza"
+            },
             {
               "tema": "vendedores en la plaza",
               "direccion": "negativo",
@@ -2327,28 +2417,34 @@
           ]
         },
         {
-          "respuestaId": "r43",
-          "participante": "Lorena, 47, apoderada del liceo",
-          "direccion": "negativo",
+          "respuestaId": "r53",
+          "participante": "Gabriela, 31, vendedora en la feria",
+          "direccion": "mixto",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "venta de vapers",
+              "tema": "cámaras en la feria",
+              "direccion": "positivo",
+              "intensidad": "fuerte",
+              "cita": "Sí, cámaras en la feria, por favor."
+            },
+            {
+              "tema": "desorden en la feria",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "Y venden cosas también, vapers, otras cosas."
+              "cita": "Los domingos es un desorden, los lanzas, los que se pelean por los puestos."
             }
           ]
         }
       ]
     },
     {
-      "id": "k30",
-      "nombre": "consecuencias judiciales e impunidad",
-      "descripcion": "Que los delitos registrados tengan sanciones reales para quienes los cometen.",
-      "personas": 3,
+      "id": "k27",
+      "nombre": "consecuencias judiciales",
+      "descripcion": "Falta de sanciones o consecuencias reales para quienes cometen delitos en el barrio.",
+      "personas": 4,
       "positivo": 0,
-      "negativo": 3,
+      "negativo": 4,
       "mixto": 0,
       "neutro": 0,
       "mejora": 0,
@@ -2375,10 +2471,24 @@
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "impunidad de los responsables",
+              "tema": "falta de consecuencias",
               "direccion": "negativo",
               "intensidad": "fuerte",
               "cita": "todos saben quiénes son, son del mismo barrio, y no pasa nada"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r46",
+          "participante": "Iván, 48, dueño de taller mecánico",
+          "direccion": "negativo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "evidencia de video en fiscalía",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Llevé el video y el fiscal dijo que no alcanzaba"
             }
           ]
         },
@@ -2399,11 +2509,11 @@
       ]
     },
     {
-      "id": "k8",
-      "nombre": "impacto en comercio y ventas",
-      "descripcion": "Efectos de la inseguridad en las ventas y horarios de los negocios.",
-      "personas": 1,
-      "positivo": 0,
+      "id": "k3",
+      "nombre": "reglas y cambios del sistema",
+      "descripcion": "Falta de reglamento claro, ordenanzas y cambios que se agregan después sin aviso a la población.",
+      "personas": 2,
+      "positivo": 1,
       "negativo": 1,
       "mixto": 0,
       "neutro": 0,
@@ -2411,44 +2521,78 @@
       "empeora": 0,
       "celdas": [
         {
-          "respuestaId": "r4",
-          "participante": "Héctor, 58, dueño de almacén",
+          "respuestaId": "r5",
+          "participante": "Fernanda, 22, estudiante de derecho",
           "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "pérdida de ventas por cierre temprano",
+              "tema": "falta de reglamento",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "Desde ahí cierro a las siete y pierdo la venta de la tarde, que era la mejor."
+              "cita": "no hay ninguna regla que yo conozca"
+            },
+            {
+              "tema": "cambios futuros sin aviso",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "eso nunca se dice al principio, se agrega después y nadie se entera"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r40",
+          "participante": "Daniela, 40, abogada, vive en el sector nuevo",
+          "direccion": "positivo",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "regulación mediante ordenanza",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Lo que pido es que la municipalidad apruebe una ordenanza antes de instalarlas"
             }
           ]
         }
       ]
     },
     {
-      "id": "k11",
-      "nombre": "control policial y abusos",
-      "descripcion": "Controles de identidad de patrullas y trato policial hacia vecinos.",
-      "personas": 1,
-      "positivo": 0,
-      "negativo": 1,
+      "id": "k10",
+      "nombre": "organización vecinal",
+      "descripcion": "Iniciativas de la propia comunidad para protegerse, como alarmas comunitarias, juntas y asambleas.",
+      "personas": 2,
+      "positivo": 2,
+      "negativo": 0,
       "mixto": 0,
       "neutro": 0,
-      "mejora": 0,
+      "mejora": 1,
       "empeora": 0,
       "celdas": [
         {
-          "respuestaId": "r9",
-          "participante": "Pedro, 19, juega a la pelota en la cancha",
-          "direccion": "negativo",
+          "respuestaId": "r6",
+          "participante": "Marta, 45, presidenta junta de vecinos",
+          "direccion": "positivo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "control policial",
-              "direccion": "negativo",
+              "tema": "organización vecinal",
+              "direccion": "positivo",
               "intensidad": "moderada",
-              "cita": "pasa la patrulla y nos piden el carnet a todos, a mí me han controlado como diez veces este año y yo no he hecho nada"
+              "cita": "tenemos alarmas comunitarias que compramos con un bingo, nos organizamos"
+            }
+          ]
+        },
+        {
+          "respuestaId": "r47",
+          "participante": "Verónica, 39, dirigenta del comité de vivienda",
+          "direccion": "positivo",
+          "tendencia": "mejora",
+          "temas": [
+            {
+              "tema": "organización vecinal",
+              "direccion": "positivo",
+              "intensidad": "fuerte",
+              "cita": "Desde que nos organizamos no ha entrado nadie. La organización de los vecinos funciona, lo hemos probado."
             }
           ]
         }
@@ -2456,36 +2600,50 @@
     },
     {
       "id": "k23",
-      "nombre": "uso político de la medida",
-      "descripcion": "Sospecha de que la medida busca visibilidad o rédito político más que resolver problemas.",
-      "personas": 1,
+      "nombre": "convivencia y vínculos vecinales",
+      "descripcion": "Falta de relación entre vecinos, rotación de residentes y espacios comunitarios de encuentro.",
+      "personas": 2,
       "positivo": 0,
-      "negativo": 1,
+      "negativo": 2,
       "mixto": 0,
       "neutro": 0,
       "mejora": 0,
-      "empeora": 0,
+      "empeora": 2,
       "celdas": [
         {
-          "respuestaId": "r14",
-          "participante": "Ignacio, 27, trabajador social",
+          "respuestaId": "r18",
+          "participante": "Ramón, 78, vive solo",
           "direccion": "negativo",
-          "tendencia": "no_dice",
+          "tendencia": "empeora",
           "temas": [
             {
-              "tema": "uso político de la medida",
+              "tema": "conocerse entre vecinos",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "me preocupa que esto sea más para salir en la prensa que para resolver"
+              "cita": "Ahora yo no sé quién vive al lado mío. Llegan, se van, arriendan, no saludan."
+            }
+          ]
+        },
+        {
+          "respuestaId": "r41",
+          "participante": "Manuel, 72, jubilado, presidente del club de adulto mayor",
+          "direccion": "negativo",
+          "tendencia": "empeora",
+          "temas": [
+            {
+              "tema": "cuidado entre vecinos",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "Antes los vecinos se cuidaban entre ellos... Eso se perdió."
             }
           ]
         }
       ]
     },
     {
-      "id": "k31",
-      "nombre": "estigmatización de grupos",
-      "descripcion": "Atribuir delitos o sospechas a grupos específicos, como extranjeros, sin fundamento.",
+      "id": "k18",
+      "nombre": "temor a represalias",
+      "descripcion": "Miedo a que vecinos o traficantes identifiquen a quien pidió o apoyó las cámaras.",
       "personas": 1,
       "positivo": 0,
       "negativo": 1,
@@ -2495,16 +2653,62 @@
       "empeora": 0,
       "celdas": [
         {
-          "respuestaId": "r19",
-          "participante": "Paola, 35, cuidadora, llegó de Venezuela",
+          "respuestaId": "r15",
+          "participante": "Carmen, 52, vive frente a la plaza",
           "direccion": "negativo",
           "tendencia": "no_dice",
           "temas": [
             {
-              "tema": "culpar a extranjeros",
+              "tema": "represalias de vecinos",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "Porque los que venden ahí van a pensar que yo la pedí, que yo soy la sapa."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k28",
+      "nombre": "convivencia escolar y liceo",
+      "descripcion": "Peleas, venta de vapers y falta de inspectores u orientadores en los liceos y colegios.",
+      "personas": 1,
+      "positivo": 0,
+      "negativo": 0,
+      "mixto": 1,
+      "neutro": 0,
+      "mejora": 0,
+      "empeora": 0,
+      "celdas": [
+        {
+          "respuestaId": "r43",
+          "participante": "Lorena, 47, apoderada del liceo",
+          "direccion": "mixto",
+          "tendencia": "no_dice",
+          "temas": [
+            {
+              "tema": "peleas a la salida del liceo",
+              "direccion": "negativo",
+              "intensidad": "fuerte",
+              "cita": "hay peleas casi todas las semanas, a veces con gente de afuera"
+            },
+            {
+              "tema": "venta de vapers",
               "direccion": "negativo",
               "intensidad": "moderada",
-              "cita": "muchas veces la gente dice altiro fueron los extranjeros"
+              "cita": "venden cosas también, vapers, otras cosas"
+            },
+            {
+              "tema": "cámaras para inspectores",
+              "direccion": "positivo",
+              "intensidad": "moderada",
+              "cita": "Una cámara ahí ayudaría a que los inspectores sepan qué pasa"
+            },
+            {
+              "tema": "falta de inspectores y orientadores",
+              "direccion": "negativo",
+              "intensidad": "moderada",
+              "cita": "el liceo necesita más inspectores, más orientadores. Los chiquillos están solos"
             }
           ]
         }
@@ -2515,12 +2719,17 @@
     {
       "respuestaId": "r1",
       "participante": "Rosa, 71, jubilada, pasaje Los Copihues",
-      "texto": "Arreglar primero el foco quemado del poste de la esquina en el pasaje Los Copihues, antes de instalar las cámaras."
+      "texto": "Arreglar primero la luz del poste de la esquina antes de instalar las cámaras"
+    },
+    {
+      "respuestaId": "r3",
+      "participante": "Daniela, 29, profesora de básica",
+      "texto": "Destinar los fondos a talleres y actividades para los niños después de clases, en vez de cámaras"
     },
     {
       "respuestaId": "r4",
       "participante": "Héctor, 58, dueño de almacén",
-      "texto": "Que haya una central con personas que miren las cámaras en vivo y llamen a la patrulla si ven algo raro, y que se instale una cámara en la esquina de su local."
+      "texto": "Que haya una central de monitoreo con personas que miren las cámaras en tiempo real y llamen a la patrulla si ven algo raro."
     },
     {
       "respuestaId": "r5",
@@ -2530,12 +2739,12 @@
     {
       "respuestaId": "r6",
       "participante": "Marta, 45, presidenta junta de vecinos",
-      "texto": "Que la municipalidad siente a la junta de vecinos en una mesa antes de decidir dónde instalar las cámaras"
+      "texto": "Que la municipalidad siente a la junta de vecinos en una mesa antes de decidir dónde instalar las cámaras, considerando los pasajes, la cancha y el puente del canal"
     },
     {
       "respuestaId": "r7",
       "participante": "Luis, 39, guardia, ex operador de monitoreo",
-      "texto": "Aumentar la cantidad de operadores por turno y que la central tenga radio directa con la patrulla"
+      "texto": "Más operadores por turno y que la central tenga radio directa con la patrulla"
     },
     {
       "respuestaId": "r8",
@@ -2550,42 +2759,42 @@
     {
       "respuestaId": "r10",
       "participante": "Gladys, 64, feriante",
-      "texto": "Que pasen los inspectores por el barrio, además de instalar cámaras en la entrada de la feria"
+      "texto": "Que pasen los inspectores por el barrio como antes"
     },
     {
       "respuestaId": "r11",
       "participante": "Andrés, 42, ingeniero informático",
-      "texto": "Que el presupuesto indique cuánto se destina a comprar las cámaras y cuánto a mantenerlas funcionando."
+      "texto": "Que la municipalidad explique cuánto del presupuesto es para comprar las cámaras y cuánto para mantenerlas funcionando"
     },
     {
       "respuestaId": "r13",
       "participante": "Yasna, 37, auxiliar de aseo, turno de madrugada",
-      "texto": "Luz en el camino y en el paradero, y que la micro pase más seguido temprano."
+      "texto": "Luz en el camino y en el paradero, y que la micro pase más seguido temprano"
     },
     {
       "respuestaId": "r14",
       "participante": "Ignacio, 27, trabajador social",
-      "texto": "Hacer primero un diagnóstico por sector con los vecinos y decidir con eso, invirtiendo en prevención como sedes vecinales abiertas en la tarde, programas para jóvenes y mediación entre vecinos"
+      "texto": "Que la municipalidad haga un diagnóstico con los vecinos por sector antes de decidir, y destine la plata a prevención comunitaria."
     },
     {
       "respuestaId": "r15",
       "participante": "Carmen, 52, vive frente a la plaza",
-      "texto": "Que no pongan la cámara en su poste, o que expliquen públicamente que fue decisión de la municipalidad y no de los vecinos."
+      "texto": "Que no instalen la cámara en su poste, o que la municipalidad explique públicamente que la decisión fue de la muni y no de los vecinos."
     },
     {
       "respuestaId": "r16",
       "participante": "Mauricio, 46, dueño de ferretería",
-      "texto": "Que la municipalidad conecte a su central las cámaras privadas de comerciantes que ya existen, mediante un convenio, y que instale cámaras propias solo donde no hay ninguna."
+      "texto": "Conectar las cámaras privadas que ya existen a la central municipal mediante un convenio, y que la municipalidad instale las suyas donde no hay ninguna"
     },
     {
       "respuestaId": "r17",
       "participante": "Valentina, 24, enfermera",
-      "texto": "Que la patrulla llegue más rápido cuando alguien llama, más que instalar cámaras"
+      "texto": "Que cuando uno llama, llegue una patrulla con rapidez, porque las cámaras no reemplazan una respuesta a tiempo."
     },
     {
       "respuestaId": "r18",
       "participante": "Ramón, 78, vive solo",
-      "texto": "Abrir la sede comunitaria y hacer once comunitaria para que la gente se conozca de nuevo."
+      "texto": "Que la sede se abra, que haya once comunitaria y que la gente vuelva a conocerse para cuidarse entre vecinos"
     },
     {
       "respuestaId": "r19",
@@ -2595,12 +2804,12 @@
     {
       "respuestaId": "r20",
       "participante": "Tomás, 41, conductor de aplicación",
-      "texto": "Intervenir antes con los jóvenes que caen en delitos y aplicar consecuencias reales cuando ocurre un delito"
+      "texto": "Intervenir con los jóvenes antes de que cometan delitos y aplicar consecuencias reales cuando ocurren."
     },
     {
       "respuestaId": "r22",
       "participante": "Javiera, 30, diseñadora, trabaja desde la casa",
-      "texto": "Un registro público semestral del uso de las grabaciones (cuántas veces se pidieron, para qué casos y si sirvieron), revisable por la junta de vecinos, y retirar las cámaras si no sirven."
+      "texto": "Un registro público cada seis meses del uso de las grabaciones, revisable por la junta de vecinos, y evaluar si las cámaras sirven para retirarlas o probar otra medida si no sirven."
     },
     {
       "respuestaId": "r23",
@@ -2610,12 +2819,17 @@
     {
       "respuestaId": "r24",
       "participante": "Claudia, 48, directora de jardín infantil",
-      "texto": "Instalar un lomo de toro y un paso de cebra frente al jardín, y que las cámaras sirvan también para multar a los autos que pasan a alta velocidad."
+      "texto": "Poner un lomo de toro y un paso de cebra frente al jardín, y usar la cámara también para multar a los autos que pasan a alta velocidad"
     },
     {
       "respuestaId": "r25",
       "participante": "Roberto, 66, ex dirigente vecinal",
-      "texto": "Preguntar a los vecinos qué necesitan en vez de hacer preguntas de sí o no, y asegurar que lo que dicen llegue a quien decide"
+      "texto": "Preguntar qué necesitan los vecinos en vez de solo sí o no, y asegurar que lo que digan llegue a quien decide"
+    },
+    {
+      "respuestaId": "r26",
+      "participante": "Patricia, 43, vecina de la villa El Esfuerzo",
+      "texto": "Que haya un furgón municipal que salga cuando la central detecta algo"
     },
     {
       "respuestaId": "r28",
@@ -2625,7 +2839,7 @@
     {
       "respuestaId": "r29",
       "participante": "Benjamín, 23, estudiante de ingeniería",
-      "texto": "Ver por escrito las reglas de uso antes de instalar cualquier cámara"
+      "texto": "Definir y publicar por escrito las reglas de uso y resguardo de las grabaciones antes de instalar cualquier cámara"
     },
     {
       "respuestaId": "r30",
@@ -2635,12 +2849,12 @@
     {
       "respuestaId": "r31",
       "participante": "Felipe, 38, papá, trabaja en bodega",
-      "texto": "Que las cámaras sirvan para probar los robos y que haya consecuencias, además de que alguien se haga cargo de los jóvenes que los cometen"
+      "texto": "Que la cámara sirva para probar los robos y que haya consecuencias, además de que alguien se haga cargo de los jóvenes que roban"
     },
     {
       "respuestaId": "r32",
       "participante": "Rocío, 27, vende comida por delivery",
-      "texto": "Más iluminación en las calles, especialmente en Los Olmos"
+      "texto": "Mejorar la iluminación de las calles, sobre todo de noche"
     },
     {
       "respuestaId": "r33",
@@ -2650,17 +2864,17 @@
     {
       "respuestaId": "r34",
       "participante": "Karen, 33, mamá soltera",
-      "texto": "Poner la cámara en la plaza y sacar a los vendedores para que los niños puedan usar los columpios"
+      "texto": "Instalar cámaras de televigilancia en la plaza y sacar a los vendedores que están en ella"
     },
     {
       "respuestaId": "r35",
       "participante": "Diego, 30, profesor de educación física",
-      "texto": "Invertir en los jóvenes, en la cancha, los balones y la luz para jugar de noche, en vez de instalar cámaras."
+      "texto": "Invertir en los niños, en la cancha y en luz para jugar de noche, en lugar de instalar cámaras."
     },
     {
       "respuestaId": "r36",
       "participante": "Silvia, 57, dueña de casa",
-      "texto": "Que esta vez hagan una reunión con los vecinos de cada pasaje antes de decidir."
+      "texto": "Que hagan una reunión con los vecinos de cada pasaje antes de decidir."
     },
     {
       "respuestaId": "r37",
@@ -2670,7 +2884,7 @@
     {
       "respuestaId": "r38",
       "participante": "Antonia, 26, psicóloga en el CESFAM",
-      "texto": "Que las cámaras vengan acompañadas de actividades que devuelvan a la gente a la calle y ayuden a que los vecinos se conozcan"
+      "texto": "Sumar actividades que devuelvan a la gente a la calle y la hagan conocerse, junto con las cámaras"
     },
     {
       "respuestaId": "r39",
@@ -2680,17 +2894,17 @@
     {
       "respuestaId": "r40",
       "participante": "Daniela, 40, abogada, vive en el sector nuevo",
-      "texto": "Que la municipalidad apruebe una ordenanza antes de instalar las cámaras, que defina quién tiene acceso, cuántos días se guardan las grabaciones, que solo se entreguen a fiscalía con solicitud formal, que exista un registro de cada revisión, y que se informe y publique para los vecinos."
+      "texto": "Que la municipalidad apruebe una ordenanza antes de instalar las cámaras, con control de acceso, plazo de conservación de grabaciones, entrega solo a fiscalía con solicitud formal, registro de cada consulta y publicación para los vecinos."
     },
     {
       "respuestaId": "r41",
       "participante": "Manuel, 72, jubilado, presidente del club de adulto mayor",
-      "texto": "Armar algo junto con las cámaras para que los vecinos se vuelvan a conocer"
+      "texto": "Que junto con las cámaras se arme algo para que los vecinos vuelvan a conocerse."
     },
     {
       "respuestaId": "r43",
       "participante": "Lorena, 47, apoderada del liceo",
-      "texto": "Más inspectores y orientadores en el liceo"
+      "texto": "Más inspectores y orientadores en el liceo, además de las cámaras"
     },
     {
       "respuestaId": "r44",
@@ -2700,57 +2914,62 @@
     {
       "respuestaId": "r45",
       "participante": "Camila, 19, estudiante de técnico en enfermería",
-      "texto": "Más luz y más gente en la calle, en lugar de cámaras"
+      "texto": "Más iluminación y más gente en la calle, en lugar de cámaras"
     },
     {
       "respuestaId": "r46",
       "participante": "Iván, 48, dueño de taller mecánico",
-      "texto": "Que alguien se ponga las pilas con las denuncias para que los casos avancen."
+      "texto": "Que alguien se ponga las pilas con las denuncias de robos."
     },
     {
       "respuestaId": "r47",
       "participante": "Verónica, 39, dirigenta del comité de vivienda",
-      "texto": "Que la municipalidad apoye a las organizaciones vecinales con alarmas comunitarias y capacitaciones, además de instalar las cámaras"
+      "texto": "Que la municipalidad apoye a las organizaciones vecinales con alarmas comunitarias y capacitaciones, además de instalar las cámaras."
     },
     {
       "respuestaId": "r48",
       "participante": "Nicolás, 34, programador, trabaja remoto",
-      "texto": "Que la municipalidad publique periódicamente cuántas veces las grabaciones sirvieron para algo y que las cámaras no tengan reconocimiento facial"
+      "texto": "Que la municipalidad publique periódicamente cuántas veces las grabaciones sirvieron para algo, y que las cámaras no tengan reconocimiento facial."
     },
     {
       "respuestaId": "r49",
       "participante": "Ana María, 66, vive frente a la cancha",
-      "texto": "Poner luz en la cancha, organizar campeonatos y que la junta administre la cancha, además de instalar las cámaras."
+      "texto": "Que pongan luz en la cancha, que la ocupen con campeonatos y que la junta la administre."
     },
     {
       "respuestaId": "r51",
       "participante": "Mónica, 55, auxiliar de jardín infantil",
-      "texto": "Que la municipalidad consulte a los vecinos sobre dónde instalar las cámaras."
+      "texto": "Que pregunten a los vecinos dónde ponerlas, que nosotros sabemos."
     },
     {
       "respuestaId": "r52",
       "participante": "Alejandro, 42, sociólogo, investigador",
-      "texto": "Invertir en iluminación pública y arreglar plazas en lugar de instalar cámaras de televigilancia"
+      "texto": "Poner luminarias y arreglar plazas en lugar de instalar cámaras"
+    },
+    {
+      "respuestaId": "r53",
+      "participante": "Gabriela, 31, vendedora en la feria",
+      "texto": "Instalar cámaras de televigilancia en la feria"
     },
     {
       "respuestaId": "r54",
       "participante": "Hernán, 63, taxista jubilado",
-      "texto": "Que cuando la gente llame, llegue alguien"
+      "texto": "Que cuando la gente llame, llegue alguien."
     },
     {
       "respuestaId": "r56",
       "participante": "Tomás, 25, artista, hace murales en el barrio",
-      "texto": "Invertir en murales y actividades comunitarias en lugar de instalar cámaras de televigilancia"
+      "texto": "Hacer más murales y espacios de encuentro con los vecinos en vez de instalar cámaras"
     },
     {
       "respuestaId": "r57",
       "participante": "Carolina, 44, enfermera, hace turnos de noche",
-      "texto": "Más luz en las calles oscuras y patrullaje visible, complementando las cámaras."
+      "texto": "Sumar iluminación en las calles y patrullaje visible además de las cámaras."
     },
     {
       "respuestaId": "r58",
       "participante": "Pablo, 52, dueño de botillería",
-      "texto": "Que la municipalidad conecte las cámaras de los comerciantes en un convenio."
+      "texto": "Que la municipalidad conecte las cámaras de los comerciantes mediante un convenio."
     },
     {
       "respuestaId": "r59",
@@ -2760,41 +2979,45 @@
     {
       "respuestaId": "r60",
       "participante": "Luis, 70, dirigente de la sede vecinal",
-      "texto": "Que digan qué van a hacer con las respuestas, con plazos, y que vuelvan a contarles."
+      "texto": "Que la municipalidad diga qué va a hacer con las respuestas, con plazos, y que vuelva a informar a los vecinos."
     }
   ],
   "emociones": [
     {
       "emocion": "preocupacion",
-      "n": 18
+      "n": 20
     },
     {
       "emocion": "frustracion",
-      "n": 11
+      "n": 10
     },
     {
       "emocion": "neutral",
-      "n": 7
-    },
-    {
-      "emocion": "miedo",
-      "n": 5
-    },
-    {
-      "emocion": "duda",
-      "n": 4
+      "n": 9
     },
     {
       "emocion": "confianza",
+      "n": 5
+    },
+    {
+      "emocion": "miedo",
       "n": 4
     },
     {
-      "emocion": "esperanza",
+      "emocion": "duda",
       "n": 3
     },
     {
       "emocion": "rabia",
       "n": 2
+    },
+    {
+      "emocion": "esperanza",
+      "n": 2
+    },
+    {
+      "emocion": "tristeza",
+      "n": 1
     },
     {
       "emocion": "molestia",
@@ -2809,15 +3032,7 @@
       "n": 1
     },
     {
-      "emocion": "tristeza",
-      "n": 1
-    },
-    {
-      "emocion": "alivio",
-      "n": 1
-    },
-    {
-      "emocion": "satisfaccion",
+      "emocion": "orgullo",
       "n": 1
     }
   ]

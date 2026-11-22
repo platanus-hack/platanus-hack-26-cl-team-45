@@ -24,7 +24,11 @@ function Voces() {
   const pedido = useMemo(() => DEMO ? {} : ({ t: { query: api.encuestas.topicos, args: { slug: SLUG } }, m: { query: api.encuestas.mapa, args: { slug: SLUG } } }), []);
   const r = useQueries(pedido);
   const cargando = !DEMO && (r.t === undefined || r.m === undefined);
-  const v = useMemo(() => DEMO ? desdeTopicos(DEMO) : cargando ? undefined : elegir(r.t, r.m), [r.t, r.m, cargando]);
+  // Replay: n = how many answers to show, in arrival order (null = all, and keeps following new ones).
+  const [n, setN] = useState(null);
+  const [reproduciendo, setReproduciendo] = useState(false);
+  const total = (DEMO ?? (r.t instanceof Error ? null : r.t))?.respuestas?.length ?? 0;
+  const v = useMemo(() => DEMO ? elegir(DEMO, null, n) : cargando ? undefined : elegir(r.t, r.m, n), [r.t, r.m, cargando, n]);
   const ls = useMemo(() => v ? lecturas(v) : [], [v]);
   const [sel, setSel] = useState(null);
   const [modo, setModo] = useState('vivo');
@@ -42,6 +46,15 @@ function Voces() {
     const chat = modo === 'chat' && ejesChat && v ? { ejes: ejesChat, claves: v.ejes.filter(e => ejesChat.includes(e.id)).flatMap(e => e.celdas.map(c => clave(e.id, c.id))) } : null;
     dibujo.current.resaltar(lectura ?? chat);
   }, [lectura, modo, ejesChat, v]);
+  useEffect(() => {                                       // play: one more answer every 0.6 s until all are in
+    if (!reproduciendo) return;
+    const id = setInterval(() => setN(x => {
+      const sig = (x ?? total) >= total ? 1 : (x ?? total) + 1;
+      if (sig >= total) { setReproduciendo(false); return null; }
+      return sig;
+    }), 600);
+    return () => clearInterval(id);
+  }, [reproduciendo, total]);
   useEffect(() => {                                       // readings advance on their own until someone steps manually
     if (modo !== 'lecturas' || !auto || !ls.length) return;
     const id = setInterval(() => setPaso(p => (p + 1) % ls.length), 8000);
@@ -70,8 +83,14 @@ function Voces() {
         {hay && <p className="clave-fila">
           {DEMO && <span className="clave"><strong>Datos sintéticos</strong></span>}
           {['pos', 'neu', 'neg'].map(t => <span key={t} className="clave"><i className="tono" style={{ background: `var(--${t})` }}></i>{t === 'neu' ? 'neutro o mixto' : NOMBRE_TONO[t]}</span>)}
-          <span className="clave">punto = una persona · tamaño = intensidad · el blob crece hacia lo más mencionado</span>
+          <span className="clave">punto = una persona, ubicada entre los temas de los que habla · más lejos = dijo más y con más fuerza · arrastra para girar</span>
         </p>}
+        {total > 1 && <div className="replay">
+          <button onClick={() => setReproduciendo(x => !x)} aria-label={reproduciendo ? 'Pausar' : 'Ver cómo se formó, respuesta a respuesta'}>{reproduciendo ? 'Pausar' : '▶ Ver cómo se formó'}</button>
+          <input type="range" min="1" max={total} value={n ?? total} aria-label="Respuestas que se muestran"
+            onChange={e => { setReproduciendo(false); const x = +e.target.value; setN(x >= total ? null : x); }} />
+          <span className="num">{n ?? total} de {total}</span>
+        </div>}
       </header>
 
       <aside id="tarjeta" aria-live="polite">
@@ -113,12 +132,15 @@ function Voces() {
   );
 }
 
-function Persona({ eje, celda, cerrar }) {
+// One person: everything they said, one block per axis they talk about (that is what places their dot).
+function Persona({ celdas, cerrar }) {
   return (
     <div className="bloque persona">
-      <h2><i className="tono" style={{ background: `var(--${celda.tono})` }}></i>{eje.nombre} · {celda.postura}{TENDENCIA[celda.tendencia] ? ` · ${TENDENCIA[celda.tendencia]}` : ''}</h2>
-      {celda.citas.map((c, i) => <q key={i}>{c}</q>)}
-      <p className="cuenta num">En este eje: {plural(eje.personas, 'persona', 'personas')} · {eje.pos} pos · {eje.neu} neu · {eje.neg} neg</p>
+      {celdas[0].celda.participante && <p className="quien">{celdas[0].celda.participante}</p>}
+      {celdas.map(({ eje, celda }) => <div key={eje.id} className="tema">
+        <h2><i className="tono" style={{ background: `var(--${celda.tono})` }}></i>{eje.nombre} · {celda.postura}{TENDENCIA[celda.tendencia] ? ` · ${TENDENCIA[celda.tendencia]}` : ''}</h2>
+        {celda.citas.map((c, i) => <q key={i}>{c}</q>)}
+      </div>)}
       <button onClick={cerrar}>Cerrar</button>
     </div>
   );
