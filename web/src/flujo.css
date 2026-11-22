@@ -1,37 +1,35 @@
-header { display: flex; align-items: center; gap: var(--s3) var(--s4); padding: var(--s6) var(--s6) var(--s5); flex-wrap: wrap; }
-h1 { margin: 0; font-size: clamp(32px, 3.4vw, 52px); line-height: 1.1; flex: 1 1 100%; }
-nav { display: flex; gap: var(--s2); }
-main { padding: 0 var(--s6) var(--s6); }
-section { background: none; border: 0; border-radius: var(--radio); padding: var(--s4) 0; overflow-x: auto; }
+/* Flujo: answers → phrases → concepts → themes. Tokens and components: design-system/. Rules: DESIGN.md. */
+header { padding: var(--esp-6) var(--esp-8) var(--esp-4); }
+main { padding: 0 var(--esp-8) var(--esp-8); }
+section { overflow-x: auto; }
 figure { margin: 0; }
-#flujo { width: 100%; min-width: 900px; height: auto; max-height: calc(100vh - 190px); display: block; margin: 0 auto; }
-figcaption { border-top: 1px solid var(--line); margin-top: var(--s2); padding-top: var(--s3); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2) var(--s5); align-items: center; font-size: var(--t-1); color: var(--ink-2); }
-.clave { display: inline-flex; align-items: center; gap: var(--s2); }
-.metodo { flex-basis: 100%; text-align: center; font-family: var(--mono); color: var(--muted); }
+#flujo { width: 100%; min-width: 900px; height: auto; max-height: calc(100vh - 220px); display: block; margin: 0 auto; }
+figcaption { border-top: 1px solid var(--linea); margin-top: var(--esp-2); padding-top: var(--esp-3); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--esp-2) var(--esp-6); align-items: center; font-size: 13px; color: var(--tinta-suave); }
+figcaption .metodo { flex-basis: 100%; text-align: center; }
 /* SVG */
-#flujo text { font-family: var(--sans); fill: var(--ink); }
-#flujo .etapa { font-family: var(--mono); font-size: 17px; fill: var(--muted); }
-#flujo .etapa tspan { fill: var(--ink); font-weight: 500; }
+#flujo text { font-family: var(--font-texto); fill: var(--tinta); }
+#flujo .etapa { font-family: var(--font-texto); font-size: 17px; fill: var(--tinta-suave); }
+#flujo .etapa tspan { font-family: var(--font-display); fill: var(--tinta); font-weight: 500; }
 .col { transition: opacity .3s ease-out; }
 .col.oculta { opacity: 0; }
 path.l { fill: none; transition: opacity .2s ease-out; }
-path.rf { stroke: var(--ink); stroke-opacity: .16; stroke-width: 1.2; }
-path.fc { stroke-opacity: .4; }
-path.ct { stroke: var(--ink); stroke-opacity: .09; }
+path.rf { stroke: var(--tinta); stroke-opacity: .16; stroke-width: 1.2; }
+path.fc { stroke-opacity: .45; }
+path.ct { stroke: var(--tinta); stroke-opacity: .09; }
 g.n { cursor: pointer; transition: opacity .2s ease-out; }
-.resp text { font-size: 17px; fill: var(--ink-2) !important; }
-.resp circle { fill: var(--ink-2); }
-.resp.sin text { fill: var(--muted) !important; font-style: italic; }
-.frase circle { stroke: var(--surface); stroke-width: 1.5; }
-.conc rect { fill: var(--rubor); stroke: none; }
+.resp text { font-size: 17px; fill: var(--tinta-suave) !important; }
+.resp circle { fill: var(--tinta-suave); }
+.resp.sin text { font-style: italic; }
+.frase circle { stroke: var(--rubor); stroke-width: 1.5; }
+.conc rect { fill: var(--rubor-hondo); stroke: var(--linea); }
 .conc text { text-anchor: middle; dominant-baseline: central; }
-.tema circle.anillo { fill: var(--ink); fill-opacity: .055; }
-.tema circle.borde { fill: none; stroke: var(--ink); stroke-opacity: .25; }
-.tema text.pct { font-family: var(--mono); font-weight: 500; text-anchor: middle; dominant-baseline: central; }
-.tema text.nombre { font-size: 19px; font-weight: 400; font-family: var(--display); }
-.tema text.sub { font-family: var(--mono); font-size: 16px; fill: var(--ink-2); }
+.tema circle.anillo { fill: var(--tinta); fill-opacity: .055; }
+.tema circle.borde { fill: none; stroke: var(--tinta); stroke-opacity: .3; }
+.tema text.pct { font-family: var(--font-display); font-weight: 300; text-anchor: middle; dominant-baseline: central; font-variant-numeric: tabular-nums; }
+.tema text.nombre { font-size: 19px; font-weight: 500; }
+.tema text.sub { font-family: var(--font-display); font-weight: 300; font-size: 16px; fill: var(--tinta-suave); }
 #flujo.foco g.n:not(.vecino), #flujo.foco path.l:not(.vecino) { opacity: .08; }
 #flujo.foco path.rf.vecino { stroke-opacity: .5; }
-#flujo.foco path.fc.vecino { stroke-opacity: .8; }
+#flujo.foco path.fc.vecino { stroke-opacity: .85; }
 #flujo.foco path.ct.vecino { stroke-opacity: .28; }
-@media (max-width: 900px) { header, main { padding-left: var(--s4); padding-right: var(--s4); } }
+@media (max-width: 900px) { header, main { padding-left: var(--esp-4); padding-right: var(--esp-4); } }

@@ -41,13 +41,13 @@ float snoise(vec3 v){
 }`;
 
 const VERT = NOISE + `
-uniform float uTime; uniform vec3 uDirs[6]; uniform float uVals[6]; uniform float uPulse[6]; uniform float uAmp;
-varying vec3 vN; varying float vD; varying vec3 vView;
+uniform float uTime; uniform vec3 uDirs[6]; uniform float uVals[6]; uniform float uPulse[6]; uniform float uAmp; uniform float uTono[6];
+varying vec3 vN; varying float vD; varying vec3 vView; varying float vTono; varying float vPeso;
 float disp(vec3 p){
   float d = snoise(p * 1.2 + uTime * 0.08) * uAmp + snoise(p * 2.2 - uTime * 0.1) * uAmp * 0.2;
   for(int i=0;i<6;i++){
     float k = pow(max(dot(p, uDirs[i]), 0.), 5.);
-    d += k * (uVals[i] * (0.45 + 0.08 * snoise(p * 2.5 + float(i) + uTime * 0.15)) + uPulse[i] * 0.12);
+    d += k * (uVals[i] * (0.6 + 0.08 * snoise(p * 2.5 + float(i) + uTime * 0.15)) + uPulse[i] * 0.12);
   }
   return d;
 }
@@ -59,19 +59,25 @@ void main(){
   vec3 P = move(p), A = move(normalize(p + t*.01)), B = move(normalize(p + b*.01));
   vN = normalize(normalMatrix * cross(A - P, B - P));
   vD = disp(p);
+  // Each lobe takes its axis' net tone (-1 neg … +1 pos); between lobes the surface stays neutral.
+  float w = 0., tn = 0.;
+  for(int i=0;i<6;i++){ float k = pow(max(dot(p, uDirs[i]), 0.), 4.) * step(0.001, uVals[i]); w += k; tn += k * uTono[i]; }
+  vTono = tn / (w + 1e-4); vPeso = clamp(w * 1.6, 0., 1.);
   vec4 mv = modelViewMatrix * vec4(P, 1.);
   vView = normalize(-mv.xyz);
   gl_Position = projectionMatrix * mv;
 }`;
 
-// Same palette as comun.css: --neg in the ridges and rim, --pos in the valleys.
+// Tone tokens from comun.css (read at mount). A lobe is --pos or --neg by its axis' net tone and --neu when mixed, like the dots' legend.
 const FRAG = `
-varying vec3 vN; varying float vD; varying vec3 vView;
+varying vec3 vN; varying float vD; varying vec3 vView; varying float vTono; varying float vPeso;
+uniform vec3 neg; uniform vec3 pos; uniform vec3 neu; uniform vec3 base; uniform vec3 luz;
 void main(){
-  vec3 neg = vec3(0.851, 0.290, 0.239), pos = vec3(0.239, 0.710, 0.769), luz = vec3(1.0, 0.96, 0.95);
   float fres = pow(1. - max(dot(vN, vView), 0.), 2.);
   float diff = max(dot(vN, normalize(vec3(-.4,.6,.7))), 0.);
-  vec3 col = mix(pos, neg, smoothstep(0.0, 0.35, vD + fres * 0.6));
+  vec3 tono = vTono >= 0. ? mix(neu, pos, smoothstep(0., .6, vTono)) : mix(neu, neg, smoothstep(0., .6, -vTono));
+  vec3 col = mix(base, tono, vPeso);
+  col = mix(col, luz, fres * 0.25);
   col *= 0.65 + 0.45 * diff;
   gl_FragColor = vec4(mix(col, luz, pow(diff, 24.) * 0.6), 1.);
 }`;
@@ -83,7 +89,7 @@ export function montar({ escenario, svg, onSelect }) {
   const ejeDe = new Map();                               // eje id → axis index, stable while it stays in the top 6
   const datoDe = Array(EJES).fill(null);                 // axis → eje
   const puntos = new Map();                              // clave → { g, eje, j, n, nacio, celda }
-  const objetivo = Array(EJES).fill(0), pulsoEn = Array(EJES).fill(-99);
+  const objetivo = Array(EJES).fill(0), tonoDe = Array(EJES).fill(0), pulsoEn = Array(EJES).fill(-99);
   let ampObjetivo = 0.03, primera = true, seleccion = null, foco = null, hilos = [];
   const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ahora = () => clock ? clock.getElapsedTime() : performance.now() / 1000;
@@ -148,12 +154,14 @@ export function montar({ escenario, svg, onSelect }) {
       if (!ejeDe.has(e.id)) ejeDe.set(e.id, datoDe.indexOf(null));   // first free axis
       datoDe[ejeDe.get(e.id)] = e;
     }
-    const max = Math.max(1, ...tops.map(e => e.personas));
+    // Stretch the range so the most mentioned axis clearly wins: min → 0.2, max → 1 (counts are always written next to each name).
+    const ns = tops.map(e => e.personas), max = Math.max(1, ...ns), min = Math.min(max, ...ns);
     const vivos = new Set();
     let nuevo = null;
     for (const e of tops) {
       const i = ejeDe.get(e.id), antes = objetivo[i];
-      objetivo[i] = e.personas / max;
+      objetivo[i] = max === min ? 1 : 0.2 + 0.8 * (e.personas - min) / (max - min);
+      tonoDe[i] = e.personas ? (e.pos - e.neg) / e.personas : 0;
       e.celdas.forEach((c, j) => {
         const k = `${e.id}|${c.id}`;
         vivos.add(k);
@@ -166,7 +174,7 @@ export function montar({ escenario, svg, onSelect }) {
         Object.assign(p, { eje: i, j, n: e.celdas.length, celda: c });
         const bola = p.g.lastChild;
         bola.setAttribute('r', 3.5 + c.fuerza * 3);
-        bola.setAttribute('fill', `url(#g-${c.tono})`);
+        bola.setAttribute('fill', `var(--${c.tono})`);
         p.g.setAttribute('aria-label', `${e.nombre}, ${c.postura}: ${c.citas[0] ?? ''}`);
       });
       if (!primera && objetivo[i] > antes && pulsoEn[i] < ahora() - 0.1) pulsoEn[i] = ahora();
@@ -200,6 +208,7 @@ export function montar({ escenario, svg, onSelect }) {
       const u = uniforms.uVals.value;
       for (let i = 0; i < EJES; i++) {
         u[i] += (objetivo[i] - u[i]) * 0.04;
+        uniforms.uTono.value[i] += (tonoDe[i] - uniforms.uTono.value[i]) * 0.04;
         const edad = t - pulsoEn[i];
         uniforms.uPulse.value[i] = reducir ? 0 : Math.exp(-edad * 3) * Math.sin(edad * 14);
       }
@@ -251,7 +260,9 @@ export function montar({ escenario, svg, onSelect }) {
     camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
     camera.position.z = 6;
     const dirs = [...Array(EJES)].map((_, i) => { const a = Math.PI / 2 + i * Math.PI / 3; return new THREE.Vector3(Math.cos(a), Math.sin(a), 0.35).normalize(); });
-    uniforms = { uTime: { value: 0 }, uDirs: { value: dirs }, uVals: { value: Array(EJES).fill(0) }, uPulse: { value: Array(EJES).fill(0) }, uAmp: { value: 0.03 } };
+    uniforms = { uTime: { value: 0 }, uDirs: { value: dirs }, uVals: { value: Array(EJES).fill(0) }, uPulse: { value: Array(EJES).fill(0) }, uAmp: { value: 0.03 }, uTono: { value: Array(EJES).fill(0) } };
+    const css = getComputedStyle(document.documentElement), color = v => ({ value: new THREE.Color(css.getPropertyValue(v).trim()) });
+    Object.assign(uniforms, { neg: color('--neg'), pos: color('--pos'), neu: color('--neu'), base: color('--linea-fuerte'), luz: color('--tinta') });
     blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 64), new THREE.ShaderMaterial({ uniforms, vertexShader: VERT, fragmentShader: FRAG }));
     scene.add(blob);
     const antes = performance.now() / 1000;            // switch dot clocks to the Three clock

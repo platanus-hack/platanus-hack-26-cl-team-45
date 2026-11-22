@@ -99,7 +99,7 @@ export function montar() {
     fOrden.forEach(f => {
       const y = yF.get(f.id), tn = tono(f.emocion), cs = conc(f);
       c2 += `<g class="n frase" data-f="${f.id}" data-tip="${esc(`<q>${esc(f.texto)}</q><span>«${esc(f.cita)}» · ${esc(f.emocion)} · ${esc(tById.get(f.cluster_id).nombre)}</span>`)}">
-        <circle cx="${X.f}" cy="${y}" r="${4 + 6 * (f.intensidad || 0)}" fill="url(#g-${tn})"/></g>`;
+        <circle cx="${X.f}" cy="${y}" r="${4 + 6 * (f.intensidad || 0)}" fill="var(--${tn})"/></g>`;
       const w = 1.2 + 2.5 * (f.intensidad || 0);
       if (cs.length) cs.forEach(c => { const k = cById.get(c); l2 += `<path class="l fc" data-f="${f.id}" stroke="var(--${tn})" stroke-width="${w}" d="${curva(X.f, y, X.c - k.w / 2, k.y)}"/>`; });
       else { const t = tById.get(f.cluster_id); l2 += `<path class="l fc" data-f="${f.id}" stroke="var(--${tn})" stroke-width="${w}" d="${curva(X.f, y, t.cx - t.r, t.y)}"/>`; }

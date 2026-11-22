@@ -10,6 +10,7 @@
 
 import type * as chat from "../chat.js";
 import type * as encuestas from "../encuestas.js";
+import type * as extraccion from "../extraccion.js";
 import type * as procesar from "../procesar.js";
 
 import type {
@@ -21,6 +22,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   chat: typeof chat;
   encuestas: typeof encuestas;
+  extraccion: typeof extraccion;
   procesar: typeof procesar;
 }>;
 

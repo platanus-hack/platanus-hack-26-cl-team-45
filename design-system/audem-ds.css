@@ -31,6 +31,8 @@
 .au-sel-op { font: 500 12px/1 var(--font-texto); color: var(--tinta-suave); background: transparent; border: 0; padding: 8px 14px; border-radius: var(--radio-pildora); cursor: pointer; }
 .au-sel-op:hover { color: var(--tinta); }
 .au-sel-op[aria-pressed="true"] { color: var(--coral-texto); box-shadow: inset 0 0 0 1.5px var(--coral); }
+/* In data views coral means negative tone, so the chosen option is marked in tinta. */
+.au-sel--tinta .au-sel-op[aria-pressed="true"] { color: var(--tinta); box-shadow: inset 0 0 0 1.5px var(--tinta); }
 
 /* Pastilla */
 .au-pas { display: inline-flex; align-items: center; height: 20px; padding: 0 9px; border: 1px solid currentColor; border-radius: var(--radio-pildora); font: 600 10px/1 var(--font-texto); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }

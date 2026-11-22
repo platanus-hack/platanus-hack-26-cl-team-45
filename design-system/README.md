@@ -1,6 +1,6 @@
-# Sistema visual de Audem (propuesta)
+# Sistema visual de Audem
 
-> **Propuesta, no estándar.** El estándar vigente del repo sigue siendo [`DESIGN.md`](../DESIGN.md). Esta carpeta propone una identidad visual completa para Audem a partir de la atmósfera de *Motion: Harmonic* (Excite Audio). Antes de usarla en `web/`, hay que resolver los choques que se listan abajo y, si se adopta, actualizar `DESIGN.md` primero.
+> **Adoptado.** `web/` usa este sistema en tema **Noche** (`data-theme="dark"`) y lo carga con `web/src/ds.js`. Cómo se aplica a las vistas de datos está en [`DESIGN.md`](../DESIGN.md). Para cambiar algo visual, se cambia aquí primero.
 
 Versión navegable, con vistas en vivo: https://claude.ai/artifact/2T9s87Ro77sCAU76B2eccP (privada hasta que se comparta).
 
@@ -18,18 +18,18 @@ Versión navegable, con vistas en vivo: https://claude.ai/artifact/2T9s87Ro77sCA
 
 Para verlo: abre `demo.html` en el navegador (necesita internet para React y las fuentes).
 
-## Choques con `DESIGN.md`
+## Decisiones al adoptarlo en `web/`
 
-| Tema | `DESIGN.md` (vigente) | Esta propuesta | Qué decidir |
-|---|---|---|---|
-| Significado del color | Coral `#ec5449` = tono negativo, cian `#16a8c0` = positivo, crema `#eab54e` = neutro. Es el único canal de color con datos. | Coral `#d94a3d` = acción y valor (botón de grabar, barras, arcos). Estados de rama en turquesa y lila. | En las vistas de datos, coral no puede significar «acción» y «negativo» a la vez. O el tono cambia de colores, o la acción deja de ser coral ahí. |
-| Tipografía | Poppins + IBM Plex Mono para números | Outfit (títulos, cifras) + Poppins (texto) | Elegir la familia de las cifras. |
-| Temas | Solo claro, fondo blanco | Claro + Noche, superficie rosada `rubor` | Si se mantiene un solo tema. |
-| Botones y relieve | Píldoras con relieve 3D (`--raised`, `--sunk`) | Rectángulos negros rectos, sin relieve; paneles sin sombra | Un solo lenguaje de botón. |
-| Degradados | Banda `--iris` arriba de cada página y `h1` con degradado | Degradado solo dentro del Orbe | Dónde vive la iridiscencia. |
-| Movimiento | «Nada pulsa ni se repite» | El Orbe gira (26 s) y respira (7 s) | Si el Orbe es la excepción. |
+| Tema | Decisión |
+|---|---|
+| Significado del color | El tono de los datos usa los colores del Orbe: positivo `turquesa`, neutro `oro`, negativo `coral`. En las vistas de datos coral solo significa negativo: el Selector usa la variante `au-sel--tinta` y el primario es `tinta`. Coral como acción queda para el BotonVoz. |
+| Tipografía | Outfit para títulos y cifras, Poppins para el texto. Sale IBM Plex Mono. |
+| Temas | Solo Noche. |
+| Botones y relieve | Rectángulos de este sistema. Sale el relieve 3D. |
+| Degradados | Solo dentro del Orbe y del BotonVoz. Salen la banda `--iris`, el `h1` con degradado y las esferas iluminadas de los puntos. |
+| Movimiento | El Orbe de la portada, el BotonVoz y el blob de Tópicos son las únicas cosas que se mueven solas. |
 
-Lo que sí calza: base de espaciado de 4 px, Poppins para el texto, el color nunca va solo (siempre con palabra), `prefers-reduced-motion` respetado, sin bordes laterales de acento.
+Lo que se agregó al sistema para cubrir `web/`: la variante `au-sel--tinta` del Selector.
 
 ## Guía de marca
 
@@ -157,6 +157,8 @@ Un grupo de opciones en forma de píldora; la elegida se marca con trazo y texto
 - `etiqueta`: el rótulo que va debajo, en `etiqueta` y `tinta-suave` (también nombra el grupo para lectores de pantalla).
 
 De dos a cuatro opciones cortas. Si son más, usa una lista.
+
+En vistas de datos, agrega la clase `au-sel--tinta` al grupo: la opción elegida se marca en `tinta`, porque ahí coral significa tono negativo.
 
 ### Pastilla
 
