@@ -83,14 +83,22 @@ export const analizar = internalAction({
   },
 });
 
+// Haiku copies long Convex ids ("jd7f...:3") back wrong often enough that whole answers lost their tópicos;
+// it only ever sees t0, t1, ... and we map them back here.
+function idsCortos<T extends { id: string }>(items: T[]): [T[], (corto: string) => string] {
+  const largos = items.map(i => i.id);
+  return [items.map((i, n) => ({ ...i, id: `t${n}` })), corto => largos[Number(corto.slice(1))] ?? corto];
+}
+
 // Same pattern as agrupar: one call regroups every tema of the poll into neutral tópicos.
 export const normalizar = internalAction({
   args: { encuestaId: v.id("encuestas"), token: v.number() },
   handler: async (ctx, { encuestaId, token }) => {
     const d = await ctx.runQuery(internal.encuestas.leerParaNormalizar, { encuestaId, token });
     if (!d || !d.temas.length) return;
-    const out = await normalizarTemas(claude(), d.pregunta, d.topicos, d.temas);
-    await ctx.runMutation(internal.encuestas.guardarTopicos, { encuestaId, ...out });
+    const [temas, largo] = idsCortos(d.temas);
+    const out = await normalizarTemas(claude(), d.pregunta, d.topicos, temas);
+    await ctx.runMutation(internal.encuestas.guardarTopicos, { encuestaId, topicos: out.topicos, asignacion: out.asignacion.map(x => ({ ...x, tema: largo(x.tema) })) });
   },
 });
 
@@ -111,7 +119,8 @@ export const asignarTopicos = internalAction({
   handler: async (ctx, args) => {
     const d = await ctx.runQuery(internal.encuestas.leerParaAsignarTopicos, args);
     if (!d || !d.temas.length) return;
-    const out = await asignarTemas(claude(), d.pregunta, d.topicos, d.temas);
-    await ctx.runMutation(internal.encuestas.guardarAsignacionTopicos, { encuestaId: args.encuestaId, ...out });
+    const [temas, largo] = idsCortos(d.temas);
+    const out = await asignarTemas(claude(), d.pregunta, d.topicos, temas);
+    await ctx.runMutation(internal.encuestas.guardarAsignacionTopicos, { encuestaId: args.encuestaId, nuevos: out.nuevos, asignacion: out.asignacion.map(x => ({ ...x, tema: largo(x.tema) })) });
   },
 });
